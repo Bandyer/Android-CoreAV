@@ -1,5 +1,5 @@
 <p align="center">
-<img src="docs/img/bandyer.jpg" alt="Bandyer" title="Bandyer" />
+<img src="img/bandyer.jpg" alt="Bandyer" title="Bandyer" />
 </p>
 
 
@@ -41,7 +41,7 @@ In Bandyer-CoreAV we have decided to represent a call with 3 Major entities.
 
 In this scenario an user wants to stream his video to 2 friends.
 
-![Architecture](docs/img/pubSub.png)
+![Architecture](img/pubSub.png)
 
 ## Features
 * It's easy to use
