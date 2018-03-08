@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Publisher - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.publisher</a>&nbsp;/&nbsp;<a href="./index.html">Publisher</a><br/>
+<br/>
+<h1>Publisher</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-capturer-observer.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">, </span><span class="identifier">SignalingChannelStreamListener</span><span class="symbol">, </span><span class="identifier">PeerConnectionStreamListener</span><span class="symbol">, </span><span class="identifier">PeerConnectionStatusListener</span><span class="symbol">, </span><span class="identifier">OnStreamReady</span></code>
+<p>This class represents a publisher of a stream.
+A publisher is someone who is in read-write mode on a stream.
+There can be only one local publisher at a time in the room.
+The publisher needs a capturer ( audio/video ) to be able to fetch the data to stream.</p>
+<p>The first step to use the publisher is create it, by instantiating with a user it refers to.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">Publisher</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$<init>(com.bandyer.core_av.room.RoomUser)/roomUser">roomUser</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.room/-room-user/index.html"><span class="identifier">RoomUser</span></a><span class="symbol">)</span></code>
+<p>Creates a publisher</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="id.html">id</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Unique identifier for the publisher</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="room-user.html">roomUser</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">roomUser</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.room/-room-user/index.html"><span class="identifier">RoomUser</span></a></code>
+<p>user that is requesting to publish</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="stream.html">stream</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">stream</span><span class="symbol">: </span><a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">?</span></code>
+<p>Stream to publish</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-publisher-observer.html">addPublisherObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addPublisherObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$addPublisherObserver(com.bandyer.core_av.publisher.PublisherObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-publisher-observer/index.html"><span class="identifier">PublisherObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Publisher</span></a></code>
+<p>Method to add an observer to the publisher.
+The observer will be notified when a change has occurred</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="equals.html">equals</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">equals</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$equals(kotlin.Any)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Equality method based on the publisher identifier</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="hash-code.html">hashCode</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>HashCode based on the publisher identifier</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="release-view.html">releaseView</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">releaseView</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to release a view attached to this publisher</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-publisher-observer.html">removePublisherObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removePublisherObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$removePublisherObserver(com.bandyer.core_av.publisher.PublisherObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-publisher-observer/index.html"><span class="identifier">PublisherObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Publisher</span></a></code>
+<p>Method to remove an observer, usually used when not interested anymore in any event coming from the publisher.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-capturer.html">setCapturer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">setCapturer</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setCapturer(com.bandyer.core_av.capturer.AbstractBaseCapturer((kotlin.Any)), com.bandyer.core_av.networking.models.MuteStreamOption)/capturer">capturer</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-abstract-base-capturer/index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setCapturer(com.bandyer.core_av.capturer.AbstractBaseCapturer((kotlin.Any)), com.bandyer.core_av.networking.models.MuteStreamOption)/muteOption">muteOption</span><span class="symbol">:</span>&nbsp;<span class="identifier">MuteStreamOption</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Publisher</span></a></code>
+<p>Method to set the capturer to be used, and the additional options such as mute a channel</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-view.html">setView</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">setView</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setView(com.bandyer.core_av.view.BandyerView, com.bandyer.core_av.view.OnViewStatusListener)/view">view</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.view/-bandyer-view/index.html"><span class="identifier">BandyerView</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setView(com.bandyer.core_av.view.BandyerView, com.bandyer.core_av.view.OnViewStatusListener)/statusListener">statusListener</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.view/-on-view-status-listener/index.html"><span class="identifier">OnViewStatusListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Publisher</span></a></code>
+<p>Utility method to attach a view to the publisher</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

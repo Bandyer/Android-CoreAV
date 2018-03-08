@@ -1,0 +1,142 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Subscriber - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.subscriber</a>&nbsp;/&nbsp;<a href="./index.html">Subscriber</a><br/>
+<br/>
+<h1>Subscriber</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Subscriber</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">PeerConnectionStreamListener</span><span class="symbol">, </span><span class="identifier">PeerConnectionStatusListener</span><span class="symbol">, </span><span class="identifier">OnStreamReady</span></code>
+<p>This class represents a subscriber to a stream.
+A subscriber is someone who is in read-only mode on a stream.</p>
+<p>The first step to use the subscriber is create it, by instantiating with a stream it refers to.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">Subscriber</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.subscriber.Subscriber$<init>(com.bandyer.core_av.Stream)/stream">stream</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">)</span></code>
+<p>Creates a subscriber</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="id.html">id</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Unique identifier for the subscriber</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="stream.html">stream</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">stream</span><span class="symbol">: </span><a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a></code>
+<p>remote stream</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-subscribe-observer.html">addSubscribeObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addSubscribeObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.subscriber.Subscriber$addSubscribeObserver(com.bandyer.core_av.subscriber.SubscriberObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-subscriber-observer/index.html"><span class="identifier">SubscriberObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Subscriber</span></a></code>
+<p>Method to add an observer to the subscriber.
+The observer will be notified when a change has occurred</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="equals.html">equals</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">equals</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.subscriber.Subscriber$equals(kotlin.Any)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Equality method based on the subscriber identifier</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-view.html">getView</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">getView</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.view/-bandyer-view/index.html"><span class="identifier">BandyerView</span></a><span class="symbol">?</span></code>
+<p>Utility method to get the view where the subscriber will render</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="hash-code.html">hashCode</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>HashCode based on the subscriber identifier</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="release-view.html">releaseView</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">releaseView</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to release a view attached to this subscriber</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-subscribe-observer.html">removeSubscribeObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeSubscribeObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.subscriber.Subscriber$removeSubscribeObserver(com.bandyer.core_av.subscriber.SubscriberObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-subscriber-observer/index.html"><span class="identifier">SubscriberObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Subscriber</span></a></code>
+<p>Method to remove an observer, usually used when not interested anymore in any event coming from the subscriber.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-options.html">setOptions</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setOptions</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.subscriber.Subscriber$setOptions(com.bandyer.core_av.networking.models.PubSubOptions)/pubSubOptions">pubSubOptions</span><span class="symbol">:</span>&nbsp;<span class="identifier">PubSubOptions</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Subscriber</span></a></code>
+<p>Method to set how you are interested in the audio/video channels.
+Example:
+You may need to subscribe to only audio channel and mute it until something else happens.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-quality.html">setQuality</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">setQuality</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.subscriber.Subscriber$setQuality(com.bandyer.core_av.subscriber.VideoResolutionQuality, com.bandyer.core_av.subscriber.VideoFpsQuality)/videoResolutionQuality">videoResolutionQuality</span><span class="symbol">:</span>&nbsp;<a href="../-video-resolution-quality/index.html"><span class="identifier">VideoResolutionQuality</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.subscriber.Subscriber$setQuality(com.bandyer.core_av.subscriber.VideoResolutionQuality, com.bandyer.core_av.subscriber.VideoFpsQuality)/videoFpsQuality">videoFpsQuality</span><span class="symbol">:</span>&nbsp;<a href="../-video-fps-quality/index.html"><span class="identifier">VideoFpsQuality</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Subscriber</span></a></code>
+<p>Utility method to set the desired resolution and update frequency</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-view.html">setView</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">setView</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.subscriber.Subscriber$setView(com.bandyer.core_av.view.BandyerView, com.bandyer.core_av.view.OnViewStatusListener)/view">view</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.view/-bandyer-view/index.html"><span class="identifier">BandyerView</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.subscriber.Subscriber$setView(com.bandyer.core_av.view.BandyerView, com.bandyer.core_av.view.OnViewStatusListener)/statusListener">statusListener</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.view/-on-view-status-listener/index.html"><span class="identifier">OnViewStatusListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Subscriber</span></a></code>
+<p>Utility method to attach a view to the subscriber</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

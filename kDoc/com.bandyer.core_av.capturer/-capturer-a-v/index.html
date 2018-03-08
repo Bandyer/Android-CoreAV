@@ -1,0 +1,122 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>CapturerAV - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.capturer</a>&nbsp;/&nbsp;<a href="./index.html">CapturerAV</a><br/>
+<br/>
+<h1>CapturerAV</h1>
+<code><span class="keyword">class </span><span class="identifier">CapturerAV</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-base-capturer/index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer.video/-video-interface/index.html"><span class="identifier">VideoInterface</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer.audio/-audio-interface/index.html"><span class="identifier">AudioInterface</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../-capturer-observer.html"><span class="identifier">CapturerObserver</span></a></code>
+<p>This class captures device audio and video from the camera</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">CapturerAV</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>This class captures device audio and video from the camera</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="dispose.html">dispose</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">dispose</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method used to dispose the capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-audio-muted.html">setAudioMuted</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setAudioMuted</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.CapturerAV$setAudioMuted(kotlin.Boolean)/muted">muted</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">CapturerAV</span></a></code>
+<p>Method used to mute the audio channel</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-max-video-output-quality.html">setMaxVideoOutputQuality</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setMaxVideoOutputQuality</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.CapturerAV$setMaxVideoOutputQuality(com.bandyer.core_av.capturer.video.CapturerQuality)/outputQualityCapturer">outputQualityCapturer</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer.video/-capturer-quality/index.html"><span class="identifier">CapturerQuality</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">CapturerAV</span></a></code>
+<p>Set the max video output quality to be streamed
+Be aware that this is the max output that will be streamed and not the actual value that will be received by the other parts</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-video-feeder.html">setVideoFeeder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setVideoFeeder</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.CapturerAV$setVideoFeeder(com.bandyer.core_av.capturer.video.CameraVideoFeeder)/feederCamera">feederCamera</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer.video/-camera-video-feeder/index.html"><span class="identifier">CameraVideoFeeder</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">CapturerAV</span></a></code>
+<p>Method to set/change the video feeder</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-video-muted.html">setVideoMuted</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setVideoMuted</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.CapturerAV$setVideoMuted(kotlin.Boolean)/muted">muted</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">CapturerAV</span></a></code>
+<p>Method to mute the video</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-video-rendering-quality.html">setVideoRenderingQuality</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setVideoRenderingQuality</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.CapturerAV$setVideoRenderingQuality(com.bandyer.core_av.capturer.video.CapturerQuality)/capturerQuality">capturerQuality</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer.video/-capturer-quality/index.html"><span class="identifier">CapturerQuality</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">CapturerAV</span></a></code>
+<p>Method to set the video rendering quality</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="switch-video-feeder.html">switchVideoFeeder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">switchVideoFeeder</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">CapturerAV</span></a></code>
+<p>Method to switch the current feeder</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-abstract-base-capturer/add-capturer-observer.html">addCapturerObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addCapturerObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.AbstractBaseCapturer$addCapturerObserver(com.bandyer.core_av.capturer.CapturerObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-observer.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-abstract-base-capturer/index.html#T"><span class="identifier">T</span></a></code>
+<p>Method to add an observer to the capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-abstract-base-capturer/remove-capturer-observer.html">removeCapturerObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeCapturerObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.AbstractBaseCapturer$removeCapturerObserver(com.bandyer.core_av.capturer.CapturerObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-observer.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-abstract-base-capturer/index.html#T"><span class="identifier">T</span></a></code>
+<p>Method to remove an observer from</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

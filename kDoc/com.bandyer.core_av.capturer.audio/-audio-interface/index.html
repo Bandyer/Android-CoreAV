@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AudioInterface - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.capturer.audio</a>&nbsp;/&nbsp;<a href="./index.html">AudioInterface</a><br/>
+<br/>
+<h1>AudioInterface</h1>
+<code><span class="keyword">interface </span><span class="identifier">AudioInterface</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>Audio capturer interface</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="set-audio-muted.html">setAudioMuted</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setAudioMuted</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.audio.AudioInterface$setAudioMuted(kotlin.Boolean)/muted">muted</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>Method used to mute the audio channel</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.bandyer.core_av.capturer/-capturer-a-v/index.html">CapturerAV</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CapturerAV</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-abstract-base-capturer/index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.capturer/-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer.video/-video-interface/index.html"><span class="identifier">VideoInterface</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.capturer/-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="./index.html"><span class="identifier">AudioInterface</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.capturer/-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer/-capturer-observer.html"><span class="identifier">CapturerObserver</span></a></code>
+<p>This class captures device audio and video from the camera</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-capturer-audio/index.html">CapturerAudio</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">CapturerAudio</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-abstract-base-capturer/index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><a href="../-capturer-audio/index.html"><span class="identifier">CapturerAudio</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="./index.html"><span class="identifier">AudioInterface</span></a><span class="symbol">&lt;</span><a href="../-capturer-audio/index.html"><span class="identifier">CapturerAudio</span></a><span class="symbol">&gt;</span></code>
+<p>Audio capturer from the device</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SubscriberObserver - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.subscriber</a>&nbsp;/&nbsp;<a href="./index.html">SubscriberObserver</a><br/>
+<br/>
+<h1>SubscriberObserver</h1>
+<code><span class="keyword">interface </span><span class="identifier">SubscriberObserver</span></code>
+<p>Subscriber listener</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="on-local-subscriber-added.html">onLocalSubscriberAdded</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalSubscriberAdded</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.subscriber.SubscriberObserver$onLocalSubscriberAdded(com.bandyer.core_av.subscriber.Subscriber)/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<a href="../-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when a subscriber has joined the room</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-local-subscriber-error.html">onLocalSubscriberError</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalSubscriberError</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.subscriber.SubscriberObserver$onLocalSubscriberError(com.bandyer.core_av.subscriber.Subscriber, kotlin.String)/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<a href="../-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.subscriber.SubscriberObserver$onLocalSubscriberError(com.bandyer.core_av.subscriber.Subscriber, kotlin.String)/reason">reason</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when an error has occured with a subscriber</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.bandyer.core_av.room/-room/index.html">Room</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Room</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">SubscriberObserver</span></a><span class="symbol">, </span><a href="../../com.bandyer.core_av.publisher/-publisher-observer/index.html"><span class="identifier">PublisherObserver</span></a><span class="symbol">, </span><span class="identifier">SignalingChannelStatusListener</span><span class="symbol">, </span><span class="identifier">SignalingChannelStreamListener</span><span class="symbol">, </span><span class="identifier">SignalingChannelMessageListener</span></code>
+<p>This class represents a Bandyer room where the users will join and talk.
+The first step to use the room is create it by instantiating it with a room token.
+The room token will be provided by us, beforehand</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

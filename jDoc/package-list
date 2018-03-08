@@ -1,0 +1,11 @@
+com.bandyer.core_av
+com.bandyer.core_av.capturer
+com.bandyer.core_av.capturer.audio
+com.bandyer.core_av.capturer.video
+com.bandyer.core_av.publisher
+com.bandyer.core_av.publisher.exceptions
+com.bandyer.core_av.room
+com.bandyer.core_av.room.exceptions
+com.bandyer.core_av.subscriber
+com.bandyer.core_av.subscriber.exceptions
+com.bandyer.core_av.view

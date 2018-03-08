@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.bandyer.core_av.publisher - </title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="./index.html">com.bandyer.core_av.publisher</a><br/>
+<br/>
+<h2>Package com.bandyer.core_av.publisher</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-publisher/index.html">Publisher</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.bandyer.core_av.capturer/-capturer-observer.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">, </span><span class="identifier">SignalingChannelStreamListener</span><span class="symbol">, </span><span class="identifier">PeerConnectionStreamListener</span><span class="symbol">, </span><span class="identifier">PeerConnectionStatusListener</span><span class="symbol">, </span><span class="identifier">OnStreamReady</span></code>
+<p>This class represents a publisher of a stream.
+A publisher is someone who is in read-write mode on a stream.
+There can be only one local publisher at a time in the room.
+The publisher needs a capturer ( audio/video ) to be able to fetch the data to stream.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-publisher-observer/index.html">PublisherObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">PublisherObserver</span></code>
+<p>Class observer on the publisher</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-publisher-state/index.html">PublisherState</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">PublisherState</span></code>
+<p>Publisher states</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
