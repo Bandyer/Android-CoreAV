@@ -82,9 +82,21 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
                 .setCapturer(capturerAV);
         room.publish(this, publisher);
         publisher.setView(publisherView, new OnViewStatusListener() {
+
             @Override
             public void onReadyToPlay(@NonNull Stream stream) {
                 publisherView.play(stream);
+            }
+
+
+            @Override
+            public void onFirstFrameRendered() {
+
+            }
+
+            @Override
+            public void onViewSizeChanged(int width, int height, int rotationDegree) {
+
             }
         });
     }
@@ -126,10 +138,22 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
 
         subscribersListView.addView(subscriberView, new LinearLayout.LayoutParams(size, size));
         subscriber.setView(subscriberView, new OnViewStatusListener() {
+
             @Override
             public void onReadyToPlay(@NonNull Stream stream) {
                 subscriberView.play(stream);
             }
+
+            @Override
+            public void onFirstFrameRendered() {
+
+            }
+
+            @Override
+            public void onViewSizeChanged(int width, int height, int rotationDegree) {
+
+            }
+
         });
     }
 

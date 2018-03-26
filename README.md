@@ -39,7 +39,7 @@ In Bandyer-CoreAV we have decided to represent a call with 3 Major entities.
 
 ### Let's see a typical scenario 
 
-In this scenario an user wants to stream his video to 2 friends.
+In this scenario a user wants to stream his video to 2 friends.
 
 ![Architecture](img/pubSub.png)
 
@@ -50,14 +50,14 @@ In this scenario an user wants to stream his video to 2 friends.
 * Small-sized
 * Fully covered by Unit-Tests
 * Written in Kotlin
-* Advanced proprietary features not available in standart WebRTC
+* Advanced proprietary features not available in standard WebRTC
 
 ## Installation
 
 Download the [latest JAR](https://bintray.com/bandyer/Android-CoreAV/Android-CoreAV) or grab via Gradle:
 
 ```groovy
-implementation 'com.bandyer:core_av:1.0.0'
+implementation 'com.bandyer:core_av:1.0.1'
 ```
 
 ## Quickstart
@@ -145,10 +145,22 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
                 .setCapturer(capturerAV);
         room.publish(this, publisher);
         publisher.setView(publisherView, new OnViewStatusListener() {
+
             @Override
             public void onReadyToPlay(@NonNull Stream stream) {
                 publisherView.play(stream);
             }
+
+            @Override
+            public void onFirstFrameRendered() {
+
+            }
+
+            @Override
+            public void onViewSizeChanged(int width, int height, int rotationDegree) {
+                
+            }
+
         });
     }
 
@@ -193,6 +205,17 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
             public void onReadyToPlay(@NonNull Stream stream) {
                 subscriberView.play(stream);
             }
+
+            @Override
+            public void onFirstFrameRendered() {
+
+            }
+
+            @Override
+            public void onViewSizeChanged(int width, int height, int rotationDegree) {
+                
+            }
+
         });
     }
 
