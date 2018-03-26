@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>NetworkAwareBandwidthThrottlingStrategy - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.peerconnection.bandwidthThrottling</a>&nbsp;/&nbsp;<a href="./index.html">NetworkAwareBandwidthThrottlingStrategy</a><br/>
+<br/>
+<h1>NetworkAwareBandwidthThrottlingStrategy</h1>
+<code><span class="keyword">class </span><span class="identifier">NetworkAwareBandwidthThrottlingStrategy</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-bandwidth-throttling-strategy/index.html"><span class="identifier">AbstractBandwidthThrottlingStrategy</span></a></code>
+<p>Class to change the bandwidth based on the current type of connection</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">NetworkAwareBandwidthThrottlingStrategy</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.peerconnection.bandwidthThrottling.NetworkAwareBandwidthThrottlingStrategy$<init>(android.content.Context, kotlin.Int, kotlin.Int)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.peerconnection.bandwidthThrottling.NetworkAwareBandwidthThrottlingStrategy$<init>(android.content.Context, kotlin.Int, kotlin.Int)/wifiMaxBandwidth">wifiMaxBandwidth</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Int.MAX_VALUE<span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.peerconnection.bandwidthThrottling.NetworkAwareBandwidthThrottlingStrategy$<init>(android.content.Context, kotlin.Int, kotlin.Int)/cellularMaxBandwidth">cellularMaxBandwidth</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;600<span class="symbol">)</span></code>
+<p>Creates a Network based bandwidth throttling strategy</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="cellular-max-bandwidth.html">cellularMaxBandwidth</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">cellularMaxBandwidth</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>max bandwidth in case of a cellular connection, by default is set to 600 Kbit/s</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="wifi-max-bandwidth.html">wifiMaxBandwidth</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">wifiMaxBandwidth</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>max bandwidth in case of a wifi connection, by default is not limited</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="max-bandwidth.html">maxBandwidth</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">maxBandwidth</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Method to choose the max bandwidth allowed for the track</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-abstract-bandwidth-throttling-strategy/track-to-throttle.html">trackToThrottle</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">trackToThrottle</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-abstract-bandwidth-throttling-strategy/-track/index.html"><span class="identifier">Track</span></a></code>
+<p>Method to choose the track to throttle</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

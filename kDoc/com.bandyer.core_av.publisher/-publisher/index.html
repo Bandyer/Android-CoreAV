@@ -111,10 +111,19 @@ The observer will be notified when a change has occurred</p>
 </tr>
 <tr>
 <td>
+<p><a href="set-bandwidth-throttling-strategy.html">setBandwidthThrottlingStrategy</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setBandwidthThrottlingStrategy</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setBandwidthThrottlingStrategy(com.bandyer.core_av.peerconnection.bandwidthThrottling.AbstractBandwidthThrottlingStrategy)/bandwidthThrottlingStrategy">bandwidthThrottlingStrategy</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.peerconnection.bandwidth-throttling/-abstract-bandwidth-throttling-strategy/index.html"><span class="identifier">AbstractBandwidthThrottlingStrategy</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Publisher</span></a></code>
+<p>Method used to set a cap on the internet usage</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="set-capturer.html">setCapturer</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">setCapturer</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setCapturer(com.bandyer.core_av.capturer.AbstractBaseCapturer((kotlin.Any)), com.bandyer.core_av.networking.models.MuteStreamOption)/capturer">capturer</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-abstract-base-capturer/index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setCapturer(com.bandyer.core_av.capturer.AbstractBaseCapturer((kotlin.Any)), com.bandyer.core_av.networking.models.MuteStreamOption)/muteOption">muteOption</span><span class="symbol">:</span>&nbsp;<span class="identifier">MuteStreamOption</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Publisher</span></a></code>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">setCapturer</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setCapturer(com.bandyer.core_av.capturer.AbstractBaseCapturer((kotlin.Any)), kotlin.Boolean, com.bandyer.core_av.networking.models.MuteStreamOption)/capturer">capturer</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-abstract-base-capturer/index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setCapturer(com.bandyer.core_av.capturer.AbstractBaseCapturer((kotlin.Any)), kotlin.Boolean, com.bandyer.core_av.networking.models.MuteStreamOption)/autoDispose">autoDispose</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setCapturer(com.bandyer.core_av.capturer.AbstractBaseCapturer((kotlin.Any)), kotlin.Boolean, com.bandyer.core_av.networking.models.MuteStreamOption)/muteOption">muteOption</span><span class="symbol">:</span>&nbsp;<span class="identifier">MuteStreamOption</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Publisher</span></a></code>
 <p>Method to set the capturer to be used, and the additional options such as mute a channel</p>
 </td>
 </tr>
