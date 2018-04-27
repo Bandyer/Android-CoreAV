@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2018 Bandyer S.r.l. All Rights Reserved.
+  ~ See LICENSE.txt for licensing information
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/picker_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_item_button_states"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <net.igenius.customcheckbox.CustomCheckBox
+        android:id="@+id/checked"
+        android:layout_width="@dimen/space16"
+        android:layout_height="@dimen/space16"
+        android:layout_marginLeft="@dimen/space16"
+        android:layout_marginStart="@dimen/space16"
+        android:clickable="false"
+        app:color_checked="@android:color/transparent"
+        app:color_tick="@color/colorAccent"
+        app:color_unchecked="@android:color/transparent"
+        app:color_unchecked_stroke="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space16"
+        android:text="" />
+
+</LinearLayout>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2018 Bandyer S.r.l. All Rights Reserved.
+  ~ See LICENSE.txt for licensing information
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:grid="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_height">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.bandyer.core_av.view.BandyerView
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/stream_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/black_transparent"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:padding="@dimen/space8"
+        android:singleLine="true"
+        android:textColor="@android:color/white" />
+
+    <GridLayout
+        android:id="@+id/publishing_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/space56"
+        android:background="@color/black_transparent"
+        android:columnCount="2"
+        android:padding="@dimen/space8"
+        android:rowCount="2">
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/micButton"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:layout_row="0"
+            android:src="@drawable/ic_mic"
+            app:backgroundTint="@color/colorPrimary"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/videoButton"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:src="@drawable/ic_videocam"
+            app:backgroundTint="@color/colorPrimary"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/changeQualityButton"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:visibility="gone"
+            android:src="@drawable/ic_tune"
+            app:backgroundTint="@color/colorPrimary"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/switchCameraButton"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:src="@drawable/ic_switch_camera"
+            app:backgroundTint="@color/colorPrimary"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1" />
+
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/videoQuality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="@dimen/space8"
+        android:singleLine="true"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/fpsQuality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/space8"
+        android:singleLine="true"
+        android:textColor="@android:color/white" />
+</RelativeLayout>

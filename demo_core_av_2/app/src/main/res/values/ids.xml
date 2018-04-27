@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2018 Bandyer S.r.l. All Rights Reserved.
+  ~ See LICENSE.txt for licensing information
+  -->
+
+<resources>
+    <item name="stream_item" type="id" />
+    <item name="publisher_item" type="id" />
+    <item name="subscriber_item" type="id" />
+    <item name="picker_item" type="id" />
+    <item name="string_item" type="id" />
+</resources>
