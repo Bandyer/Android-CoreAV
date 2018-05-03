@@ -78,5 +78,5 @@ dependencies {
 
     /*** Bandyer Core ***/
 
-    implementation 'com.bandyer:core_av:1.0.2'
+    implementation 'com.bandyer:core_av:1.0.3'
 }
