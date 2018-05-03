@@ -58,6 +58,6 @@
         app:fabSize="normal"
         app:layout_anchor="@id/streams"
         app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior="com.bandyer.demo_core_av.design.ScrollAwareFABBehavior" />
+        app:layout_behavior="com.bandyer.demo_core_av_2.design.ScrollAwareFABBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>
