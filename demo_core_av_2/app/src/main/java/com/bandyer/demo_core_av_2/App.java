@@ -23,7 +23,7 @@ import okhttp3.OkHttpClient;
 /**
  * @author kristiyan
  **/
-public class App extends Application implements NetworkLogger.Delegate {
+public class App extends Application implements NetworkLogger {
 
     public static OkHttpClient okHttpClient;
     public static Gson gson;
@@ -53,7 +53,7 @@ public class App extends Application implements NetworkLogger.Delegate {
         BandyerCoreAV.init(
                 new BandyerCoreAV.Builder(this)
                         .setHttpStack(okHttpClient)
-                        .setNetworkLogger(new NetworkLogger(this))
+                        .setNetworkLogger(this)
                         .setGsonBuilder(gsonBuilder)
         );
     }
