@@ -12,4 +12,5 @@ com.bandyer.core_av.room
 com.bandyer.core_av.room.exceptions
 com.bandyer.core_av.subscriber
 com.bandyer.core_av.subscriber.exceptions
+com.bandyer.core_av.utils
 com.bandyer.core_av.view
