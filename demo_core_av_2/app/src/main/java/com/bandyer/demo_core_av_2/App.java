@@ -9,7 +9,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.bandyer.core_av.BandyerCoreAV;
-import com.bandyer.core_av.utils.NetworkLogger;
+import com.bandyer.core_av.utils.logging.Logger;
+import com.bandyer.core_av.utils.logging.NetworkLogger;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
@@ -20,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 
 import okhttp3.OkHttpClient;
 
+import static com.bandyer.core_av.utils.logging.BaseLogger.ERROR;
+
 /**
  * @author kristiyan
  **/
@@ -29,7 +32,6 @@ public class App extends Application implements NetworkLogger {
     public static Gson gson;
 
     StethoReporter stethoReporter;
-
 
     @Override
     public void onCreate() {
@@ -50,11 +52,43 @@ public class App extends Application implements NetworkLogger {
         GsonBuilder gsonBuilder = new GsonBuilder().setLenient();
         gson = gsonBuilder.create();
 
-        BandyerCoreAV.init(
-                new BandyerCoreAV.Builder(this)
-                        .setHttpStack(okHttpClient)
-                        .setNetworkLogger(this)
-                        .setGsonBuilder(gsonBuilder)
+        BandyerCoreAV.init(new BandyerCoreAV.Builder(this)
+                .setHttpStack(okHttpClient)
+                .setNetworkLogger(this)
+                .setLogger(new Logger(ERROR) { // will log only the errors type
+
+                    @Override
+                    public int getLevel() {
+                        return ROOM | PUBLISHER | SUBSCRIBER; // add all the levels you want to debug
+                    }
+
+                    @Override
+                    public void verbose(@NotNull String tag, @NotNull String message) {
+                        Log.v(tag, message);
+                    }
+
+                    @Override
+                    public void debug(@NotNull String tag, @NotNull String message) {
+                        Log.d(tag, message);
+                    }
+
+                    @Override
+                    public void info(@NotNull String tag, @NotNull String message) {
+                        Log.i(tag, message);
+                    }
+
+                    @Override
+                    public void warn(@NotNull String tag, @NotNull String message) {
+                        Log.w(tag, message);
+                    }
+
+                    @Override
+                    public void error(@NotNull String tag, @NotNull String message) {
+                        Log.e(tag, message);
+                    }
+                })
+                .setGsonBuilder(gsonBuilder)
+
         );
     }
 
