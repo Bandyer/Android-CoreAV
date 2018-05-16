@@ -8,7 +8,7 @@
 <a href="../index.html">com.bandyer.core_av.publisher</a>&nbsp;/&nbsp;<a href="./index.html">Publisher</a><br/>
 <br/>
 <h1>Publisher</h1>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-capturer-observer.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">, </span><span class="identifier">SignalingChannelStreamListener</span><span class="symbol">, </span><span class="identifier">PeerConnectionStreamListener</span><span class="symbol">, </span><span class="identifier">PeerConnectionStatusListener</span><span class="symbol">, </span><span class="identifier">OnStreamReady</span></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-capturer-observer.html"><span class="identifier">CapturerObserver</span></a></code>
 <p>This class represents a publisher of a stream.
 A publisher is someone who is in read-write mode on a stream.
 There can be only one local publisher at a time in the room.
@@ -134,6 +134,15 @@ The observer will be notified when a change has occurred</p>
 <td>
 <code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">setView</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setView(com.bandyer.core_av.view.BandyerView, com.bandyer.core_av.view.OnViewStatusListener)/view">view</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.view/-bandyer-view/index.html"><span class="identifier">BandyerView</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setView(com.bandyer.core_av.view.BandyerView, com.bandyer.core_av.view.OnViewStatusListener)/statusListener">statusListener</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.view/-on-view-status-listener/index.html"><span class="identifier">OnViewStatusListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Publisher</span></a></code>
 <p>Utility method to attach a view to the publisher</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="to-string.html">toString</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Method returns a string representation of the publisher.</p>
 </td>
 </tr>
 </tbody>

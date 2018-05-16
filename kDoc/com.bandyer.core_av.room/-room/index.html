@@ -8,7 +8,7 @@
 <a href="../index.html">com.bandyer.core_av.room</a>&nbsp;/&nbsp;<a href="./index.html">Room</a><br/>
 <br/>
 <h1>Room</h1>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Room</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber-observer/index.html"><span class="identifier">SubscriberObserver</span></a><span class="symbol">, </span><a href="../../com.bandyer.core_av.publisher/-publisher-observer/index.html"><span class="identifier">PublisherObserver</span></a><span class="symbol">, </span><span class="identifier">SignalingChannelStatusListener</span><span class="symbol">, </span><span class="identifier">SignalingChannelStreamListener</span><span class="symbol">, </span><span class="identifier">SignalingChannelMessageListener</span></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Room</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber-observer/index.html"><span class="identifier">SubscriberObserver</span></a><span class="symbol">, </span><a href="../../com.bandyer.core_av.publisher/-publisher-observer/index.html"><span class="identifier">PublisherObserver</span></a></code>
 <p>This class represents a Bandyer room where the users will join and talk.
 The first step to use the room is create it by instantiating it with a room token.
 The room token will be provided by us, beforehand</p>
@@ -163,6 +163,15 @@ This method must be called if you want to setup a call.</p>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">subscribe</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$subscribe(com.bandyer.core_av.subscriber.Subscriber)/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Method used to add a new subscriber in the room.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="to-string.html">toString</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Method returns a string representation of the room.</p>
 </td>
 </tr>
 <tr>
