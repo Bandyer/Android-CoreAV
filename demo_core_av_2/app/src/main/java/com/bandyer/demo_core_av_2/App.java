@@ -9,7 +9,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.bandyer.core_av.BandyerCoreAV;
-import com.bandyer.core_av.utils.logging.Logger;
+import com.bandyer.core_av.utils.logging.CoreLogger;
 import com.bandyer.core_av.utils.logging.NetworkLogger;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
@@ -55,7 +55,7 @@ public class App extends Application implements NetworkLogger {
         BandyerCoreAV.init(new BandyerCoreAV.Builder(this)
                 .setHttpStack(okHttpClient)
                 .setNetworkLogger(this)
-                .setLogger(new Logger(ERROR) { // will log only the errors type
+                .setLogger(new CoreLogger(ERROR) { // will log only the errors type
 
                     @Override
                     public int getLevel() {
