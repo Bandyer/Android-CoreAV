@@ -245,7 +245,11 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     @Override
     public void onLocalSubscriberError(@NonNull Subscriber subscriber, @NonNull String reason) {
         Log.e("Subscriber", reason);
-
+    }
+    
+    @Override
+    public void onLocalSubscriberStateChanged(Subscriber subscriber, SubscriberState subscriberState) {
+        Log.d("Subscriber", "onLocalSubscriberStateChanged" + subscriberState.name());
     }
 
     @Override
@@ -257,6 +261,12 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
         Log.e("Publisher", reason);
     }
+
+    @Override
+    public void onLocalPublisherStateChanged(Publisher publisher, PublisherState publisherState) {
+        Log.d("Publisher", "onLocalPublisherStateChanged" + publisherState.name());
+    }
+    
 }
 ```
 
