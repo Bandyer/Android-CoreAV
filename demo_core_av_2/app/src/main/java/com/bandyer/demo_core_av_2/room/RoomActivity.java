@@ -23,6 +23,7 @@ import com.bandyer.core_av.capturer.CapturerAV;
 import com.bandyer.core_av.capturer.audio.CapturerAudio;
 import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.PublisherObserver;
+import com.bandyer.core_av.publisher.PublisherState;
 import com.bandyer.core_av.room.Room;
 import com.bandyer.core_av.room.RoomObserver;
 import com.bandyer.core_av.room.RoomState;
@@ -30,6 +31,7 @@ import com.bandyer.core_av.room.RoomToken;
 import com.bandyer.core_av.room.RoomUser;
 import com.bandyer.core_av.subscriber.Subscriber;
 import com.bandyer.core_av.subscriber.SubscriberObserver;
+import com.bandyer.core_av.subscriber.SubscriberState;
 import com.bandyer.demo_core_av_2.App;
 import com.bandyer.demo_core_av_2.BaseActivity;
 import com.bandyer.demo_core_av_2.R;
@@ -268,6 +270,11 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     }
 
     @Override
+    public void onLocalSubscriberStateChanged(Subscriber subscriber, SubscriberState subscriberState) {
+
+    }
+
+    @Override
     public void onLocalPublisherAdded(@NotNull Publisher publisher) {
 
     }
@@ -275,6 +282,11 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     @Override
     public void onLocalPublisherError(@NotNull Publisher publisher, @NotNull String reason) {
         pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
+    }
+
+    @Override
+    public void onLocalPublisherStateChanged(Publisher publisher, PublisherState publisherState) {
+
     }
 
     @Override

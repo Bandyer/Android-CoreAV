@@ -56,9 +56,8 @@ public class App extends Application implements NetworkLogger {
                 .setHttpStack(okHttpClient)
                 .setNetworkLogger(this)
                 .setLogger(new CoreLogger(ERROR) { // will log only the errors type
-
                     @Override
-                    public int getLevel() {
+                    public int getTarget() {
                         return ROOM | PUBLISHER | SUBSCRIBER; // add all the levels you want to debug
                     }
 

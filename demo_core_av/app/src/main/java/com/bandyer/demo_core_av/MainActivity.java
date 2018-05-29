@@ -22,12 +22,14 @@ import com.bandyer.core_av.Stream;
 import com.bandyer.core_av.capturer.CapturerAV;
 import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.PublisherObserver;
+import com.bandyer.core_av.publisher.PublisherState;
 import com.bandyer.core_av.room.Room;
 import com.bandyer.core_av.room.RoomObserver;
 import com.bandyer.core_av.room.RoomToken;
 import com.bandyer.core_av.room.RoomUser;
 import com.bandyer.core_av.subscriber.Subscriber;
 import com.bandyer.core_av.subscriber.SubscriberObserver;
+import com.bandyer.core_av.subscriber.SubscriberState;
 import com.bandyer.core_av.view.BandyerView;
 import com.bandyer.core_av.view.OnViewStatusListener;
 
@@ -193,6 +195,11 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     @Override
     public void onLocalSubscriberError(@NonNull Subscriber subscriber, @NonNull String reason) {
         Log.e("Subscriber", reason);
+    }
+
+    @Override
+    public void onLocalSubscriberStateChanged(Subscriber subscriber, SubscriberState subscriberState) {
+        Log.d("Subscriber", "onLocalSubscriberStateChanged" + subscriberState.name());
 
     }
 
@@ -204,6 +211,12 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     @Override
     public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
         Log.e("Publisher", reason);
+    }
+
+    @Override
+    public void onLocalPublisherStateChanged(Publisher publisher, PublisherState publisherState) {
+        Log.d("Publisher", "onLocalPublisherStateChanged" + publisherState.name());
+
     }
 
     // SHOW RUN TIME PERMISSIONS DIALOG
@@ -243,5 +256,4 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         // NOTE: delegate the permission handling to generated method
         MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
-
 }

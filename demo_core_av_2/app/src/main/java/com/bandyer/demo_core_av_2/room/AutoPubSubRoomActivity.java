@@ -24,6 +24,7 @@ import com.bandyer.core_av.capturer.CapturerAV;
 import com.bandyer.core_av.peerconnection.bandwidthThrottling.FixedBandwidthThrottlingStrategy;
 import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.PublisherObserver;
+import com.bandyer.core_av.publisher.PublisherState;
 import com.bandyer.core_av.room.Room;
 import com.bandyer.core_av.room.RoomObserver;
 import com.bandyer.core_av.room.RoomState;
@@ -31,6 +32,7 @@ import com.bandyer.core_av.room.RoomToken;
 import com.bandyer.core_av.room.RoomUser;
 import com.bandyer.core_av.subscriber.Subscriber;
 import com.bandyer.core_av.subscriber.SubscriberObserver;
+import com.bandyer.core_av.subscriber.SubscriberState;
 import com.bandyer.demo_core_av_2.App;
 import com.bandyer.demo_core_av_2.BaseActivity;
 import com.bandyer.demo_core_av_2.R;
@@ -219,14 +221,12 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
 
     @Override
     public void onRoomError(@NonNull String reason) {
-        Log.e("Room", reason);
-        if (room != null)
-            room.leave();
+        Log.e("Room","onRoomError "+ reason);
     }
 
     @Override
     public void onLocalSubscriberAdded(@NonNull Subscriber subscriber) {
-        Log.e("Subscriber", "onLocalSubscriberAdded");
+        Log.d("Subscriber", "onLocalSubscriberAdded");
     }
 
     @Override
@@ -236,8 +236,13 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     }
 
     @Override
+    public void onLocalSubscriberStateChanged(Subscriber subscriber, SubscriberState subscriberState) {
+        Log.d("Subscriber", "changed status to " + subscriberState.name());
+    }
+
+    @Override
     public void onLocalPublisherAdded(@NonNull Publisher publisher) {
-        Log.e("Publisher", "onLocalPublisherAdded");
+        Log.d("Publisher", "onLocalPublisherAdded");
     }
 
     @Override
@@ -247,7 +252,13 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     }
 
     @Override
+    public void onLocalPublisherStateChanged(Publisher publisher, PublisherState publisherState) {
+        Log.d("Publisher", "changed status to " + publisherState.name());
+    }
+
+    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return imageZoomHelper != null && (imageZoomHelper.onDispatchTouchEvent(ev) || super.dispatchTouchEvent(ev));
     }
+
 }
