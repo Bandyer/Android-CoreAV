@@ -15,11 +15,11 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-log-level/index.html">LogLevel</a></p>
+<p><a href="-log-target/index.html">LogTarget</a></p>
 </td>
 <td>
-<code><span class="keyword">annotation</span> <span class="keyword">class </span><span class="identifier">LogLevel</span></code>
-<p>CoreAV log level</p>
+<code><span class="keyword">annotation</span> <span class="keyword">class </span><span class="identifier">LogTarget</span></code>
+<p>CoreAV log target</p>
 </td>
 </tr>
 </tbody>
@@ -41,11 +41,11 @@
 <tbody>
 <tr>
 <td>
-<p><a href="level.html">level</a></p>
+<p><a href="target.html">target</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">level</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-<p>Logging target it may log one or more levels concatenated ( ex. PUBLISHER | SUBSCRIBER )</p>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">target</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Logging target it may log one or more targets concatenated ( ex. PUBLISHER | SUBSCRIBER )</p>
 </td>
 </tr>
 </tbody>
@@ -109,7 +109,7 @@
 </td>
 <td>
 <code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">CAPTURER</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-<p>Audio/Video capturer level</p>
+<p>Audio/Video capturer target</p>
 </td>
 </tr>
 <tr>
@@ -118,7 +118,7 @@
 </td>
 <td>
 <code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">PEER_CONNECTION</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-<p>PeerConnection level</p>
+<p>PeerConnection target</p>
 </td>
 </tr>
 <tr>
@@ -127,7 +127,7 @@
 </td>
 <td>
 <code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">PUBLISHER</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-<p>Publisher level</p>
+<p>Publisher target</p>
 </td>
 </tr>
 <tr>
@@ -136,7 +136,7 @@
 </td>
 <td>
 <code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">ROOM</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-<p>Room level</p>
+<p>Room target</p>
 </td>
 </tr>
 <tr>
@@ -145,7 +145,7 @@
 </td>
 <td>
 <code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">SUBSCRIBER</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-<p>Subscriber level</p>
+<p>Subscriber target</p>
 </td>
 </tr>
 </tbody>
