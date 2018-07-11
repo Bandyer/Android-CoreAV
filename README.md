@@ -139,28 +139,17 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         Log.d("Room", "onRoomEnter");
 
         // TODO: Publisher needs runtime permissions for AUDIO/VIDEO, otherwise it won't stream anything
-        CapturerAV capturerAV = new CapturerAV();
+        CapturerAV capturerAV = new CapturerAV(this);
+        capturerAV.start();
         publisher = new Publisher(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"))
                 .addPublisherObserver(MainActivity.this)
                 .setCapturer(capturerAV);
-        room.publish(this, publisher);
-        publisher.setView(publisherView, new OnViewStatusListener() {
-
+        room.publish(publisher);
+        publisher.setView(publisherView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NonNull Stream stream) {
+            public void onReadyToPlay(@NotNull Stream stream) {
                 publisherView.play(stream);
             }
-
-            @Override
-            public void onFirstFrameRendered() {
-
-            }
-
-            @Override
-            public void onViewSizeChanged(int width, int height, int rotationDegree) {
-                
-            }
-
         });
     }
     
@@ -210,22 +199,12 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         int size = getDp(60);
 
         subscribersListView.addView(subscriberView, new LinearLayout.LayoutParams(size, size));
-        subscriber.setView(subscriberView, new OnViewStatusListener() {
+        subscriber.setView(subscriberView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NonNull Stream stream) {
+            public void onReadyToPlay(@NotNull Stream stream) {
                 subscriberView.play(stream);
+                subscriberView.bringToFront(true);
             }
-
-            @Override
-            public void onFirstFrameRendered() {
-
-            }
-
-            @Override
-            public void onViewSizeChanged(int width, int height, int rotationDegree) {
-                
-            }
-
         });
     }
 
