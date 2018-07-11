@@ -18,14 +18,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     private static Retrofit retrofit = null;
+    private static String clientUrl;
 
     public static Retrofit getClient(String url) {
-        if (retrofit == null) {
+        if (retrofit == null || !url.equals(clientUrl)) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(url)
                     .client(App.okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create(App.gson))
                     .build();
+            clientUrl = url;
         }
         return retrofit;
     }

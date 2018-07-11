@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -165,12 +166,12 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
         if (room == null || room.getRoomState() != RoomState.CONNECTED || publisher != null)
             return;
 
-        AbstractBaseCapturer<?> capturer = isAudioOnlyCall ? new CapturerAudio() : new CapturerAV();
+        AbstractBaseCapturer<?> capturer = isAudioOnlyCall ? new CapturerAudio(this) : new CapturerAV(this);
         publisher = new Publisher(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"))
                 .addPublisherObserver(RoomActivity.this)
                 .setCapturer(capturer);
-
-        room.publish(this, publisher);
+        capturer.start();
+        room.publish(publisher);
 
         PublisherItem item = new PublisherItem(publisher, capturer);
         pubSubsAdapter.add(0, item);
@@ -244,39 +245,55 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     }
 
     @Override
-    public void onRoomEnter() {
-
-    }
-
-    @Override
     public void onRoomExit() {
+        Log.d("Room", "exit");
+    }
 
+
+    @Override
+    public void onRoomStateChanged(@NotNull RoomState state) {
+        Log.d("Room", "onRoomStateChanged " + state);
     }
 
     @Override
-    public void onRoomError(@NotNull String reason) {
-
+    public void onRoomError(@NonNull String reason) {
+        Log.e("Room", "onRoomError " + reason);
     }
+
+    @Override
+    public void onRoomEnter() {
+        Log.d("RoomActivity", "onRoomEnter");
+    }
+
+    @Override
+    public void onRoomReconnecting() {
+        Log.d("RoomActivity", "reconnecting...");
+    }
+
 
     @Override
     public void onLocalSubscriberAdded(@NotNull Subscriber subscriber) {
-
+        Log.d("RoomActivity", "onLocalSubscriberAdded");
     }
 
     @Override
     public void onLocalSubscriberError(@NotNull Subscriber subscriber, @NotNull String reason) {
         pubSubsAdapter.getItemAdapter().removeByIdentifier(subscriber.getId().hashCode());
-
     }
 
     @Override
-    public void onLocalSubscriberStateChanged(Subscriber subscriber, SubscriberState subscriberState) {
-
+    public void onLocalSubscriberStateChanged(@NonNull Subscriber subscriber, @NonNull SubscriberState subscriberState) {
+        Log.d("RoomActivity", "onLocalSubscriberStateChanged");
     }
 
     @Override
     public void onLocalPublisherAdded(@NotNull Publisher publisher) {
+        Log.d("RoomActivity", "onLocalPublisherAdded");
+    }
 
+    @Override
+    public void onLocalPublisherRemoved(@NotNull Publisher publisher) {
+        streamAdapter.getItemAdapter().removeByIdentifier(publisher.getStream().getStreamId().hashCode());
     }
 
     @Override
@@ -285,8 +302,8 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     }
 
     @Override
-    public void onLocalPublisherStateChanged(Publisher publisher, PublisherState publisherState) {
-
+    public void onLocalPublisherStateChanged(@NonNull Publisher publisher, @NonNull PublisherState publisherState) {
+        Log.d("RoomActivity", "onLocalPublisherStateChanged");
     }
 
     @Override

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
+import com.bandyer.core_av.OnStreamListener;
 import com.bandyer.core_av.Stream;
 import com.bandyer.core_av.subscriber.Subscriber;
 import com.bandyer.core_av.subscriber.VideoFpsQuality;
@@ -30,6 +31,8 @@ import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.listeners.ClickEventHook;
 import com.viven.imagezoom.ImageZoomHelper;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -119,16 +122,18 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
 
         @Override
         public void bindView(@NonNull final SubscriberItem item, @NonNull List<Object> payloads) {
-            item.subscriber.setView(preview, new OnViewStatusListener() {
+            item.subscriber.setView(preview, new OnStreamListener() {
                 @Override
-                public void onReadyToPlay(@NonNull Stream stream) {
+                public void onReadyToPlay(@NotNull Stream stream) {
                     updateAudioVideoButton(stream.getHasVideo(),
                             stream.getHasAudio(),
                             stream.isAudioMuted(),
                             stream.isVideoMuted());
                     preview.play(stream);
                 }
+            });
 
+            preview.setViewListener(new OnViewStatusListener() {
                 @Override
                 public void onFirstFrameRendered() {
                     Log.e("SubView", "frameRendered");

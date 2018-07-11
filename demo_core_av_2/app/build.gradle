@@ -82,6 +82,5 @@ dependencies {
     implementation 'com.github.okaybroda:ImageZoom:1.1.1'
 
     /*** Bandyer Core ***/
-
-    implementation 'com.bandyer:core_av:1.0.7'
+    implementation "com.bandyer:core_av:1.0.8"
 }

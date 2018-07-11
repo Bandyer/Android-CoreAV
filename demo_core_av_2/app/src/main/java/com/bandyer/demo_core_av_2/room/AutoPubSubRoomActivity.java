@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,8 +21,11 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.bandyer.core_av.Stream;
+import com.bandyer.core_av.audiosession.AudioOutputDeviceType;
+import com.bandyer.core_av.audiosession.AudioSession;
+import com.bandyer.core_av.audiosession.AudioSessionListener;
+import com.bandyer.core_av.audiosession.AudioSessionOptions;
 import com.bandyer.core_av.capturer.CapturerAV;
-import com.bandyer.core_av.peerconnection.bandwidthThrottling.FixedBandwidthThrottlingStrategy;
 import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.PublisherObserver;
 import com.bandyer.core_av.publisher.PublisherState;
@@ -33,6 +37,7 @@ import com.bandyer.core_av.room.RoomUser;
 import com.bandyer.core_av.subscriber.Subscriber;
 import com.bandyer.core_av.subscriber.SubscriberObserver;
 import com.bandyer.core_av.subscriber.SubscriberState;
+import com.bandyer.core_av.utils.proximity_listener.ProximitySensorListener;
 import com.bandyer.demo_core_av_2.App;
 import com.bandyer.demo_core_av_2.BaseActivity;
 import com.bandyer.demo_core_av_2.R;
@@ -44,7 +49,10 @@ import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnLongClickListener;
 import com.viven.imagezoom.ImageZoomHelper;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -63,10 +71,13 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     FastItemAdapter pubSubsAdapter = new FastItemAdapter();
 
     private Room room;
+    private CapturerAV capturerAV;
 
     private Publisher publisher;
 
     ImageZoomHelper imageZoomHelper;
+
+    Snackbar snackbar;
 
     public static void show(BaseActivity activity, String token, boolean roomAudioMuted) {
         Intent intent = new Intent(activity, AutoPubSubRoomActivity.class);
@@ -96,6 +107,38 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
         pubSubs.setAdapter(pubSubsAdapter);
 
         setAdapterListeners();
+
+        AudioSession.getInstance().startWithOptions(
+                this,
+                new AudioSessionOptions.Builder()
+                        // .disableAutomaticAudioDeviceChange()
+                        .withDefaultSpeakerPhoneOutputHardWareDevice()
+                        .build(),
+                new AudioSessionListener() {
+                    @Override
+                    public void onOutputDeviceConnected(@NotNull AudioOutputDeviceType oldAudioOutputDeviceType, @NotNull AudioOutputDeviceType connectedAudioOutputDevice, @NotNull List<? extends AudioOutputDeviceType> availableOutputs) {
+                        Log.d("AudioSession", "changed from old: " + oldAudioOutputDeviceType.name() + " to connected: " + connectedAudioOutputDevice.name());
+                        if (snackbar != null)
+                            snackbar.dismiss();
+                        snackbar = Snackbar.make(pubSubs, connectedAudioOutputDevice.name(), Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                    }
+
+                    @Override
+                    public void onOutputDeviceAttached(@NotNull AudioOutputDeviceType currentAudioOutputDevice, @NotNull AudioOutputDeviceType attachedAudioOutputDevice, @NotNull List<? extends AudioOutputDeviceType> availableOutputs) {
+                        Log.d("AudioSession", "current: " + currentAudioOutputDevice.name() + " attached audioDevice: " + attachedAudioOutputDevice.name());
+                    }
+
+                    @Override
+                    public void onOutputDeviceDetached(@NotNull AudioOutputDeviceType currentAudioOutputDevice, @NotNull AudioOutputDeviceType detachedAudioOutputDevice, @NotNull List<? extends AudioOutputDeviceType> availableOutputs) {
+                        Log.d("AudioSession", "current: " + currentAudioOutputDevice.name() + " detached audioDevice: " + detachedAudioOutputDevice.name());
+                    }
+                }, new ProximitySensorListener() {
+                    @Override
+                    public void onProximitySensorChanged(boolean isNear) {
+                        Log.d("ProximitySensor", "proximity triggered: " + isNear);
+                    }
+                });
 
         room = new Room(new RoomToken(token));
         room.addRoomObserver(this);
@@ -134,8 +177,7 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     public void onRemotePublisherJoined(@NonNull final Stream stream) {
         Log.e("Publisher", "onRemotePublisherJoined");
         final Subscriber subscriber = new Subscriber(stream)
-                .addSubscribeObserver(this)
-                .setBandwidthThrottlingStrategy(new FixedBandwidthThrottlingStrategy(10));
+                .addSubscribeObserver(this);
         room.subscribe(subscriber);
         SubscriberItem item = new SubscriberItem(subscriber);
         pubSubsAdapter.add(item);
@@ -154,11 +196,12 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     @Override
     @SuppressWarnings("unchecked")
     public void onRoomEnter() {
-        CapturerAV capturerAV = new CapturerAV();
+        capturerAV = new CapturerAV(this);
+        capturerAV.start();
         publisher = new Publisher(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"))
                 .addPublisherObserver(AutoPubSubRoomActivity.this)
                 .setCapturer(capturerAV);
-        room.publish(this, publisher);
+        room.publish(publisher);
 
         PublisherItem item = new PublisherItem(publisher, capturerAV);
         pubSubsAdapter.add(0, item);
@@ -213,15 +256,29 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     }
 
     @Override
+    public void onRoomReconnecting() {
+        Log.d("RoomActivity", "reconnecting");
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (snackbar != null)
+            snackbar.dismiss();
         if (room != null)
             room.leave();
     }
 
     @Override
+    public void onRoomStateChanged(@NotNull RoomState state) {
+        Log.d("Room", "onRoomStateChanged " + state);
+    }
+
+    @Override
     public void onRoomError(@NonNull String reason) {
-        Log.e("Room","onRoomError "+ reason);
+        Log.e("Room", "onRoomError " + reason);
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override
@@ -236,7 +293,7 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     }
 
     @Override
-    public void onLocalSubscriberStateChanged(Subscriber subscriber, SubscriberState subscriberState) {
+    public void onLocalSubscriberStateChanged(@NonNull Subscriber subscriber, @NonNull SubscriberState subscriberState) {
         Log.d("Subscriber", "changed status to " + subscriberState.name());
     }
 
@@ -246,13 +303,19 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     }
 
     @Override
+    public void onLocalPublisherRemoved(@NotNull Publisher publisher) {
+        room.unpublish(publisher);
+        pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
+    }
+
+    @Override
     public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
         Log.e("Publisher", reason);
         pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
     }
 
     @Override
-    public void onLocalPublisherStateChanged(Publisher publisher, PublisherState publisherState) {
+    public void onLocalPublisherStateChanged(@NonNull Publisher publisher, @NonNull PublisherState publisherState) {
         Log.d("Publisher", "changed status to " + publisherState.name());
     }
 

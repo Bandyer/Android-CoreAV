@@ -163,6 +163,16 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
 
         });
     }
+    
+    @Override
+    public void onRoomReconnecting() {
+        Log.d("Room", "onRoomReconnecting ...");
+    }
+
+    @Override
+    public void onRoomStateChanged(@NotNull RoomState state) {
+        Log.d("Room", "onRoomStateChanged " + state.name());
+    }
 
     @Override
     public void onRoomExit() {
@@ -256,6 +266,16 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     public void onLocalPublisherAdded(@NonNull Publisher publisher) {
         Log.d("Publisher", "onLocalPublisherAdded");
     }
+    
+    @Override
+    public void onLocalPublisherRemoved(@NotNull Publisher publisher) {
+        Log.d("Publisher", "onLocalPublisherRemoved");
+    }
+    
+    @Override
+    public void onLocalPublisherStateChanged(@NonNull Publisher publisher, @NonNull PublisherState publisherState) {
+        Log.d("Publisher", "onLocalPublisherStateChanged" + publisherState.name());
+    }
 
     @Override
     public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
@@ -289,5 +309,3 @@ If you prefer commercial support, please contact [bandyer.com](https://bandyer.c
 - [Gson](https://github.com/google/gson) by Google
 - [Android-weak-handler](https://github.com/badoo/android-weak-handler) by Badoo
 - [Socket.io](https://github.com/socketio/socket.io-client-java) by socket.io
-
-

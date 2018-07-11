@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
+import com.bandyer.core_av.OnStreamListener;
 import com.bandyer.core_av.Stream;
 import com.bandyer.core_av.capturer.AbstractBaseCapturer;
 import com.bandyer.core_av.capturer.CapturerAV;
@@ -25,6 +26,8 @@ import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.listeners.ClickEventHook;
 import com.viven.imagezoom.ImageZoomHelper;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -114,29 +117,30 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
         @Override
         public void bindView(@NonNull final PublisherItem item, @NonNull List<Object> payloads) {
             capturerAV = item.capturerAV;
-            item.publisher.setView(preview, new OnViewStatusListener() {
 
-                @Override
-                public void onReadyToPlay(@NonNull Stream stream) {
-                    updateAudioVideoButton(stream.getHasVideo(),
-                            stream.getHasAudio(),
-                            stream.isAudioMuted(),
-                            stream.isVideoMuted());
-                    preview.play(stream);
-                }
-
-                @Override
-                public void onFirstFrameRendered() {
-                    Log.e("PubView", "frameRendered");
-                }
+            preview.setViewListener(new OnViewStatusListener() {
 
                 @Override
                 public void onViewSizeChanged(int width, int height, int rotationDegree) {
                     Log.e("PubView", "w " + width + " h " + height + "r " + rotationDegree);
                 }
 
+                @Override
+                public void onFirstFrameRendered() {
+                    Log.e("PubView", "frameRendered");
+                }
             });
 
+            item.publisher.setView(preview, new OnStreamListener() {
+                @Override
+                public void onReadyToPlay(@NotNull Stream stream) {
+                    updateAudioVideoButton(stream.getHasVideo(),
+                            stream.getHasAudio(),
+                            stream.isAudioMuted(),
+                            stream.isVideoMuted());
+                    preview.play(stream);
+                }
+            });
 
             streamId.setText(item.publisher.getId());
             streamId.setSelected(true);

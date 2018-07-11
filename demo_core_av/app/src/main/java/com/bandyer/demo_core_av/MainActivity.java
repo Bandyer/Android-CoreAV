@@ -18,6 +18,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.widget.LinearLayout;
 
+import com.bandyer.core_av.OnStreamListener;
 import com.bandyer.core_av.Stream;
 import com.bandyer.core_av.capturer.CapturerAV;
 import com.bandyer.core_av.publisher.Publisher;
@@ -25,13 +26,15 @@ import com.bandyer.core_av.publisher.PublisherObserver;
 import com.bandyer.core_av.publisher.PublisherState;
 import com.bandyer.core_av.room.Room;
 import com.bandyer.core_av.room.RoomObserver;
+import com.bandyer.core_av.room.RoomState;
 import com.bandyer.core_av.room.RoomToken;
 import com.bandyer.core_av.room.RoomUser;
 import com.bandyer.core_av.subscriber.Subscriber;
 import com.bandyer.core_av.subscriber.SubscriberObserver;
 import com.bandyer.core_av.subscriber.SubscriberState;
 import com.bandyer.core_av.view.BandyerView;
-import com.bandyer.core_av.view.OnViewStatusListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
@@ -88,27 +91,17 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     @Override
     public void onRoomEnter() {
         Log.d("Room", "onRoomEnter");
-        CapturerAV capturerAV = new CapturerAV();
+        CapturerAV capturerAV = new CapturerAV(this);
+        capturerAV.start();
         publisher = new Publisher(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"))
                 .addPublisherObserver(MainActivity.this)
                 .setCapturer(capturerAV);
-        room.publish(this, publisher);
-        publisher.setView(publisherView, new OnViewStatusListener() {
+        room.publish(publisher);
 
+        publisher.setView(publisherView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NonNull Stream stream) {
+            public void onReadyToPlay(@NotNull Stream stream) {
                 publisherView.play(stream);
-            }
-
-
-            @Override
-            public void onFirstFrameRendered() {
-
-            }
-
-            @Override
-            public void onViewSizeChanged(int width, int height, int rotationDegree) {
-
             }
         });
     }
@@ -121,6 +114,16 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     @Override
     public void onRoomError(@NonNull String reason) {
         Log.e("Room", reason);
+    }
+
+    @Override
+    public void onRoomReconnecting() {
+        Log.d("Room", "onRoomReconnecting ...");
+    }
+
+    @Override
+    public void onRoomStateChanged(@NotNull RoomState state) {
+        Log.d("Room", "onRoomStateChanged " + state.name());
     }
 
     @Override
@@ -149,23 +152,12 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         int size = getDp(60);
 
         subscribersListView.addView(subscriberView, new LinearLayout.LayoutParams(size, size));
-        subscriber.setView(subscriberView, new OnViewStatusListener() {
-
+        subscriber.setView(subscriberView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NonNull Stream stream) {
+            public void onReadyToPlay(@NotNull Stream stream) {
                 subscriberView.play(stream);
+                subscriberView.bringToFront(true);
             }
-
-            @Override
-            public void onFirstFrameRendered() {
-
-            }
-
-            @Override
-            public void onViewSizeChanged(int width, int height, int rotationDegree) {
-
-            }
-
         });
     }
 
@@ -198,9 +190,8 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     @Override
-    public void onLocalSubscriberStateChanged(Subscriber subscriber, SubscriberState subscriberState) {
+    public void onLocalSubscriberStateChanged(@NonNull Subscriber subscriber, @NonNull SubscriberState subscriberState) {
         Log.d("Subscriber", "onLocalSubscriberStateChanged" + subscriberState.name());
-
     }
 
     @Override
@@ -209,14 +200,18 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     @Override
+    public void onLocalPublisherRemoved(@NotNull Publisher publisher) {
+        Log.d("Publisher", "onLocalPublisherRemoved");
+    }
+
+    @Override
     public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
         Log.e("Publisher", reason);
     }
 
     @Override
-    public void onLocalPublisherStateChanged(Publisher publisher, PublisherState publisherState) {
+    public void onLocalPublisherStateChanged(@NonNull Publisher publisher, @NonNull PublisherState publisherState) {
         Log.d("Publisher", "onLocalPublisherStateChanged" + publisherState.name());
-
     }
 
     // SHOW RUN TIME PERMISSIONS DIALOG
@@ -256,4 +251,6 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         // NOTE: delegate the permission handling to generated method
         MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
+
+
 }
