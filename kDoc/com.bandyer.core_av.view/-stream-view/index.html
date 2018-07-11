@@ -1,0 +1,142 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>StreamView - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.view</a>&nbsp;/&nbsp;<a href="./index.html">StreamView</a><br/>
+<br/>
+<h1>StreamView</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">StreamView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/widget/FrameLayout.html"><span class="identifier">FrameLayout</span></a></code>
+<p>Abstract view which extends FrameLayout and is used to render the stream of the subscriber and publisher</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">StreamView</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.view.StreamView$<init>(android.content.Context, android.util.AttributeSet, kotlin.Int)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.view.StreamView$<init>(android.content.Context, android.util.AttributeSet, kotlin.Int)/attrs">attrs</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/util/AttributeSet.html"><span class="identifier">AttributeSet</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.view.StreamView$<init>(android.content.Context, android.util.AttributeSet, kotlin.Int)/defStyleAttr">defStyleAttr</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0<span class="symbol">)</span></code>
+<p>Abstract view which extends FrameLayout and is used to render the stream of the subscriber and publisher</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="current-scale-type.html">currentScaleType</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">currentScaleType</span><span class="symbol">: </span><a href="../-scale-type/index.html"><span class="identifier">ScaleType</span></a></code>
+<p>current view-port scale type, by default is BALANCED</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="view-listener.html">viewListener</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">viewListener</span><span class="symbol">: </span><a href="../-on-view-status-listener/index.html"><span class="identifier">OnViewStatusListener</span></a><span class="symbol">?</span></code>
+<p>Listener for rendering changes</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="audio-enabled.html">audioEnabled</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">audioEnabled</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.view.StreamView$audioEnabled(kotlin.Boolean)/enabled">enabled</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to enable/disable the audio</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="pause.html">pause</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">pause</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to put on pause the video streaming</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="play.html">play</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">play</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.view.StreamView$play(com.bandyer.core_av.Stream)/stream">stream</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to play the stream on the view</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-mirror.html">setMirror</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setMirror</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.view.StreamView$setMirror(kotlin.Boolean)/enable">enable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method used to enable mirroring of the video stream.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-scale-type.html">setScaleType</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setScaleType</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.view.StreamView$setScaleType(com.bandyer.core_av.view.ScaleType)/scaleType">scaleType</span><span class="symbol">:</span>&nbsp;<a href="../-scale-type/index.html"><span class="identifier">ScaleType</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to change the scale type of the preview</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="stop.html">stop</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">stop</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to stop the video streaming</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="video-enabled.html">videoEnabled</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">videoEnabled</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.view.StreamView$videoEnabled(kotlin.Boolean)/enabled">enabled</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to enable/disable the video</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-bandyer-view/index.html">BandyerView</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">BandyerView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">StreamView</span></a></code>
+<p>Custom view which extends FrameLayout and is used to render the stream of the subscriber and publisher</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-video-stream-view/index.html">VideoStreamView</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">VideoStreamView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">StreamView</span></a><span class="symbol">, </span><a href="../-rounded-view/index.html"><span class="identifier">RoundedView</span></a></code>
+<p>Custom which extends FrameLayout and is used to render the stream of the subscriber and publisher using TextureView as rendering view</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -10,6 +10,9 @@
 <h1>AbstractBaseCapturer</h1>
 <code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractBaseCapturer</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span></code>
 <p>Abstract class defining how the capturers must behave</p>
+<h3>Parameters</h3>
+<p><a name="context"></a>
+<code>context</code> - activity context where the capturer will be binded</p>
 <p><strong>Author</strong><br/>
 kristiyan</p>
 <h3>Constructors</h3>
@@ -20,8 +23,31 @@ kristiyan</p>
 <p><a href="-init-.html">&lt;init&gt;</a></p>
 </td>
 <td>
-<code><span class="identifier">AbstractBaseCapturer</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<code><span class="identifier">AbstractBaseCapturer</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.AbstractBaseCapturer$<init>(android.support.v7.app.AppCompatActivity)/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">AppCompatActivity</span><span class="symbol">)</span></code>
 <p>Abstract class defining how the capturers must behave</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="state.html">state</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">state</span><span class="symbol">: </span><a href="../-capturer-state/index.html"><span class="identifier">CapturerState</span></a></code>
+<p>returns the capturer current state</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="stream.html">stream</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">stream</span><span class="symbol">: </span><a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">?</span></code>
+<p>Captured audio or video</p>
 </td>
 </tr>
 </tbody>
@@ -34,17 +60,27 @@ kristiyan</p>
 <p><a href="add-capturer-observer.html">addCapturerObserver</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">addCapturerObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.AbstractBaseCapturer$addCapturerObserver(com.bandyer.core_av.capturer.CapturerObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-observer.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<code><span class="keyword">fun </span><span class="identifier">addCapturerObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.AbstractBaseCapturer$addCapturerObserver(com.bandyer.core_av.capturer.CapturerObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-observer/index.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
 <p>Method to add an observer to the capturer</p>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="dispose.html">dispose</a></p>
+<p><a href="destroy.html">destroy</a></p>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">dispose</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Method used to dispose the capturer</p>
+<code><span class="keyword">fun </span><span class="identifier">destroy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>Method used to dispose the capturer, called onDestroy of the activity</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="pause.html">pause</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">pause</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>pause the capturer, called onPause of the activity
+If you manually pause the capturer it will not automatically resume onResume of the activity.</p>
 </td>
 </tr>
 <tr>
@@ -52,8 +88,26 @@ kristiyan</p>
 <p><a href="remove-capturer-observer.html">removeCapturerObserver</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">removeCapturerObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.AbstractBaseCapturer$removeCapturerObserver(com.bandyer.core_av.capturer.CapturerObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-observer.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<code><span class="keyword">fun </span><span class="identifier">removeCapturerObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.AbstractBaseCapturer$removeCapturerObserver(com.bandyer.core_av.capturer.CapturerObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-observer/index.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
 <p>Method to remove an observer from</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="resume.html">resume</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">resume</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>resumes the capturer if it has been paused, called onResume of the activity</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="start.html">start</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">start</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>starts the capturer, called by the user</p>
 </td>
 </tr>
 </tbody>
@@ -66,8 +120,9 @@ kristiyan</p>
 <p><a href="../-capturer-a-v/index.html">CapturerAV</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">CapturerAV</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><a href="../-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer.video/-video-interface/index.html"><span class="identifier">VideoInterface</span></a><span class="symbol">&lt;</span><a href="../-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer.audio/-audio-interface/index.html"><span class="identifier">AudioInterface</span></a><span class="symbol">&lt;</span><a href="../-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../-capturer-observer.html"><span class="identifier">CapturerObserver</span></a></code>
-<p>This class captures device audio and video from the camera</p>
+<code><span class="keyword">class </span><span class="identifier">CapturerAV</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><a href="../-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer.video/-video-interface/index.html"><span class="identifier">VideoInterface</span></a><span class="symbol">&lt;</span><a href="../-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer.audio/-audio-interface/index.html"><span class="identifier">AudioInterface</span></a><span class="symbol">&lt;</span><a href="../-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../-capturer-observer/index.html"><span class="identifier">CapturerObserver</span></a></code>
+<p>This class captures device audio and video from the camera
+It will follow the activity lifecycle, so you don't need to pause/resume/destroy</p>
 </td>
 </tr>
 <tr>
@@ -85,7 +140,8 @@ kristiyan</p>
 </td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">CapturerVideo</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.capturer.video/-capturer-video/index.html"><span class="identifier">CapturerVideo</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer.video/-video-interface/index.html"><span class="identifier">VideoInterface</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.capturer.video/-capturer-video/index.html"><span class="identifier">CapturerVideo</span></a><span class="symbol">&gt;</span></code>
-<p>Video Capturer from the camera</p>
+<p>Video Capturer from the camera
+It will follow the activity lifecycle, so you don't need to pause/resume/destroy</p>
 </td>
 </tr>
 </tbody>

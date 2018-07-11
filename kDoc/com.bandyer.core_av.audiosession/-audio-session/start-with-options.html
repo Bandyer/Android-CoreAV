@@ -1,0 +1,26 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AudioSession.startWithOptions - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.audiosession</a>&nbsp;/&nbsp;<a href="index.html">AudioSession</a>&nbsp;/&nbsp;<a href="./start-with-options.html">startWithOptions</a><br/>
+<br/>
+<h1>startWithOptions</h1>
+<a name="com.bandyer.core_av.audiosession.AudioSession$startWithOptions(android.support.v7.app.AppCompatActivity, com.bandyer.core_av.audiosession.AudioSessionOptions, com.bandyer.core_av.audiosession.AudioSessionListener, com.bandyer.core_av.utils.proximity_listener.ProximitySensorListener)"></a>
+<code><span class="keyword">fun </span><span class="identifier">startWithOptions</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSession$startWithOptions(android.support.v7.app.AppCompatActivity, com.bandyer.core_av.audiosession.AudioSessionOptions, com.bandyer.core_av.audiosession.AudioSessionListener, com.bandyer.core_av.utils.proximity_listener.ProximitySensorListener)/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">AppCompatActivity</span><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSession$startWithOptions(android.support.v7.app.AppCompatActivity, com.bandyer.core_av.audiosession.AudioSessionOptions, com.bandyer.core_av.audiosession.AudioSessionListener, com.bandyer.core_av.utils.proximity_listener.ProximitySensorListener)/options">options</span><span class="symbol">:</span>&nbsp;<a href="../-audio-session-options/index.html"><span class="identifier">AudioSessionOptions</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSession$startWithOptions(android.support.v7.app.AppCompatActivity, com.bandyer.core_av.audiosession.AudioSessionOptions, com.bandyer.core_av.audiosession.AudioSessionListener, com.bandyer.core_av.utils.proximity_listener.ProximitySensorListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-audio-session-listener/index.html"><span class="identifier">AudioSessionListener</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSession$startWithOptions(android.support.v7.app.AppCompatActivity, com.bandyer.core_av.audiosession.AudioSessionOptions, com.bandyer.core_av.audiosession.AudioSessionListener, com.bandyer.core_av.utils.proximity_listener.ProximitySensorListener)/proximityListener">proximityListener</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.utils.proximity_listener/-proximity-sensor-listener/index.html"><span class="identifier">ProximitySensorListener</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Request audio session to initialize with audio session options.
+Context is requested and never stored. Be sure to follow activity lifecycle and always call dispose on audio session module to prevent
+activities leaks.</p>
+<h3>Parameters</h3>
+<p><a name="context"></a>
+<code>context</code> - context used to initialize wired headset and bluetooth broadcast receiver.</p>
+<p><a name="options"></a>
+<code>options</code> - options to be used in audio session initialization</p>
+<p><a name="listener"></a>
+<code>listener</code> - audio session listener to be notified for hardware output changes.</p>
+<p><a name="proximityListener"></a>
+<code>proximityListener</code> - listener to be notified when the proximity sensor has been triggered</p>
+</BODY>
+</HTML>

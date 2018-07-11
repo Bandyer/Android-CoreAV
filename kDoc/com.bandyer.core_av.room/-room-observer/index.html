@@ -17,6 +17,15 @@ kristiyan</p>
 <tbody>
 <tr>
 <td>
+<p><a href="on-local-publisher-removed.html">onLocalPublisherRemoved</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalPublisherRemoved</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.RoomObserver$onLocalPublisherRemoved(com.bandyer.core_av.publisher.Publisher)/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.publisher/-publisher/index.html"><span class="identifier">Publisher</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when the local publisher has been removed you may need to remove it from the UI</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="on-remote-publisher-joined.html">onRemotePublisherJoined</a></p>
 </td>
 <td>
@@ -58,6 +67,24 @@ kristiyan</p>
 <td>
 <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onRoomExit</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Called when the room has been left</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-room-reconnecting.html">onRoomReconnecting</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onRoomReconnecting</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when the room has been left</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-room-state-changed.html">onRoomStateChanged</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onRoomStateChanged</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.RoomObserver$onRoomStateChanged(com.bandyer.core_av.room.RoomState)/state">state</span><span class="symbol">:</span>&nbsp;<a href="../-room-state/index.html"><span class="identifier">RoomState</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when the room status has changed</p>
 </td>
 </tr>
 </tbody>

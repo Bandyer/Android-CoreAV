@@ -16,7 +16,7 @@
 <p><a href="-bandyer-view/index.html">BandyerView</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">BandyerView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/widget/FrameLayout.html"><span class="identifier">FrameLayout</span></a></code>
+<code><span class="keyword">class </span><span class="identifier">BandyerView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-stream-view/index.html"><span class="identifier">StreamView</span></a></code>
 <p>Custom view which extends FrameLayout and is used to render the stream of the subscriber and publisher</p>
 </td>
 </tr>
@@ -26,7 +26,25 @@
 </td>
 <td>
 <code><span class="keyword">interface </span><span class="identifier">OnViewStatusListener</span></code>
-<p>View status listener</p>
+<p>View status change listener</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-roundable.html">Roundable</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Roundable</span></code>
+<p>Generic interface referring to roundable objects</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-rounded-view/index.html">RoundedView</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">RoundedView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-roundable.html"><span class="identifier">Roundable</span></a></code>
+<p>View that can be rounded</p>
 </td>
 </tr>
 <tr>
@@ -36,6 +54,24 @@
 <td>
 <code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">ScaleType</span></code>
 <p>Scale type used in bandyer view</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-stream-view/index.html">StreamView</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">StreamView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/widget/FrameLayout.html"><span class="identifier">FrameLayout</span></a></code>
+<p>Abstract view which extends FrameLayout and is used to render the stream of the subscriber and publisher</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-video-stream-view/index.html">VideoStreamView</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">VideoStreamView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-stream-view/index.html"><span class="identifier">StreamView</span></a><span class="symbol">, </span><a href="-rounded-view/index.html"><span class="identifier">RoundedView</span></a></code>
+<p>Custom which extends FrameLayout and is used to render the stream of the subscriber and publisher using TextureView as rendering view</p>
 </td>
 </tr>
 </tbody>

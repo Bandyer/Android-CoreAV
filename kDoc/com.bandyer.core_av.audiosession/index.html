@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.bandyer.core_av.audiosession - </title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="./index.html">com.bandyer.core_av.audiosession</a><br/>
+<br/>
+<h2>Package com.bandyer.core_av.audiosession</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-audio-output-device-type/index.html">AudioOutputDeviceType</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">AudioOutputDeviceType</span></code>
+<p>Class which represents an audio hardware output device.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-audio-session/index.html">AudioSession</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">AudioSession</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AudioSessionInstance</span><span class="symbol">, </span><span class="identifier">LifecycleEvents</span></code>
+<p>AudioSession class is used to represent and audio session that uses output hardware devices to route audio during audio/video calls.
+This class performs automatic best hardware selection upgrading audio session from earpiece/speaker to wired headset and, if present, bluetooth devices.
+This class must be binded to the activity lifecycle calling initialize(context), resume(context), pause(context) and dispose(context) methods
+Following permission must be added in order to let audio session scan bluetooth devices and modify audio settings:
+    &lt;uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" /&gt;</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-audio-session-listener/index.html">AudioSessionListener</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">AudioSessionListener</span></code>
+<p>Class which represents an audio session listener.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-audio-session-options/index.html">AudioSessionOptions</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">AudioSessionOptions</span></code>
+<p>Class which represents options to be used to initialize audio session module.
+By default the AudioSession automatically changes between earpiece -&gt; speaker-phone -&gt; wired-headset -&gt; bluetooth devices in this exact order and priority when connected.
+The proximity sensor is optionally used to automatically switch between earpiece(near) and speaker(far)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-audio-session-state/index.html">AudioSessionState</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">AudioSessionState</span></code>
+<p>Class which represents AudioSession class state.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

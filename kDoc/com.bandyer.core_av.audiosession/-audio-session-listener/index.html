@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AudioSessionListener - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.audiosession</a>&nbsp;/&nbsp;<a href="./index.html">AudioSessionListener</a><br/>
+<br/>
+<h1>AudioSessionListener</h1>
+<code><span class="keyword">interface </span><span class="identifier">AudioSessionListener</span></code>
+<p>Class which represents an audio session listener.</p>
+<p><strong>Since</strong><br/>
+v1.0.8</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="on-output-device-attached.html">onOutputDeviceAttached</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onOutputDeviceAttached</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSessionListener$onOutputDeviceAttached(com.bandyer.core_av.audiosession.AudioOutputDeviceType, com.bandyer.core_av.audiosession.AudioOutputDeviceType, kotlin.collections.List((com.bandyer.core_av.audiosession.AudioOutputDeviceType)))/currentAudioOutputDevice">currentAudioOutputDevice</span><span class="symbol">:</span>&nbsp;<a href="../-audio-output-device-type/index.html"><span class="identifier">AudioOutputDeviceType</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSessionListener$onOutputDeviceAttached(com.bandyer.core_av.audiosession.AudioOutputDeviceType, com.bandyer.core_av.audiosession.AudioOutputDeviceType, kotlin.collections.List((com.bandyer.core_av.audiosession.AudioOutputDeviceType)))/attachedAudioOutputDevice">attachedAudioOutputDevice</span><span class="symbol">:</span>&nbsp;<a href="../-audio-output-device-type/index.html"><span class="identifier">AudioOutputDeviceType</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSessionListener$onOutputDeviceAttached(com.bandyer.core_av.audiosession.AudioOutputDeviceType, com.bandyer.core_av.audiosession.AudioOutputDeviceType, kotlin.collections.List((com.bandyer.core_av.audiosession.AudioOutputDeviceType)))/availableOutputs">availableOutputs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-audio-output-device-type/index.html"><span class="identifier">AudioOutputDeviceType</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called whenever a new device has been attached</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-output-device-connected.html">onOutputDeviceConnected</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onOutputDeviceConnected</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSessionListener$onOutputDeviceConnected(com.bandyer.core_av.audiosession.AudioOutputDeviceType, com.bandyer.core_av.audiosession.AudioOutputDeviceType, kotlin.collections.List((com.bandyer.core_av.audiosession.AudioOutputDeviceType)))/oldAudioOutputDevice">oldAudioOutputDevice</span><span class="symbol">:</span>&nbsp;<a href="../-audio-output-device-type/index.html"><span class="identifier">AudioOutputDeviceType</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSessionListener$onOutputDeviceConnected(com.bandyer.core_av.audiosession.AudioOutputDeviceType, com.bandyer.core_av.audiosession.AudioOutputDeviceType, kotlin.collections.List((com.bandyer.core_av.audiosession.AudioOutputDeviceType)))/connectedAudioOutputDevice">connectedAudioOutputDevice</span><span class="symbol">:</span>&nbsp;<a href="../-audio-output-device-type/index.html"><span class="identifier">AudioOutputDeviceType</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSessionListener$onOutputDeviceConnected(com.bandyer.core_av.audiosession.AudioOutputDeviceType, com.bandyer.core_av.audiosession.AudioOutputDeviceType, kotlin.collections.List((com.bandyer.core_av.audiosession.AudioOutputDeviceType)))/availableOutputs">availableOutputs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-audio-output-device-type/index.html"><span class="identifier">AudioOutputDeviceType</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Whenever an output hardware device has been changed, automatically or not, is notified through this method.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-output-device-detached.html">onOutputDeviceDetached</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onOutputDeviceDetached</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSessionListener$onOutputDeviceDetached(com.bandyer.core_av.audiosession.AudioOutputDeviceType, com.bandyer.core_av.audiosession.AudioOutputDeviceType, kotlin.collections.List((com.bandyer.core_av.audiosession.AudioOutputDeviceType)))/currentAudioOutputDevice">currentAudioOutputDevice</span><span class="symbol">:</span>&nbsp;<a href="../-audio-output-device-type/index.html"><span class="identifier">AudioOutputDeviceType</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSessionListener$onOutputDeviceDetached(com.bandyer.core_av.audiosession.AudioOutputDeviceType, com.bandyer.core_av.audiosession.AudioOutputDeviceType, kotlin.collections.List((com.bandyer.core_av.audiosession.AudioOutputDeviceType)))/detachedAudioOutputDevice">detachedAudioOutputDevice</span><span class="symbol">:</span>&nbsp;<a href="../-audio-output-device-type/index.html"><span class="identifier">AudioOutputDeviceType</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.audiosession.AudioSessionListener$onOutputDeviceDetached(com.bandyer.core_av.audiosession.AudioOutputDeviceType, com.bandyer.core_av.audiosession.AudioOutputDeviceType, kotlin.collections.List((com.bandyer.core_av.audiosession.AudioOutputDeviceType)))/availableOutputs">availableOutputs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-audio-output-device-type/index.html"><span class="identifier">AudioOutputDeviceType</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called whenever a new device has been attached</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
