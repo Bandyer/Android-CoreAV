@@ -31,49 +31,6 @@
 </tr>
 <tr>
 <td>
-<a href="../com.bandyer.core_av.audiosession/-audio-output-device-type/index.html">com.bandyer.core_av.audiosession.AudioOutputDeviceType</a></td>
-<td>
-<p>Class which represents an audio hardware output device.</p>
-</td>
-</tr>
-<tr>
-<td>
-<a href="../com.bandyer.core_av.audiosession/-audio-session/index.html">com.bandyer.core_av.audiosession.AudioSession</a></td>
-<td>
-<p>AudioSession class is used to represent and audio session that uses output hardware devices to route audio during audio/video calls.
-This class performs automatic best hardware selection upgrading audio session from earpiece/speaker to wired headset and, if present, bluetooth devices.
-This class must be binded to the activity lifecycle calling initialize(context), resume(context), pause(context) and dispose(context) methods
-Following permission must be added in order to let audio session scan bluetooth devices and modify audio settings:
-    &lt;uses-feature
-        android:name="android.hardware.bluetooth"
-        android:required="false" /&gt;</p>
-</td>
-</tr>
-<tr>
-<td>
-<a href="../com.bandyer.core_av.audiosession/-audio-session-listener/index.html">com.bandyer.core_av.audiosession.AudioSessionListener</a></td>
-<td>
-<p>Class which represents an audio session listener.</p>
-</td>
-</tr>
-<tr>
-<td>
-<a href="../com.bandyer.core_av.audiosession/-audio-session-options/index.html">com.bandyer.core_av.audiosession.AudioSessionOptions</a></td>
-<td>
-<p>Class which represents options to be used to initialize audio session module.
-By default the AudioSession automatically changes between earpiece -&gt; speaker-phone -&gt; wired-headset -&gt; bluetooth devices in this exact order and priority when connected.
-The proximity sensor is optionally used to automatically switch between earpiece(near) and speaker(far)</p>
-</td>
-</tr>
-<tr>
-<td>
-<a href="../com.bandyer.core_av.audiosession/-audio-session-state/index.html">com.bandyer.core_av.audiosession.AudioSessionState</a></td>
-<td>
-<p>Class which represents AudioSession class state.</p>
-</td>
-</tr>
-<tr>
-<td>
 <a href="../com.bandyer.core_av/-bandyer-core-a-v/index.html">com.bandyer.core_av.BandyerCoreAV</a></td>
 <td>
 <p>Sdk Initializer
@@ -168,13 +125,6 @@ It will follow the activity lifecycle, so you don't need to pause/resume/destroy
 </tr>
 <tr>
 <td>
-<a href="../com.bandyer.core_av.utils.logging/-network-logger/index.html">com.bandyer.core_av.utils.logging.NetworkLogger</a></td>
-<td>
-<p>Log network activity</p>
-</td>
-</tr>
-<tr>
-<td>
 <a href="../com.bandyer.core_av/-on-stream-listener/index.html">com.bandyer.core_av.OnStreamListener</a></td>
 <td>
 <p>Listener called when the stream is ready to be attached to a view where it will be rendered</p>
@@ -185,21 +135,6 @@ It will follow the activity lifecycle, so you don't need to pause/resume/destroy
 <a href="../com.bandyer.core_av.view/-on-view-status-listener/index.html">com.bandyer.core_av.view.OnViewStatusListener</a></td>
 <td>
 <p>View status change listener</p>
-</td>
-</tr>
-<tr>
-<td>
-<a href="../com.bandyer.core_av.utils.proximity_listener/-proximity-sensor/index.html">com.bandyer.core_av.utils.proximity_listener.ProximitySensor</a></td>
-<td>
-<p>ProximitySensor is implemented as a boolean-sensor and works based on the lifecycle of the binded activity.
-It will be automatically unbinded on the activity destroy.</p>
-</td>
-</tr>
-<tr>
-<td>
-<a href="../com.bandyer.core_av.utils.proximity_listener/-proximity-sensor-listener/index.html">com.bandyer.core_av.utils.proximity_listener.ProximitySensorListener</a></td>
-<td>
-<p>Class which represents proximity sensor receiver listener</p>
 </td>
 </tr>
 <tr>
@@ -296,20 +231,6 @@ The room token will be provided by us, beforehand</p>
 <a href="../com.bandyer.core_av.room/-room-user/index.html">com.bandyer.core_av.room.RoomUser</a></td>
 <td>
 <p>Class to represent a User</p>
-</td>
-</tr>
-<tr>
-<td>
-<a href="../com.bandyer.core_av.view/-roundable.html">com.bandyer.core_av.view.Roundable</a></td>
-<td>
-<p>Generic interface referring to roundable objects</p>
-</td>
-</tr>
-<tr>
-<td>
-<a href="../com.bandyer.core_av.view/-rounded-view/index.html">com.bandyer.core_av.view.RoundedView</a></td>
-<td>
-<p>View that can be rounded</p>
 </td>
 </tr>
 <tr>
