@@ -124,7 +124,7 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
         public void bindView(@NonNull final SubscriberItem item, @NonNull List<Object> payloads) {
             item.subscriber.setView(preview, new OnStreamListener() {
                 @Override
-                public void onReadyToPlay(@NotNull Stream stream) {
+                public void onReadyToPlay(@NonNull Stream stream) {
                     updateAudioVideoButton(stream.getHasVideo(),
                             stream.getHasAudio(),
                             stream.isAudioMuted(),

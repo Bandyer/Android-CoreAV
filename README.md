@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         room.publish(publisher);
         publisher.setView(publisherView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NotNull Stream stream) {
+            public void onReadyToPlay(@NonNull Stream stream) {
                 publisherView.play(stream);
             }
         });
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     @Override
-    public void onRoomStateChanged(@NotNull RoomState state) {
+    public void onRoomStateChanged(@NonNull RoomState state) {
         Log.d("Room", "onRoomStateChanged " + state.name());
     }
 
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         subscribersListView.addView(subscriberView, new LinearLayout.LayoutParams(size, size));
         subscriber.setView(subscriberView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NotNull Stream stream) {
+            public void onReadyToPlay(@NonNull Stream stream) {
                 subscriberView.play(stream);
                 subscriberView.bringToFront(true);
             }
@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
     
     @Override
-    public void onLocalPublisherRemoved(@NotNull Publisher publisher) {
+    public void onLocalPublisherRemoved(@NonNull Publisher publisher) {
         Log.d("Publisher", "onLocalPublisherRemoved");
     }
     

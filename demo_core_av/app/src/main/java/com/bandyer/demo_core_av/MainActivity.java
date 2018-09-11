@@ -34,8 +34,6 @@ import com.bandyer.core_av.subscriber.SubscriberObserver;
 import com.bandyer.core_av.subscriber.SubscriberState;
 import com.bandyer.core_av.view.BandyerView;
 
-import org.jetbrains.annotations.NotNull;
-
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
@@ -100,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
 
         publisher.setView(publisherView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NotNull Stream stream) {
+            public void onReadyToPlay(@NonNull Stream stream) {
                 publisherView.play(stream);
             }
         });
@@ -122,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     @Override
-    public void onRoomStateChanged(@NotNull RoomState state) {
+    public void onRoomStateChanged(@NonNull RoomState state) {
         Log.d("Room", "onRoomStateChanged " + state.name());
     }
 
@@ -154,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         subscribersListView.addView(subscriberView, new LinearLayout.LayoutParams(size, size));
         subscriber.setView(subscriberView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NotNull Stream stream) {
+            public void onReadyToPlay(@NonNull Stream stream) {
                 subscriberView.play(stream);
                 subscriberView.bringToFront(true);
             }
@@ -200,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     @Override
-    public void onLocalPublisherRemoved(@NotNull Publisher publisher) {
+    public void onLocalPublisherRemoved(@NonNull Publisher publisher) {
         Log.d("Publisher", "onLocalPublisherRemoved");
     }
 
@@ -246,7 +244,8 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // NOTE: delegate the permission handling to generated method
         MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);

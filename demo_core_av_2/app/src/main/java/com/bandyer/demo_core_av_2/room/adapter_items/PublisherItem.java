@@ -133,7 +133,7 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
 
             item.publisher.setView(preview, new OnStreamListener() {
                 @Override
-                public void onReadyToPlay(@NotNull Stream stream) {
+                public void onReadyToPlay(@NonNull Stream stream) {
                     updateAudioVideoButton(stream.getHasVideo(),
                             stream.getHasAudio(),
                             stream.isAudioMuted(),

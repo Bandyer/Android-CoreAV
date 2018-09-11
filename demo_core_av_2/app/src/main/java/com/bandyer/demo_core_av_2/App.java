@@ -6,22 +6,21 @@
 package com.bandyer.demo_core_av_2;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.bandyer.android_common.logging.NetworkLogger;
 import com.bandyer.core_av.BandyerCoreAV;
 import com.bandyer.core_av.utils.logging.CoreLogger;
-import com.bandyer.core_av.utils.logging.NetworkLogger;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.leakcanary.LeakCanary;
 
-import org.jetbrains.annotations.NotNull;
-
 import okhttp3.OkHttpClient;
 
-import static com.bandyer.core_av.utils.logging.BaseLogger.ERROR;
+import static com.bandyer.android_common.logging.BaseLogger.ERROR;
 
 /**
  * @author kristiyan
@@ -58,31 +57,31 @@ public class App extends Application implements NetworkLogger {
                 .setLogger(new CoreLogger(ERROR) { // will log only the errors type
                     @Override
                     public int getTarget() {
-                        return ROOM | PUBLISHER | SUBSCRIBER; // add all the levels you want to debug
+                        return ROOM | PUBLISHER | SUBSCRIBER ; // add all the levels you want to debug
                     }
 
                     @Override
-                    public void verbose(@NotNull String tag, @NotNull String message) {
+                    public void verbose(@NonNull String tag, @NonNull String message) {
                         Log.v(tag, message);
                     }
 
                     @Override
-                    public void debug(@NotNull String tag, @NotNull String message) {
+                    public void debug(@NonNull String tag, @NonNull String message) {
                         Log.d(tag, message);
                     }
 
                     @Override
-                    public void info(@NotNull String tag, @NotNull String message) {
+                    public void info(@NonNull String tag, @NonNull String message) {
                         Log.i(tag, message);
                     }
 
                     @Override
-                    public void warn(@NotNull String tag, @NotNull String message) {
+                    public void warn(@NonNull String tag, @NonNull String message) {
                         Log.w(tag, message);
                     }
 
                     @Override
-                    public void error(@NotNull String tag, @NotNull String message) {
+                    public void error(@NonNull String tag, @NonNull String message) {
                         Log.e(tag, message);
                     }
                 })
@@ -92,31 +91,31 @@ public class App extends Application implements NetworkLogger {
     }
 
     @Override
-    public void onConnected(@NotNull String tag, @NotNull String url) {
+    public void onConnected(@NonNull String tag, @NonNull String url) {
         Log.d(tag, "onConnected " + url);
         stethoReporter.onCreated(url);
     }
 
     @Override
-    public void onMessageReceived(@NotNull String tag, @NotNull String response) {
+    public void onMessageReceived(@NonNull String tag, @NonNull String response) {
         Log.d(tag, "onMessageReceived " + response);
         stethoReporter.onReceive(response);
     }
 
     @Override
-    public void onMessageSent(@NotNull String tag, @NotNull String request) {
+    public void onMessageSent(@NonNull String tag, @NonNull String request) {
         Log.d(tag, "onMessageSent " + request);
         stethoReporter.onSend(request);
     }
 
     @Override
-    public void onDisconnected(@NotNull String tag) {
+    public void onDisconnected(@NonNull String tag) {
         Log.d(tag, "onDisconnected");
         stethoReporter.onClosed();
     }
 
     @Override
-    public void onError(@NotNull String tag, @NotNull String reason) {
+    public void onError(@NonNull String tag, @NonNull String reason) {
         Log.d(tag, "connection error " + reason);
         stethoReporter.onError(reason);
     }

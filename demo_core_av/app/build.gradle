@@ -6,11 +6,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion sdkVersion
+    buildToolsVersion buildToolsVersion
     defaultConfig {
         applicationId "com.bandyer.demo_core_av"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion sdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -44,6 +45,6 @@ dependencies {
     }
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:${permissionsDispatcherVersion}"
 
-    // BandyerCoreAV
-    implementation "com.bandyer:core_av:1.0.9"
+    // Bandyer Libs
+    implementation "com.bandyer:core_av:1.0.10"
 }

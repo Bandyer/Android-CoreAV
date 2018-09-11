@@ -224,7 +224,7 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     }
 
     @Override
-    public void onRemotePublisherJoined(@NotNull final Stream stream) {
+    public void onRemotePublisherJoined(@NonNull final Stream stream) {
         StreamItem streamItem = new StreamItem(stream);
         streamAdapter.add(0, streamItem);
     }
@@ -240,7 +240,7 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
 
 
     @Override
-    public void onRemotePublisherLeft(@NotNull Stream stream) {
+    public void onRemotePublisherLeft(@NonNull Stream stream) {
         streamAdapter.getItemAdapter().removeByIdentifier(stream.getStreamId().hashCode());
     }
 
@@ -249,9 +249,8 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
         Log.d("Room", "exit");
     }
 
-
     @Override
-    public void onRoomStateChanged(@NotNull RoomState state) {
+    public void onRoomStateChanged(@NonNull RoomState state) {
         Log.d("Room", "onRoomStateChanged " + state);
     }
 
@@ -265,6 +264,7 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
         Log.d("RoomActivity", "onRoomEnter");
     }
 
+
     @Override
     public void onRoomReconnecting() {
         Log.d("RoomActivity", "reconnecting...");
@@ -272,12 +272,12 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
 
 
     @Override
-    public void onLocalSubscriberAdded(@NotNull Subscriber subscriber) {
+    public void onLocalSubscriberAdded(@NonNull Subscriber subscriber) {
         Log.d("RoomActivity", "onLocalSubscriberAdded");
     }
 
     @Override
-    public void onLocalSubscriberError(@NotNull Subscriber subscriber, @NotNull String reason) {
+    public void onLocalSubscriberError(@NonNull Subscriber subscriber, @NonNull String reason) {
         pubSubsAdapter.getItemAdapter().removeByIdentifier(subscriber.getId().hashCode());
     }
 
@@ -287,17 +287,17 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     }
 
     @Override
-    public void onLocalPublisherAdded(@NotNull Publisher publisher) {
+    public void onLocalPublisherAdded(@NonNull Publisher publisher) {
         Log.d("RoomActivity", "onLocalPublisherAdded");
     }
 
     @Override
-    public void onLocalPublisherRemoved(@NotNull Publisher publisher) {
+    public void onLocalPublisherRemoved(@NonNull Publisher publisher) {
         streamAdapter.getItemAdapter().removeByIdentifier(publisher.getStream().getStreamId().hashCode());
     }
 
     @Override
-    public void onLocalPublisherError(@NotNull Publisher publisher, @NotNull String reason) {
+    public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
         pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
     }
 

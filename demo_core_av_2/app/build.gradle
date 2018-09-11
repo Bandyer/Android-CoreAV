@@ -38,7 +38,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     /*** Platform ***/
-    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation("com.android.support:appcompat-v7:$supportLibVersion")
+
     implementation "com.android.support:design:$supportLibVersion"
     implementation "com.android.support:recyclerview-v7:$supportLibVersion"
 
@@ -81,6 +82,7 @@ dependencies {
     implementation 'com.yuyh.json:jsonviewer:1.0.5'
     implementation 'com.github.okaybroda:ImageZoom:1.1.1'
 
-    /*** Bandyer Core ***/
-    implementation "com.bandyer:core_av:1.0.9"
+    /*** Bandyer Libs ***/
+    implementation "com.bandyer:core_av:1.0.10"
+    implementation 'com.bandyer:bandyer-android-audiosession:1.0.0'
 }

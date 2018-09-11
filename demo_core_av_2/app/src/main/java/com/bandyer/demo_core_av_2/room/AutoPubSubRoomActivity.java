@@ -20,11 +20,12 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.bandyer.android_audiosession.AudioOutputDeviceType;
+import com.bandyer.android_audiosession.AudioSession;
+import com.bandyer.android_audiosession.AudioSessionOptions;
+import com.bandyer.android_audiosession.audiosession.AudioSessionListener;
+import com.bandyer.android_common.proximity_listener.ProximitySensorListener;
 import com.bandyer.core_av.Stream;
-import com.bandyer.core_av.audiosession.AudioOutputDeviceType;
-import com.bandyer.core_av.audiosession.AudioSession;
-import com.bandyer.core_av.audiosession.AudioSessionListener;
-import com.bandyer.core_av.audiosession.AudioSessionOptions;
 import com.bandyer.core_av.capturer.CapturerAV;
 import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.PublisherObserver;
@@ -37,7 +38,6 @@ import com.bandyer.core_av.room.RoomUser;
 import com.bandyer.core_av.subscriber.Subscriber;
 import com.bandyer.core_av.subscriber.SubscriberObserver;
 import com.bandyer.core_av.subscriber.SubscriberState;
-import com.bandyer.core_av.utils.proximity_listener.ProximitySensorListener;
 import com.bandyer.demo_core_av_2.App;
 import com.bandyer.demo_core_av_2.BaseActivity;
 import com.bandyer.demo_core_av_2.R;
@@ -48,8 +48,6 @@ import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnLongClickListener;
 import com.viven.imagezoom.ImageZoomHelper;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,12 +109,11 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
         AudioSession.getInstance().startWithOptions(
                 this,
                 new AudioSessionOptions.Builder()
-                        // .disableAutomaticAudioDeviceChange()
                         .withDefaultSpeakerPhoneOutputHardWareDevice()
                         .build(),
                 new AudioSessionListener() {
                     @Override
-                    public void onOutputDeviceConnected(@NotNull AudioOutputDeviceType oldAudioOutputDeviceType, @NotNull AudioOutputDeviceType connectedAudioOutputDevice, @NotNull List<? extends AudioOutputDeviceType> availableOutputs) {
+                    public void onOutputDeviceConnected(@NonNull AudioOutputDeviceType oldAudioOutputDeviceType, @NonNull AudioOutputDeviceType connectedAudioOutputDevice, @NonNull List<? extends AudioOutputDeviceType> availableOutputs) {
                         Log.d("AudioSession", "changed from old: " + oldAudioOutputDeviceType.name() + " to connected: " + connectedAudioOutputDevice.name());
                         if (snackbar != null)
                             snackbar.dismiss();
@@ -125,12 +122,12 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
                     }
 
                     @Override
-                    public void onOutputDeviceAttached(@NotNull AudioOutputDeviceType currentAudioOutputDevice, @NotNull AudioOutputDeviceType attachedAudioOutputDevice, @NotNull List<? extends AudioOutputDeviceType> availableOutputs) {
+                    public void onOutputDeviceAttached(@NonNull AudioOutputDeviceType currentAudioOutputDevice, @NonNull AudioOutputDeviceType attachedAudioOutputDevice, @NonNull List<? extends AudioOutputDeviceType> availableOutputs) {
                         Log.d("AudioSession", "current: " + currentAudioOutputDevice.name() + " attached audioDevice: " + attachedAudioOutputDevice.name());
                     }
 
                     @Override
-                    public void onOutputDeviceDetached(@NotNull AudioOutputDeviceType currentAudioOutputDevice, @NotNull AudioOutputDeviceType detachedAudioOutputDevice, @NotNull List<? extends AudioOutputDeviceType> availableOutputs) {
+                    public void onOutputDeviceDetached(@NonNull AudioOutputDeviceType currentAudioOutputDevice, @NonNull AudioOutputDeviceType detachedAudioOutputDevice, @NonNull List<? extends AudioOutputDeviceType> availableOutputs) {
                         Log.d("AudioSession", "current: " + currentAudioOutputDevice.name() + " detached audioDevice: " + detachedAudioOutputDevice.name());
                     }
                 }, new ProximitySensorListener() {
@@ -270,7 +267,7 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     }
 
     @Override
-    public void onRoomStateChanged(@NotNull RoomState state) {
+    public void onRoomStateChanged(@NonNull RoomState state) {
         Log.d("Room", "onRoomStateChanged " + state);
     }
 
@@ -303,7 +300,7 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     }
 
     @Override
-    public void onLocalPublisherRemoved(@NotNull Publisher publisher) {
+    public void onLocalPublisherRemoved(@NonNull Publisher publisher) {
         room.unpublish(publisher);
         pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
     }
