@@ -11,7 +11,7 @@ def customCheckBoxVersion = "1.3"
 def okHttpVersion = "3.10.0"
 def stethoVersion = "1.5.0"
 def retrofitVersion = "2.3.0"
-def leakCanaryVersion = "1.5.4"
+def leakCanaryVersion = "1.6.1"
 def fastAdapterVersion = "3.2.5@aar"
 def butterKnifeVersion = "8.8.1"
 
