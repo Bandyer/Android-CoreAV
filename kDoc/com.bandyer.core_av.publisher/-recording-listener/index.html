@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RecordingListener - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.publisher</a>&nbsp;/&nbsp;<a href="./index.html">RecordingListener</a><br/>
+<br/>
+<h1>RecordingListener</h1>
+<code><span class="keyword">interface </span><span class="identifier">RecordingListener</span></code>
+<p>Listening callback for recording</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="on-error.html">onError</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onError</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.RecordingListener$onError(kotlin.String, kotlin.Boolean, com.bandyer.core_av.publisher.RecordingException)/recordId">recordId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.publisher.RecordingListener$onError(kotlin.String, kotlin.Boolean, com.bandyer.core_av.publisher.RecordingException)/isRecording">isRecording</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.publisher.RecordingListener$onError(kotlin.String, kotlin.Boolean, com.bandyer.core_av.publisher.RecordingException)/reason">reason</span><span class="symbol">:</span>&nbsp;<a href="../-recording-exception/index.html"><span class="identifier">RecordingException</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when an error has occurred</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-success.html">onSuccess</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onSuccess</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.RecordingListener$onSuccess(kotlin.String, kotlin.Boolean)/recordId">recordId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.publisher.RecordingListener$onSuccess(kotlin.String, kotlin.Boolean)/isRecording">isRecording</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when the action has successed</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

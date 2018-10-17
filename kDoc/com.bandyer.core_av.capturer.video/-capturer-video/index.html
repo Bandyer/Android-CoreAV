@@ -30,6 +30,15 @@ It will follow the activity lifecycle, so you don't need to pause/resume/destroy
 <tbody>
 <tr>
 <td>
+<p><a href="feeder.html">feeder</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">feeder</span><span class="symbol">: </span><a href="../-camera-video-feeder/index.html"><span class="identifier">CameraVideoFeeder</span></a></code>
+<p>Used to indicate the current camera feeder</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="is-video-enabled.html">isVideoEnabled</a></p>
 </td>
 <td>
@@ -99,7 +108,7 @@ Be aware that this is the max output that will be streamed and not the actual va
 <p><a href="set-video-feeder.html">setVideoFeeder</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">setVideoFeeder</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.CapturerVideo$setVideoFeeder(com.bandyer.core_av.capturer.video.CameraVideoFeeder)/feederCamera">feederCamera</span><span class="symbol">:</span>&nbsp;<a href="../-camera-video-feeder/index.html"><span class="identifier">CameraVideoFeeder</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">CapturerVideo</span></a></code>
+<code><span class="keyword">fun </span><span class="identifier">setVideoFeeder</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.CapturerVideo$setVideoFeeder(com.bandyer.core_av.capturer.video.CameraVideoFeeder, com.bandyer.core_av.capturer.CameraVideoFeederChangedListener)/feederCamera">feederCamera</span><span class="symbol">:</span>&nbsp;<a href="../-camera-video-feeder/index.html"><span class="identifier">CameraVideoFeeder</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.capturer.video.CapturerVideo$setVideoFeeder(com.bandyer.core_av.capturer.video.CameraVideoFeeder, com.bandyer.core_av.capturer.CameraVideoFeederChangedListener)/cameraVideoFeederChangedListener">cameraVideoFeederChangedListener</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-camera-video-feeder-changed-listener/index.html"><span class="identifier">CameraVideoFeederChangedListener</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">CapturerVideo</span></a></code>
 <p>Method to set/change the video feeder</p>
 </td>
 </tr>
@@ -126,7 +135,7 @@ Be aware that this is the max output that will be streamed and not the actual va
 <p><a href="switch-video-feeder.html">switchVideoFeeder</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">switchVideoFeeder</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">CapturerVideo</span></a></code>
+<code><span class="keyword">fun </span><span class="identifier">switchVideoFeeder</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.CapturerVideo$switchVideoFeeder(com.bandyer.core_av.capturer.CameraVideoFeederChangedListener)/cameraVideoFeederChangedListener">cameraVideoFeederChangedListener</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-camera-video-feeder-changed-listener/index.html"><span class="identifier">CameraVideoFeederChangedListener</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">CapturerVideo</span></a></code>
 <p>Method to switch the current feeder</p>
 </td>
 </tr>
@@ -183,11 +192,29 @@ If you manually pause the capturer it will not automatically resume onResume of 
 </tr>
 <tr>
 <td>
+<p><a href="../-video-interface/set-video-feeder.html">setVideoFeeder</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">setVideoFeeder</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.VideoInterface$setVideoFeeder(com.bandyer.core_av.capturer.video.CameraVideoFeeder)/feederCamera">feederCamera</span><span class="symbol">:</span>&nbsp;<a href="../-camera-video-feeder/index.html"><span class="identifier">CameraVideoFeeder</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-video-interface/index.html#T"><span class="identifier">T</span></a></code>
+<p>Method to set/change the video feeder</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="../../com.bandyer.core_av.capturer/-abstract-base-capturer/start.html">start</a></p>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">start</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.capturer/-abstract-base-capturer/index.html#T"><span class="identifier">T</span></a></code>
 <p>starts the capturer, called by the user</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-video-interface/switch-video-feeder.html">switchVideoFeeder</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">switchVideoFeeder</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-video-interface/index.html#T"><span class="identifier">T</span></a></code>
+<p>Method to switch the current feeder</p>
 </td>
 </tr>
 </tbody>

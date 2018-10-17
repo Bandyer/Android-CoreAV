@@ -16,7 +16,7 @@
 <p><a href="-publisher/index.html">Publisher</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.bandyer.core_av.capturer/-capturer-observer/index.html"><span class="identifier">CapturerObserver</span></a></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.bandyer.core_av.capturer/-capturer-observer/index.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">, </span><a href="-recordable/index.html"><span class="identifier">Recordable</span></a></code>
 <p>This class represents a publisher of a stream.
 A publisher is someone who is in read-write mode on a stream.
 There can be only one local publisher at a time in the room.
@@ -39,6 +39,38 @@ The publisher needs a capturer ( audio/video ) to be able to fetch the data to s
 <td>
 <code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">PublisherState</span></code>
 <p>Publisher states</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-recordable/index.html">Recordable</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Recordable</span></code>
+<p>Recordable interface</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-recording-listener/index.html">RecordingListener</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">RecordingListener</span></code>
+<p>Listening callback for recording</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-recording-exception/index.html">RecordingException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">RecordingException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a></code>
+<p>Recording execption</p>
 </td>
 </tr>
 </tbody>

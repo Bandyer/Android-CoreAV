@@ -8,7 +8,7 @@
 <a href="../index.html">com.bandyer.core_av.publisher</a>&nbsp;/&nbsp;<a href="./index.html">Publisher</a><br/>
 <br/>
 <h1>Publisher</h1>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-capturer-observer/index.html"><span class="identifier">CapturerObserver</span></a></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-capturer-observer/index.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">, </span><a href="../-recordable/index.html"><span class="identifier">Recordable</span></a></code>
 <p>This class represents a publisher of a stream.
 A publisher is someone who is in read-write mode on a stream.
 There can be only one local publisher at a time in the room.
@@ -33,6 +33,28 @@ The publisher needs a capturer ( audio/video ) to be able to fetch the data to s
 <tbody>
 <tr>
 <td>
+<p><a href="can-record.html">canRecord</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">canRecord</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Indicates whether the receiver can be recorded, or not.
+<strong>Note:</strong> Recording is supported in ROUTED rooms only.
+true if the receiver can be recorded, false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="can-start-recorder.html">canStartRecorder</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">canStartRecorder</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Indicates whether the receiver can start the recorder, or not.
+The recorder can be started only when in routed rooms and in connected state.
+true if the receiver can start the recorder, false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="id.html">id</a></p>
 </td>
 <td>
@@ -42,11 +64,30 @@ The publisher needs a capturer ( audio/video ) to be able to fetch the data to s
 </tr>
 <tr>
 <td>
+<p><a href="is-recording.html">isRecording</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">isRecording</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Indicates whether the receiver is recording, or not.
+true if the receiver is recording, false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="options.html">options</a></p>
 </td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">options</span><span class="symbol">: </span><span class="identifier">PubSubOptions</span></code>
 <p>Publishing options, by default the publishing is done with audio and video</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="recording-id.html">recordingId</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">recordingId</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>Recording identifcation</p>
 </td>
 </tr>
 <tr>
@@ -129,6 +170,15 @@ The observer will be notified when a change has occurred</p>
 </tr>
 <tr>
 <td>
+<p><a href="on-capturer-interrupted.html">onCapturerInterrupted</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onCapturerInterrupted</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called on main thread when the capturer has been interrupted forcibly</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="release-view.html">releaseView</a></p>
 </td>
 <td>
@@ -170,6 +220,26 @@ The observer will be notified when a change has occurred</p>
 <td>
 <code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">setView</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setView(com.bandyer.core_av.view.StreamView, com.bandyer.core_av.OnStreamListener)/view">view</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.view/-stream-view/index.html"><span class="identifier">StreamView</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$setView(com.bandyer.core_av.view.StreamView, com.bandyer.core_av.OnStreamListener)/streamListener">streamListener</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-on-stream-listener/index.html"><span class="identifier">OnStreamListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Publisher</span></a></code>
 <p>Utility method to attach a view to the publisher</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="start-recording.html">startRecording</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">startRecording</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$startRecording(com.bandyer.core_av.publisher.RecordingListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-recording-listener/index.html"><span class="identifier">RecordingListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Sends a request to the room host asking to start the recording of the published stream.
+Upon success or failure the observers will be notified on the respective callbacks.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="stop-recording.html">stopRecording</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">stopRecording</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.publisher.Publisher$stopRecording(com.bandyer.core_av.publisher.RecordingListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<a href="../-recording-listener/index.html"><span class="identifier">RecordingListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Sends a request to the room host asking to stop the recording of the published stream.
+Upon success or failure the observers will be notified on the respective callbacks.</p>
 </td>
 </tr>
 <tr>
