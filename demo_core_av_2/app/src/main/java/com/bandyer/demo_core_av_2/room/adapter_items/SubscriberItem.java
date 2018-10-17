@@ -23,6 +23,7 @@ import com.bandyer.core_av.subscriber.VideoResolutionQuality;
 import com.bandyer.core_av.view.BandyerView;
 import com.bandyer.core_av.view.OnViewStatusListener;
 import com.bandyer.core_av.view.ScaleType;
+import com.bandyer.core_av.view.StreamView;
 import com.bandyer.demo_core_av_2.BaseActivity;
 import com.bandyer.demo_core_av_2.R;
 import com.bandyer.demo_core_av_2.design.bottom_sheet.group_picker.BottomGroupPicker;
@@ -124,12 +125,12 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
         public void bindView(@NonNull final SubscriberItem item, @NonNull List<Object> payloads) {
             item.subscriber.setView(preview, new OnStreamListener() {
                 @Override
-                public void onReadyToPlay(@NonNull Stream stream) {
+                public void onReadyToPlay(@NotNull StreamView view, @NonNull Stream stream) {
                     updateAudioVideoButton(stream.getHasVideo(),
                             stream.getHasAudio(),
                             stream.isAudioMuted(),
                             stream.isVideoMuted());
-                    preview.play(stream);
+                    view.play(stream);
                 }
             });
 

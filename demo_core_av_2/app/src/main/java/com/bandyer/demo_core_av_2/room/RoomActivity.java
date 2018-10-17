@@ -224,6 +224,11 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     }
 
     @Override
+    public void onLocalPublisherJoined(@NotNull Publisher publisher) {
+        Log.e("Publisher", "onRemotePublisherJoined");
+    }
+
+    @Override
     public void onRemotePublisherJoined(@NonNull final Stream stream) {
         StreamItem streamItem = new StreamItem(stream);
         streamAdapter.add(0, streamItem);

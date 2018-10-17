@@ -5,13 +5,17 @@
 
 package com.bandyer.demo_core_av_2.room.adapter_items;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bandyer.core_av.OnStreamListener;
 import com.bandyer.core_av.Stream;
@@ -19,8 +23,11 @@ import com.bandyer.core_av.capturer.AbstractBaseCapturer;
 import com.bandyer.core_av.capturer.CapturerAV;
 import com.bandyer.core_av.capturer.video.CapturerVideo;
 import com.bandyer.core_av.publisher.Publisher;
-import com.bandyer.core_av.view.BandyerView;
+import com.bandyer.core_av.publisher.RecordingException;
+import com.bandyer.core_av.publisher.RecordingListener;
 import com.bandyer.core_av.view.OnViewStatusListener;
+import com.bandyer.core_av.view.StreamView;
+import com.bandyer.core_av.view.VideoStreamView;
 import com.bandyer.demo_core_av_2.R;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
@@ -84,7 +91,7 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
     public static class ViewHolder extends ButterKnifeViewHolder<PublisherItem> {
 
         @BindView(R.id.preview)
-        BandyerView preview;
+        VideoStreamView preview;
 
         @BindView(R.id.stream_id)
         TextView streamId;
@@ -104,6 +111,10 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
         @BindView(R.id.videoQuality)
         TextView videoQualityTextView;
 
+        @BindView(R.id.recordButton)
+        AppCompatImageButton recordButton;
+
+
         boolean audioMuted = false;
         boolean videoMuted = false;
 
@@ -114,9 +125,12 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
 
         AbstractBaseCapturer capturerAV;
 
+        Publisher publisher;
+
         @Override
         public void bindView(@NonNull final PublisherItem item, @NonNull List<Object> payloads) {
             capturerAV = item.capturerAV;
+            publisher = item.publisher;
 
             preview.setViewListener(new OnViewStatusListener() {
 
@@ -133,12 +147,12 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
 
             item.publisher.setView(preview, new OnStreamListener() {
                 @Override
-                public void onReadyToPlay(@NonNull Stream stream) {
+                public void onReadyToPlay(@NotNull StreamView view, @NonNull Stream stream) {
                     updateAudioVideoButton(stream.getHasVideo(),
                             stream.getHasAudio(),
                             stream.isAudioMuted(),
                             stream.isVideoMuted());
-                    preview.play(stream);
+                    view.play(stream);
                 }
             });
 
@@ -156,6 +170,8 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
             audioMuted = false;
             videoMuted = false;
             capturerAV = null;
+            publisher = null;
+            listener = null;
         }
 
         void updateAudioVideoButton(Boolean previewHasVideo, Boolean previewHasAudio, Boolean audioMuted, Boolean videoMuted) {
@@ -196,7 +212,29 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
                 ((CapturerAV) capturerAV).switchVideoFeeder();
             }
         }
+
+        @OnClick(R.id.recordButton)
+        void onRecord(final AppCompatImageButton view) {
+            if (publisher.isRecording()) publisher.stopRecording(listener);
+            else publisher.startRecording(listener);
+        }
+
+        RecordingListener listener = new RecordingListener() {
+
+            @Override
+            public void onSuccess(@NotNull String recordId, boolean isRecording) {
+                String message = isRecording ? "Started" : "Stopped";
+                Toast.makeText(preview.getContext(), message + " recording", Toast.LENGTH_SHORT).show();
+                ImageViewCompat.setImageTintList(recordButton, ColorStateList.valueOf(isRecording ? Color.RED : Color.WHITE));
+            }
+
+            @Override
+            public void onError(@Nullable String recordId, boolean isRecording, @NotNull RecordingException reason) {
+                ImageViewCompat.setImageTintList(recordButton, ColorStateList.valueOf(isRecording ? Color.RED : Color.WHITE));
+            }
+        };
     }
+
 
     public static class PublisherItemClickListener extends ClickEventHook<PublisherItem> {
 

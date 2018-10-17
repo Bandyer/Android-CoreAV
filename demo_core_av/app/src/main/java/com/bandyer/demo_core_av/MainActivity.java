@@ -33,6 +33,7 @@ import com.bandyer.core_av.subscriber.Subscriber;
 import com.bandyer.core_av.subscriber.SubscriberObserver;
 import com.bandyer.core_av.subscriber.SubscriberState;
 import com.bandyer.core_av.view.BandyerView;
+import com.bandyer.core_av.view.StreamView;
 
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
@@ -98,8 +99,8 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
 
         publisher.setView(publisherView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NonNull Stream stream) {
-                publisherView.play(stream);
+            public void onReadyToPlay(@NonNull StreamView view, @NonNull Stream stream) {
+                view.play(stream);
             }
         });
     }
@@ -133,6 +134,16 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     /**
+     * The local publisher has started to stream in the room
+     *
+     * @param publisher the publisher created in this activity
+     */
+    @Override
+    public void onLocalPublisherJoined(@NonNull Publisher publisher) {
+        Log.d("Publisher", "onLocalPublisherJoined");
+    }
+
+    /**
      * A new publisher has started to stream in the room
      * Let's add a subscriber for each published stream
      *
@@ -152,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         subscribersListView.addView(subscriberView, new LinearLayout.LayoutParams(size, size));
         subscriber.setView(subscriberView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NonNull Stream stream) {
-                subscriberView.play(stream);
+            public void onReadyToPlay(@NonNull StreamView view, @NonNull Stream stream) {
+                view.play(stream);
                 subscriberView.bringToFront(true);
             }
         });

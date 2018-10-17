@@ -13,11 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.bandyer.core_av.view.BandyerView
+        <com.bandyer.core_av.view.VideoStreamView
             android:id="@+id/preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary"
+            app:round="true"/>
 
     </FrameLayout>
 
@@ -48,9 +49,9 @@
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/micButton"
+            android:layout_row="0"
             android:layout_column="0"
             android:layout_gravity="center"
-            android:layout_row="0"
             android:src="@drawable/ic_mic"
             app:backgroundTint="@color/colorPrimary"
             grid:layout_columnWeight="1"
@@ -58,27 +59,27 @@
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/videoButton"
-            android:layout_column="1"
             android:layout_row="0"
+            android:layout_column="1"
             android:src="@drawable/ic_videocam"
             app:backgroundTint="@color/colorPrimary"
             grid:layout_columnWeight="1"
             grid:layout_rowWeight="1" />
 
         <android.support.v7.widget.AppCompatImageButton
-            android:id="@+id/changeQualityButton"
-            android:layout_column="0"
+            android:id="@+id/recordButton"
             android:layout_row="1"
-            android:visibility="gone"
-            android:src="@drawable/ic_tune"
+            android:layout_column="0"
+            android:src="@drawable/ic_donut_large_red_a700_24dp"
             app:backgroundTint="@color/colorPrimary"
+            app:tint="@android:color/white"
             grid:layout_columnWeight="1"
             grid:layout_rowWeight="1" />
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/switchCameraButton"
-            android:layout_column="1"
             android:layout_row="1"
+            android:layout_column="1"
             android:src="@drawable/ic_switch_camera"
             app:backgroundTint="@color/colorPrimary"
             grid:layout_columnWeight="1"
@@ -90,9 +91,9 @@
         android:id="@+id/videoQuality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:padding="@dimen/space8"
         android:singleLine="true"
         android:textColor="@android:color/white" />
@@ -101,9 +102,9 @@
         android:id="@+id/fpsQuality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:padding="@dimen/space8"
         android:singleLine="true"
         android:textColor="@android:color/white" />

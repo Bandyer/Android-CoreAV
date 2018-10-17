@@ -170,6 +170,11 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     }
 
     @Override
+    public void onLocalPublisherJoined(@NonNull Publisher publisher) {
+        Log.e("Publisher", "onLocalPublisherJoined");
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public void onRemotePublisherJoined(@NonNull final Stream stream) {
         Log.e("Publisher", "onRemotePublisherJoined");
@@ -320,5 +325,5 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return imageZoomHelper != null && (imageZoomHelper.onDispatchTouchEvent(ev) || super.dispatchTouchEvent(ev));
     }
-
+    
 }

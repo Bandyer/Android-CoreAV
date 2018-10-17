@@ -9,6 +9,7 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.bandyer.android_common.logging.BaseLogger;
 import com.bandyer.android_common.logging.NetworkLogger;
 import com.bandyer.core_av.BandyerCoreAV;
 import com.bandyer.core_av.utils.logging.CoreLogger;
@@ -19,8 +20,6 @@ import com.google.gson.GsonBuilder;
 import com.squareup.leakcanary.LeakCanary;
 
 import okhttp3.OkHttpClient;
-
-import static com.bandyer.android_common.logging.BaseLogger.ERROR;
 
 /**
  * @author kristiyan
@@ -54,7 +53,7 @@ public class App extends Application implements NetworkLogger {
         BandyerCoreAV.init(new BandyerCoreAV.Builder(this)
                 .setHttpStack(okHttpClient)
                 .setNetworkLogger(this)
-                .setLogger(new CoreLogger(ERROR) { // will log only the errors type
+                .setLogger(new CoreLogger(BaseLogger.ERROR) { // will log only the errors type
                     @Override
                     public int getTarget() {
                         return ROOM | PUBLISHER | SUBSCRIBER ; // add all the levels you want to debug

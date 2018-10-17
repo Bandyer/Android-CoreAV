@@ -57,7 +57,7 @@ In this scenario a user wants to stream his video to 2 friends.
 Download the [latest JAR](https://bintray.com/bandyer/Android-CoreAV/Android-CoreAV) or grab via Gradle:
 
 ```groovy
-implementation 'com.bandyer:core_av:1.0.11'
+implementation 'com.bandyer:core_av:1.0.12'
 ```
 
 ## Quickstart
@@ -147,8 +147,8 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         room.publish(publisher);
         publisher.setView(publisherView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NonNull Stream stream) {
-                publisherView.play(stream);
+            public void onReadyToPlay(@NonNull StreamView view, @NonNull Stream stream) {
+                view.play(stream); 
             }
         });
     }
@@ -180,6 +180,16 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         if (room != null)
             room.leave();
     }
+    
+    /**
+    * The local publisher has started to stream in the room
+    *
+    * @param publisher the publisher created in this activity
+    */
+    @Override
+    public void onLocalPublisherJoined(@NonNull Publisher publisher) {
+        Log.d("Publisher", "onLocalPublisherJoined");
+    }
 
     /**
      * A new publisher has started to stream in the room
@@ -201,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         subscribersListView.addView(subscriberView, new LinearLayout.LayoutParams(size, size));
         subscriber.setView(subscriberView, new OnStreamListener() {
             @Override
-            public void onReadyToPlay(@NonNull Stream stream) {
+            public void onReadyToPlay(@NonNull StreamView view, @NonNull Stream stream) {
                 subscriberView.play(stream);
                 subscriberView.bringToFront(true);
             }
