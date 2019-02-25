@@ -57,7 +57,7 @@ In this scenario a user wants to stream his video to 2 friends.
 Download the [latest JAR](https://bintray.com/bandyer/Android-CoreAV/Android-CoreAV) or grab via Gradle:
 
 ```groovy
-implementation 'com.bandyer:core_av:1.0.13'
+implementation 'com.bandyer:core_av:1.1.0'
 ```
 
 ## Quickstart
