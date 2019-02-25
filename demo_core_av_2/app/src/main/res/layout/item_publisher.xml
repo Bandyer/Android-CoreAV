@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
-            app:round="true"/>
+            app:round="true" />
 
     </FrameLayout>
 
@@ -36,56 +36,54 @@
         android:singleLine="true"
         android:textColor="@android:color/white" />
 
-    <GridLayout
+    <LinearLayout
         android:id="@+id/publishing_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/space56"
         android:background="@color/black_transparent"
-        android:columnCount="2"
-        android:padding="@dimen/space8"
-        android:rowCount="2">
+        android:orientation="horizontal"
+        android:padding="@dimen/space8">
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/micButton"
-            android:layout_row="0"
-            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_mic"
-            app:backgroundTint="@color/colorPrimary"
-            grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1" />
+            app:backgroundTint="@color/colorPrimary" />
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/videoButton"
-            android:layout_row="0"
-            android:layout_column="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_videocam"
-            app:backgroundTint="@color/colorPrimary"
-            grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1" />
+            app:backgroundTint="@color/colorPrimary" />
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/recordButton"
-            android:layout_row="1"
-            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_donut_large_red_a700_24dp"
             app:backgroundTint="@color/colorPrimary"
-            app:tint="@android:color/white"
-            grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1" />
+            app:tint="@android:color/white" />
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/switchCameraButton"
-            android:layout_row="1"
-            android:layout_column="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_switch_camera"
-            app:backgroundTint="@color/colorPrimary"
-            grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1" />
+            app:backgroundTint="@color/colorPrimary" />
 
-    </GridLayout>
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/captureFrameButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_a_photo_white_24dp"
+            app:backgroundTint="@color/colorPrimary" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/videoQuality"

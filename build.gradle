@@ -11,16 +11,17 @@ buildscript {
     ext.sdkVersion = 28
     ext.buildToolsVersion = "28.0.4"
     ext.supportLibVersion = "28.0.0"
-    ext.bandyer_common = '1.0.4'
+    ext.bandyer_common = '1.0.5'
 
     repositories {
+        mavenLocal()
         google()
         jcenter()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath 'com.android.tools.build:gradle:3.3.1'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
@@ -28,6 +29,7 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenLocal()
         google()
         jcenter()
         mavenCentral()

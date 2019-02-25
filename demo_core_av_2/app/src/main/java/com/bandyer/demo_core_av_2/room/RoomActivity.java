@@ -95,12 +95,12 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
 
         String token = getIntent().getStringExtra(ROOM_TOKEN);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 4, GridLayoutManager.VERTICAL, false);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                // if is the first item then it weights 2 else 1
-                return position == 0 ? 2 : 1;
+                // if is the first item then it weights 4 else 2
+                return position == 0 ? 4 : 2;
             }
         });
 

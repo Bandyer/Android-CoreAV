@@ -5,13 +5,20 @@
 
 package com.bandyer.demo_core_av_2.room.adapter_items;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.GridLayout;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bandyer.core_av.OnStreamListener;
@@ -21,7 +28,7 @@ import com.bandyer.core_av.subscriber.VideoFpsQuality;
 import com.bandyer.core_av.subscriber.VideoQuality;
 import com.bandyer.core_av.subscriber.VideoResolutionQuality;
 import com.bandyer.core_av.view.BandyerView;
-import com.bandyer.core_av.view.OnViewStatusListener;
+import com.bandyer.core_av.view.OnViewStatusObserver;
 import com.bandyer.core_av.view.ScaleType;
 import com.bandyer.core_av.view.StreamView;
 import com.bandyer.demo_core_av_2.BaseActivity;
@@ -101,11 +108,10 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
         @BindView(R.id.videoButton)
         AppCompatImageButton videoButton;
 
-        @BindView(R.id.subscription_options)
-        GridLayout subscription_options;
-
         @BindView(R.id.changeQualityButton)
         AppCompatImageButton changeQualityButton;
+
+        Dialog screenShotDialog;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -121,6 +127,23 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
         VideoResolutionQuality videoResolutionQuality = VideoResolutionQuality.AUTO;
         VideoFpsQuality videoFpsQuality = VideoFpsQuality.AUTO;
 
+        private OnViewStatusObserver viewStatusObserver = new OnViewStatusObserver() {
+            @Override
+            public void onFirstFrameRendered() {
+                Log.e("SubView", "frameRendered");
+            }
+
+            @Override
+            public void onViewSizeChanged(int width, int height, int rotationDegree) {
+                Log.e("SubView", "w " + width + " h " + height + "r " + rotationDegree);
+            }
+
+            @Override
+            public void onFrameCaptured(@NotNull Bitmap bitmap) {
+                showImage(bitmap);
+            }
+        };
+
         @Override
         public void bindView(@NonNull final SubscriberItem item, @NonNull List<Object> payloads) {
             item.subscriber.setView(preview, new OnStreamListener() {
@@ -134,17 +157,7 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
                 }
             });
 
-            preview.setViewListener(new OnViewStatusListener() {
-                @Override
-                public void onFirstFrameRendered() {
-                    Log.e("SubView", "frameRendered");
-                }
-
-                @Override
-                public void onViewSizeChanged(int width, int height, int rotationDegree) {
-                    Log.e("SubView", "w " + width + " h " + height + "r " + rotationDegree);
-                }
-            });
+            preview.addViewStatusObserver(viewStatusObserver);
 
             streamId.setText(item.subscriber.getStream().getStreamId());
             streamId.setSelected(true);
@@ -155,6 +168,29 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
                     onChangeQuality((BaseActivity) v.getContext(), item);
                 }
             });
+        }
+
+        private void showImage(Bitmap bitmap) {
+            Context context = preview.getContext();
+            screenShotDialog = new Dialog(context);
+            screenShotDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            screenShotDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            screenShotDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    //nothing;
+                }
+            });
+
+            ImageView imageView = new ImageView(context);
+            imageView.setImageBitmap(bitmap);
+            screenShotDialog.addContentView(imageView, new RelativeLayout.LayoutParams(bitmap.getWidth(), bitmap.getHeight()));
+            screenShotDialog.show();
+        }
+
+        private static int dp2px(Context ctx, float dp) {
+            final float scale = ctx.getResources().getDisplayMetrics().density;
+            return (int) (dp * scale + 0.5f);
         }
 
         @Override
@@ -169,9 +205,9 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
             videoButton.setVisibility(View.VISIBLE);
             audioButton.setVisibility(View.VISIBLE);
 
-            if (snackbar != null) {
-                snackbar.dismiss();
-            }
+            if (snackbar != null) snackbar.dismiss();
+            if (screenShotDialog != null) screenShotDialog.dismiss();
+            preview.removeViewStatusObserver(viewStatusObserver);
         }
 
         void updateAudioVideoButton(Boolean previewHasVideo, Boolean previewHasAudio, Boolean audioMuted, Boolean videoMuted) {
@@ -250,6 +286,11 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
             snackbar.show();
         }
 
+        @OnClick(R.id.captureFrameButton)
+        void captureFrame() {
+            preview.captureFrame();
+        }
+
     }
 
     public static class SubscriberItemClickListener extends ClickEventHook<SubscriberItem> {
@@ -264,7 +305,7 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
 
         @Override
         public void onClick(@NonNull View v, int position, @NonNull FastAdapter<SubscriberItem> fastAdapter, @NonNull SubscriberItem item) {
-            GridLayout sub_options = v.findViewById(R.id.subscription_options);
+            View sub_options = v.findViewById(R.id.subscription_options);
             sub_options.setVisibility(sub_options.getVisibility() == View.VISIBLE ? GONE : View.VISIBLE);
         }
     }

@@ -5,10 +5,9 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:grid="http://schemas.android.com/tools"
     android:id="@+id/subscriber_root_item"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_height">
+    android:layout_height="280dp">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -21,54 +20,51 @@
             android:background="@color/colorAccent" />
     </FrameLayout>
 
-    <GridLayout
+    <LinearLayout
         android:id="@+id/subscription_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/space56"
+        android:layout_centerVertical="true"
         android:background="@color/black_transparent"
-        android:columnCount="2"
-        android:padding="@dimen/space8"
-        android:rowCount="2">
+        android:orientation="vertical"
+        android:padding="@dimen/space8">
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/audioButton"
-            android:layout_column="0"
-            android:layout_gravity="center"
-            android:layout_row="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_volume_up"
-            app:backgroundTint="@color/colorAccent"
-            grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1" />
+            app:backgroundTint="@color/colorAccent" />
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/videoButton"
-            android:layout_column="1"
-            android:layout_row="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_videocam"
-            app:backgroundTint="@color/colorAccent"
-            grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1" />
+            app:backgroundTint="@color/colorAccent" />
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/changeQualityButton"
-            android:layout_column="0"
-            android:layout_row="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_tune"
-            app:backgroundTint="@color/colorAccent"
-            grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1" />
+            app:backgroundTint="@color/colorAccent" />
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/changeScaleTypeButton"
-            android:layout_column="1"
-            android:layout_row="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_aspect_ratio"
-            app:backgroundTint="@color/colorAccent"
-            grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1" />
-    </GridLayout>
+            app:backgroundTint="@color/colorAccent" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/captureFrameButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_a_photo_white_24dp"
+            app:backgroundTint="@color/colorAccent" />
+
+    </LinearLayout>
 
 
     <TextView

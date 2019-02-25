@@ -5,15 +5,22 @@
 
 package com.bandyer.demo_core_av_2.room.adapter_items;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.GridLayout;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,11 +28,12 @@ import com.bandyer.core_av.OnStreamListener;
 import com.bandyer.core_av.Stream;
 import com.bandyer.core_av.capturer.AbstractBaseCapturer;
 import com.bandyer.core_av.capturer.CapturerAV;
+import com.bandyer.core_av.capturer.video.CapturerQuality;
 import com.bandyer.core_av.capturer.video.CapturerVideo;
 import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.RecordingException;
 import com.bandyer.core_av.publisher.RecordingListener;
-import com.bandyer.core_av.view.OnViewStatusListener;
+import com.bandyer.core_av.view.OnViewStatusObserver;
 import com.bandyer.core_av.view.StreamView;
 import com.bandyer.core_av.view.VideoStreamView;
 import com.bandyer.demo_core_av_2.R;
@@ -127,23 +135,35 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
 
         Publisher publisher;
 
+        Dialog screenShotDialog;
+
+        private OnViewStatusObserver viewStatusObserver = new OnViewStatusObserver() {
+
+            @Override
+            public void onViewSizeChanged(int width, int height, int rotationDegree) {
+                Log.e("PubView", "w " + width + " h " + height + "r " + rotationDegree);
+            }
+
+            @Override
+            public void onFirstFrameRendered() {
+                Log.e("PubView", "frameRendered");
+            }
+
+
+            @Override
+            public void onFrameCaptured(@NonNull Bitmap bitmap) {
+                CapturerAV capturer = ((CapturerAV) capturerAV);
+                capturer.setVideoRenderingQuality(new CapturerQuality(640, 480, 30));
+                capturer.setMaxVideoOutputQuality(new CapturerQuality(640, 480, 15));
+                showImage(bitmap);
+            }
+        };
+
         @Override
         public void bindView(@NonNull final PublisherItem item, @NonNull List<Object> payloads) {
             capturerAV = item.capturerAV;
             publisher = item.publisher;
-
-            preview.setViewListener(new OnViewStatusListener() {
-
-                @Override
-                public void onViewSizeChanged(int width, int height, int rotationDegree) {
-                    Log.e("PubView", "w " + width + " h " + height + "r " + rotationDegree);
-                }
-
-                @Override
-                public void onFirstFrameRendered() {
-                    Log.e("PubView", "frameRendered");
-                }
-            });
+            preview.addViewStatusObserver(viewStatusObserver);
 
             item.publisher.setView(preview, new OnStreamListener() {
                 @Override
@@ -160,6 +180,23 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
             streamId.setSelected(true);
         }
 
+        private void showImage(Bitmap bitmap) {
+            Context context = preview.getContext();
+            screenShotDialog = new Dialog(context);
+            screenShotDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            screenShotDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            screenShotDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    //nothing;
+                }
+            });
+            ImageView imageView = new ImageView(context);
+            imageView.setImageBitmap(bitmap);
+            screenShotDialog.addContentView(imageView, new RelativeLayout.LayoutParams(bitmap.getWidth(), bitmap.getHeight()));
+            screenShotDialog.show();
+        }
+
         @Override
         public void unbindView(@NonNull PublisherItem item) {
             item.publisher.releaseView();
@@ -172,6 +209,8 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
             capturerAV = null;
             publisher = null;
             listener = null;
+            if (screenShotDialog != null) screenShotDialog.dismiss();
+            preview.removeViewStatusObserver(viewStatusObserver);
         }
 
         void updateAudioVideoButton(Boolean previewHasVideo, Boolean previewHasAudio, Boolean audioMuted, Boolean videoMuted) {
@@ -219,6 +258,15 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
             else publisher.startRecording(listener);
         }
 
+        @OnClick(R.id.captureFrameButton)
+        void captureFrame() {
+            CapturerAV capturer = ((CapturerAV) capturerAV);
+            CapturerQuality capturerQuality = capturer.getNearestCaptureQualitySupported(preview.getContext(), new CapturerQuality(1280, 960, 30));
+            capturer.setVideoRenderingQuality(capturerQuality);
+            capturer.setMaxVideoOutputQuality(capturerQuality);
+            preview.captureFrame();
+        }
+
         RecordingListener listener = new RecordingListener() {
 
             @Override
@@ -248,7 +296,7 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
 
         @Override
         public void onClick(@NonNull View v, int position, @NonNull FastAdapter<PublisherItem> fastAdapter, @NonNull PublisherItem item) {
-            GridLayout pub_options = v.findViewById(R.id.publishing_options);
+            View pub_options = v.findViewById(R.id.publishing_options);
             pub_options.setVisibility(pub_options.getVisibility() == View.VISIBLE ? GONE : View.VISIBLE);
         }
     }

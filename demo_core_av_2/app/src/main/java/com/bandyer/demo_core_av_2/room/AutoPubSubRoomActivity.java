@@ -93,12 +93,12 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
 
         imageZoomHelper = new ImageZoomHelper(this);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 4, LinearLayoutManager.VERTICAL, false);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                // if is the first item then it weights 2 else 1
-                return position == 0 ? 2 : 1;
+                // if is the first item then it weights 4 else 2
+                return position == 0 ? 4 : 2;
             }
         });
         pubSubs.setLayoutManager(layoutManager);
