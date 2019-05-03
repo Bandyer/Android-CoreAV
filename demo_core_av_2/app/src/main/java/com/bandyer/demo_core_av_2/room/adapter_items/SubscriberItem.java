@@ -139,7 +139,7 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
             }
 
             @Override
-            public void onFrameCaptured(@NotNull Bitmap bitmap) {
+            public void onFrameCaptured(Bitmap bitmap) {
                 showImage(bitmap);
             }
         };
@@ -171,17 +171,14 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
         }
 
         private void showImage(Bitmap bitmap) {
+            if (bitmap == null) {
+                Log.e("Snapshot", "failed");
+                return;
+            }
             Context context = preview.getContext();
             screenShotDialog = new Dialog(context);
             screenShotDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             screenShotDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            screenShotDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialogInterface) {
-                    //nothing;
-                }
-            });
-
             ImageView imageView = new ImageView(context);
             imageView.setImageBitmap(bitmap);
             screenShotDialog.addContentView(imageView, new RelativeLayout.LayoutParams(bitmap.getWidth(), bitmap.getHeight()));

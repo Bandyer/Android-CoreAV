@@ -7,7 +7,6 @@ package com.bandyer.demo_core_av_2.room.adapter_items;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -151,10 +150,7 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
 
 
             @Override
-            public void onFrameCaptured(@NonNull Bitmap bitmap) {
-                CapturerAV capturer = ((CapturerAV) capturerAV);
-                capturer.setVideoRenderingQuality(new CapturerQuality(640, 480, 30));
-                capturer.setMaxVideoOutputQuality(new CapturerQuality(640, 480, 15));
+            public void onFrameCaptured(Bitmap bitmap) {
                 showImage(bitmap);
             }
         };
@@ -181,16 +177,14 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
         }
 
         private void showImage(Bitmap bitmap) {
+            if (bitmap == null) {
+                Log.e("Snapshot", "failed");
+                return;
+            }
             Context context = preview.getContext();
             screenShotDialog = new Dialog(context);
             screenShotDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             screenShotDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            screenShotDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialogInterface) {
-                    //nothing;
-                }
-            });
             ImageView imageView = new ImageView(context);
             imageView.setImageBitmap(bitmap);
             screenShotDialog.addContentView(imageView, new RelativeLayout.LayoutParams(bitmap.getWidth(), bitmap.getHeight()));
@@ -260,10 +254,6 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
 
         @OnClick(R.id.captureFrameButton)
         void captureFrame() {
-            CapturerAV capturer = ((CapturerAV) capturerAV);
-            CapturerQuality capturerQuality = capturer.getNearestCaptureQualitySupported(preview.getContext(), new CapturerQuality(1280, 960, 30));
-            capturer.setVideoRenderingQuality(capturerQuality);
-            capturer.setMaxVideoOutputQuality(capturerQuality);
             preview.captureFrame();
         }
 
