@@ -5,8 +5,14 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/information"
         android:title="@string/title_info"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/internal_stats"
+        android:title="@string/internal_stats"
+        app:showAsAction="ifRoom" />
 </menu>

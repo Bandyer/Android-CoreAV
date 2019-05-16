@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 def permissionsDispatcherVersion = "3.1.0"
@@ -46,5 +50,5 @@ dependencies {
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:${permissionsDispatcherVersion}"
 
     // Bandyer Libs
-    implementation "com.bandyer:core_av:1.1.1"
+    implementation "com.bandyer:core_av:1.1.2"
 }

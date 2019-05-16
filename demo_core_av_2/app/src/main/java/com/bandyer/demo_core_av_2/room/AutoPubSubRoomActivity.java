@@ -5,12 +5,14 @@
 
 package com.bandyer.demo_core_av_2.room;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,9 +40,13 @@ import com.bandyer.core_av.room.RoomUser;
 import com.bandyer.core_av.subscriber.Subscriber;
 import com.bandyer.core_av.subscriber.SubscriberObserver;
 import com.bandyer.core_av.subscriber.SubscriberState;
+import com.bandyer.core_av.utils.logging.InternalStatsLogger;
+import com.bandyer.core_av.utils.logging.InternalStatsTypes;
 import com.bandyer.demo_core_av_2.App;
 import com.bandyer.demo_core_av_2.BaseActivity;
 import com.bandyer.demo_core_av_2.R;
+import com.bandyer.demo_core_av_2.StatsPage;
+import com.bandyer.demo_core_av_2.StatsPagerAdapter;
 import com.bandyer.demo_core_av_2.room.adapter_items.PublisherItem;
 import com.bandyer.demo_core_av_2.room.adapter_items.SubscriberItem;
 import com.mikepenz.fastadapter.IAdapter;
@@ -50,6 +56,7 @@ import com.mikepenz.fastadapter.listeners.OnLongClickListener;
 import com.viven.imagezoom.ImageZoomHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -58,7 +65,7 @@ import butterknife.OnClick;
 /**
  * @author kristiyan
  **/
-public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver, SubscriberObserver, PublisherObserver {
+public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver, SubscriberObserver, PublisherObserver, InternalStatsLogger {
 
     public static final String ROOM_TOKEN = "token";
     public static final String ROOM_AUDIO_MUTED = "audio_muted";
@@ -66,16 +73,16 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     @BindView(R.id.pubsubs)
     RecyclerView pubSubs;
 
-    FastItemAdapter pubSubsAdapter = new FastItemAdapter();
+    private FastItemAdapter pubSubsAdapter = new FastItemAdapter();
 
     private Room room;
     private CapturerAV capturerAV;
 
     private Publisher publisher;
 
-    ImageZoomHelper imageZoomHelper;
+    private ImageZoomHelper imageZoomHelper;
 
-    Snackbar snackbar;
+    private Snackbar snackbar;
 
     public static void show(BaseActivity activity, String token, boolean roomAudioMuted) {
         Intent intent = new Intent(activity, AutoPubSubRoomActivity.class);
@@ -222,6 +229,10 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
         if (id == R.id.information) {
             showInfo();
         }
+
+        if (id == R.id.internal_stats) {
+            showInternalStats();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -250,6 +261,36 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
                 InformationActivity.show(AutoPubSubRoomActivity.this, headers, items);
             }
         });
+    }
+
+
+    StatsPagerAdapter pagerAdapter;
+
+    public void showInternalStats() {
+        Dialog dialog = new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        dialog.setContentView(R.layout.alert_internals_stats);
+        dialog.setCancelable(true);
+        dialog.setOnDismissListener(it -> {
+            InternalStatsLogger.Companion.stop();
+            InternalStatsLogger.Companion.removeStatsObserver(AutoPubSubRoomActivity.this);
+        });
+
+        dialog.show();
+
+        ViewPager mPager = dialog.findViewById(R.id.pager);
+        pagerAdapter = new StatsPagerAdapter(this);
+
+        mPager.setAdapter(pagerAdapter);
+
+        InternalStatsLogger.Companion.addStatsObserver(this);
+        InternalStatsLogger.Companion.start(this);
+    }
+
+    @Override
+    public void onStats(@NonNull String id, @NonNull final HashMap<InternalStatsTypes, String> stats) {
+        if (pagerAdapter == null) return;
+        StatsPage page = pagerAdapter.addOrGetPage(id);
+        page.updateStats(stats);
     }
 
     @Override
@@ -325,5 +366,5 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return imageZoomHelper != null && (imageZoomHelper.onDispatchTouchEvent(ev) || super.dispatchTouchEvent(ev));
     }
-    
+
 }

@@ -56,7 +56,7 @@ public class App extends Application implements NetworkLogger {
                 .setLogger(new CoreLogger(BaseLogger.ERROR) { // will log only the errors type
                     @Override
                     public int getTarget() {
-                        return ROOM | PUBLISHER | SUBSCRIBER ; // add all the levels you want to debug
+                        return ROOM | PUBLISHER | SUBSCRIBER; // add all the levels you want to debug
                     }
 
                     @Override

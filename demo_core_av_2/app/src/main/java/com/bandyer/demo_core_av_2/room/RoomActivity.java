@@ -5,10 +5,12 @@
 
 package com.bandyer.demo_core_av_2.room;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,9 +35,13 @@ import com.bandyer.core_av.room.RoomUser;
 import com.bandyer.core_av.subscriber.Subscriber;
 import com.bandyer.core_av.subscriber.SubscriberObserver;
 import com.bandyer.core_av.subscriber.SubscriberState;
+import com.bandyer.core_av.utils.logging.InternalStatsLogger;
+import com.bandyer.core_av.utils.logging.InternalStatsTypes;
 import com.bandyer.demo_core_av_2.App;
 import com.bandyer.demo_core_av_2.BaseActivity;
 import com.bandyer.demo_core_av_2.R;
+import com.bandyer.demo_core_av_2.StatsPage;
+import com.bandyer.demo_core_av_2.StatsPagerAdapter;
 import com.bandyer.demo_core_av_2.design.bottom_sheet.picker.BottomListPicker;
 import com.bandyer.demo_core_av_2.design.bottom_sheet.picker.BottomListPickerItem;
 import com.bandyer.demo_core_av_2.room.adapter_items.PublisherItem;
@@ -52,6 +58,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -60,7 +67,7 @@ import butterknife.OnClick;
 /**
  * @author kristiyan
  **/
-public class RoomActivity extends BaseActivity implements RoomObserver, SubscriberObserver, PublisherObserver {
+public class RoomActivity extends BaseActivity implements RoomObserver, SubscriberObserver, PublisherObserver, InternalStatsLogger {
 
     public static final String ROOM_TOKEN = "token";
     public static final String ROOM_AUDIO_MUTED = "audio_muted";
@@ -75,10 +82,10 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     @BindView(R.id.pubsubs)
     RecyclerView pubSubs;
 
-    FastItemAdapter<StreamItem> streamAdapter = new FastItemAdapter<>();
-    FastItemAdapter pubSubsAdapter = new FastItemAdapter<>();
+    private FastItemAdapter<StreamItem> streamAdapter = new FastItemAdapter<>();
+    private FastItemAdapter pubSubsAdapter = new FastItemAdapter<>();
 
-    ImageZoomHelper imageZoomHelper;
+    private ImageZoomHelper imageZoomHelper;
 
     public static void show(BaseActivity activity, String token, boolean roomAudioMuted) {
         Intent intent = new Intent(activity, RoomActivity.class);
@@ -196,6 +203,9 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
 
         if (id == R.id.information)
             showInfo();
+        else if (id == R.id.internal_stats) {
+            showInternalStats();
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -225,7 +235,7 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
 
     @Override
     public void onLocalPublisherJoined(@NotNull Publisher publisher) {
-        Log.e("Publisher", "onRemotePublisherJoined");
+        Log.d("Publisher", "onLocalPublisherJoined");
     }
 
     @Override
@@ -247,6 +257,35 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     @Override
     public void onRemotePublisherLeft(@NonNull Stream stream) {
         streamAdapter.getItemAdapter().removeByIdentifier(stream.getStreamId().hashCode());
+    }
+
+    StatsPagerAdapter pagerAdapter;
+
+    public void showInternalStats() {
+        Dialog dialog = new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        dialog.setContentView(R.layout.alert_internals_stats);
+        dialog.setCancelable(true);
+        dialog.setOnDismissListener(it -> {
+            InternalStatsLogger.Companion.stop();
+            InternalStatsLogger.Companion.removeStatsObserver(RoomActivity.this);
+        });
+
+        dialog.show();
+
+        ViewPager mPager = dialog.findViewById(R.id.pager);
+        pagerAdapter = new StatsPagerAdapter(this);
+
+        mPager.setAdapter(pagerAdapter);
+
+        InternalStatsLogger.Companion.addStatsObserver(this);
+        InternalStatsLogger.Companion.start(this);
+    }
+
+    @Override
+    public void onStats(@NonNull String id, @NonNull final HashMap<InternalStatsTypes, String> stats) {
+        if (pagerAdapter == null) return;
+        StatsPage page = pagerAdapter.addOrGetPage(id);
+        page.updateStats(stats);
     }
 
     @Override
@@ -303,6 +342,7 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
 
     @Override
     public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
+        Log.e("RoomActivity", "onLocalPublisherError: " + reason);
         pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
     }
 

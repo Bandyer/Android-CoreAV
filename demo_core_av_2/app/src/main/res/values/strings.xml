@@ -33,6 +33,7 @@
     <string name="room_server_url">Room Server URL</string>
     <string name="auto_pub_sub">Auto Pub/Sub</string>
     <string name="title_info">Information</string>
+    <string name="internal_stats">Internal Stats</string>
     <string name="subscribers_title">Publisher &amp; Subscribers</string>
     <string name="available_streams_title">Available Streams</string>
     <string name="mute_all_subscribers_audio">Mute All Subscribers Audio</string>
@@ -41,4 +42,9 @@
     <string name="video_quality_picker_title">Change the video quality</string>
     <string name="room_join_title">How do you want to join?</string>
     <string name="close_button">close</string>
+    <string name="encoder">Encoder</string>
+    <string name="bandwidth">Bandwidth</string>
+    <string name="connection">Connection</string>
+    <string name="receiver">Receiver</string>
+    <string name="sender">Sender</string>
 </resources>
