@@ -14,11 +14,11 @@ Bandyer is a young innovative startup that enables audio/video communication and
 
 . **[Overview](#overview)** .
 **[Features](#features)** .
+**[Requirements](#requirements)** .
 **[Installation](#installation)** .
 **[Quickstart](#quickstart)** .
 **[Documentation](#documentation)** .
-
-. **[Support](#support)** .
+**[Support](#support)** .
 **[Credits](#credits)** .
 
 ---
@@ -51,6 +51,22 @@ In this scenario a user wants to stream his video to 2 friends.
 * Fully covered by Unit-Tests
 * Written in Kotlin
 * Advanced proprietary features not available in standard WebRTC
+
+
+## Requirements
+
+Supports from API level 16 (Android 4.1 Jelly Bean).
+
+**Requires compileOptions for Java8**
+```java
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+```
+
 
 ## Installation
 
