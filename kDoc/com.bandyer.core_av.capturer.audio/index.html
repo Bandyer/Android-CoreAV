@@ -13,20 +13,20 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-audio-interface/index.html">AudioInterface</a></p>
+<p><a href="-base-capturer-audio-interface/index.html">BaseCapturerAudioInterface</a></p>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">AudioInterface</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">interface </span><span class="identifier">BaseCapturerAudioInterface</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.bandyer.core_av.capturer/-capturer/index.html"><span class="identifier">Capturer</span></a><span class="symbol">&gt;</span></code>
 <p>Audio capturer interface</p>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="-capturer-audio/index.html">CapturerAudio</a></p>
+<p><a href="-capturer-audio.html">CapturerAudio</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">CapturerAudio</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.bandyer.core_av.capturer/-abstract-base-capturer/index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><a href="-capturer-audio/index.html"><span class="identifier">CapturerAudio</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="-audio-interface/index.html"><span class="identifier">AudioInterface</span></a><span class="symbol">&lt;</span><a href="-capturer-audio/index.html"><span class="identifier">CapturerAudio</span></a><span class="symbol">&gt;</span></code>
-<p>Audio capturer from the device</p>
+<code><span class="keyword">interface </span><span class="identifier">CapturerAudio</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.bandyer.core_av.capturer/-capturer/index.html"><span class="identifier">Capturer</span></a><span class="symbol">, </span><a href="-base-capturer-audio-interface/index.html"><span class="identifier">BaseCapturerAudioInterface</span></a><span class="symbol">&lt;</span><a href="-capturer-audio.html"><span class="identifier">CapturerAudio</span></a><span class="symbol">&gt;</span></code>
+<p>This represents a capturer for audio only</p>
 </td>
 </tr>
 </tbody>

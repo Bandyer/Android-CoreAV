@@ -1,0 +1,145 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>BaseCapturerCameraVideoInterface - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.capturer.video.camera</a>&nbsp;/&nbsp;<a href="./index.html">BaseCapturerCameraVideoInterface</a><br/>
+<br/>
+<h1>BaseCapturerCameraVideoInterface</h1>
+<code><span class="keyword">interface </span><span class="identifier">BaseCapturerCameraVideoInterface</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-capturer/index.html"><span class="identifier">Capturer</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer.video/-base-capturer-video-interface/index.html"><span class="identifier">BaseCapturerVideoInterface</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>Capturer video interface</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="feeder-capturer-camera.html">feederCapturerCamera</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">feederCapturerCamera</span><span class="symbol">: </span><a href="../-capturer-camera-video-feeder/index.html"><span class="identifier">CapturerCameraVideoFeeder</span></a></code>
+<p>Used to indicate the current camera feederCapturerCamera</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.bandyer.core_av.capturer.video/-base-capturer-video-interface/is-video-enabled.html">isVideoEnabled</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">isVideoEnabled</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Used to indicate if video is enabled or not.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-best-capture-format.html">getBestCaptureFormat</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getBestCaptureFormat</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface$getBestCaptureFormat(android.content.Context, com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeeder)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface$getBestCaptureFormat(android.content.Context, com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeeder)/feederCapturerCamera">feederCapturerCamera</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-camera-video-feeder/index.html"><span class="identifier">CapturerCameraVideoFeeder</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.capturer.video/-capturer-video-quality/index.html"><span class="identifier">CapturerVideoQuality</span></a></code>
+<p>Method to request the best capture format that your device camera can support related to our supported aspect-ratio.
+You may want to render with a higher quality then our default (we don't recommend it)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-nearest-capture-quality-supported.html">getNearestCaptureQualitySupported</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getNearestCaptureQualitySupported</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface$getNearestCaptureQualitySupported(android.content.Context, com.bandyer.core_av.capturer.video.CapturerVideoQuality)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface$getNearestCaptureQualitySupported(android.content.Context, com.bandyer.core_av.capturer.video.CapturerVideoQuality)/desiredCapturerVideoQuality">desiredCapturerVideoQuality</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer.video/-capturer-video-quality/index.html"><span class="identifier">CapturerVideoQuality</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.capturer.video/-capturer-video-quality/index.html"><span class="identifier">CapturerVideoQuality</span></a></code>
+<p>Method to request the nearest capture quality that your device camera can support related to our supported aspect-ratio.
+The nearest capturing quality will be decided based on the width or height</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-supported-capture-quality-list.html">getSupportedCaptureQualityList</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getSupportedCaptureQualityList</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface$getSupportedCaptureQualityList(android.content.Context, com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeeder)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface$getSupportedCaptureQualityList(android.content.Context, com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeeder)/feederCapturerCamera">feederCapturerCamera</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-camera-video-feeder/index.html"><span class="identifier">CapturerCameraVideoFeeder</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.capturer.video/-capturer-video-quality/index.html"><span class="identifier">CapturerVideoQuality</span></a><span class="symbol">&gt;</span></code>
+<p>Method to request the list of capture quality that are supported by your feederCapturerCamera provided related to our supported aspect-ratio.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-video-feeder.html">setVideoFeeder</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">setVideoFeeder</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface$setVideoFeeder(com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeeder)/feederCapturerCamera">feederCapturerCamera</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-camera-video-feeder/index.html"><span class="identifier">CapturerCameraVideoFeeder</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setVideoFeeder</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface$setVideoFeeder(com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeeder, com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeederChangedListener)/feederCapturerCamera">feederCapturerCamera</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-camera-video-feeder/index.html"><span class="identifier">CapturerCameraVideoFeeder</span></a><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface$setVideoFeeder(com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeeder, com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeederChangedListener)/capturerCameraVideoFeederChangedListener">capturerCameraVideoFeederChangedListener</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-camera-video-feeder-changed-listener/index.html"><span class="identifier">CapturerCameraVideoFeederChangedListener</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>Method to set/change the video feederCapturerCamera</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="switch-video-feeder.html">switchVideoFeeder</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">switchVideoFeeder</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">switchVideoFeeder</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface$switchVideoFeeder(com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeederChangedListener)/capturerCameraVideoFeederChangedListener">capturerCameraVideoFeederChangedListener</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-camera-video-feeder-changed-listener/index.html"><span class="identifier">CapturerCameraVideoFeederChangedListener</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="index.html#T"><span class="identifier">T</span></a></code>
+<p>Method to switch the current feederCapturerCamera</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.bandyer.core_av.capturer.video/-base-capturer-video-interface/set-max-video-output-quality.html">setMaxVideoOutputQuality</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setMaxVideoOutputQuality</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.BaseCapturerVideoInterface$setMaxVideoOutputQuality(com.bandyer.core_av.capturer.video.CapturerVideoQuality)/outputCapturerVideoQuality">outputCapturerVideoQuality</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer.video/-capturer-video-quality/index.html"><span class="identifier">CapturerVideoQuality</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.capturer.video/-base-capturer-video-interface/index.html#T"><span class="identifier">T</span></a></code>
+<p>Set the max video output quality to be streamed
+Be aware that this is the max output that will be streamed and not the actual value that will be received by the other parts</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.bandyer.core_av.capturer.video/-base-capturer-video-interface/set-video-enabled.html">setVideoEnabled</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setVideoEnabled</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.BaseCapturerVideoInterface$setVideoEnabled(kotlin.Boolean)/enabled">enabled</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to enable/disable the video</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.bandyer.core_av.capturer.video/-base-capturer-video-interface/set-video-rendering-quality.html">setVideoRenderingQuality</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setVideoRenderingQuality</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.video.BaseCapturerVideoInterface$setVideoRenderingQuality(com.bandyer.core_av.capturer.video.CapturerVideoQuality)/capturerVideoQuality">capturerVideoQuality</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer.video/-capturer-video-quality/index.html"><span class="identifier">CapturerVideoQuality</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.capturer.video/-base-capturer-video-interface/index.html#T"><span class="identifier">T</span></a></code>
+<p>Method to set the video rendering quality</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-capturer-camera-video.html">CapturerCameraVideo</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CapturerCameraVideo</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer.video/-capturer-video.html"><span class="identifier">CapturerVideo</span></a><span class="symbol">, </span><a href="./index.html"><span class="identifier">BaseCapturerCameraVideoInterface</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.capturer.video/-capturer-video.html"><span class="identifier">CapturerVideo</span></a><span class="symbol">&gt;</span></code>
+<p>This represents a capturer for camera video only</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

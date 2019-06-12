@@ -8,27 +8,10 @@
 <a href="../index.html">com.bandyer.core_av.room</a>&nbsp;/&nbsp;<a href="./index.html">Room</a><br/>
 <br/>
 <h1>Room</h1>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Room</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber-observer/index.html"><span class="identifier">SubscriberObserver</span></a><span class="symbol">, </span><a href="../../com.bandyer.core_av.publisher/-publisher-observer/index.html"><span class="identifier">PublisherObserver</span></a></code>
-<p>This class represents a Bandyer room where the users will join and talk.
-The first step to use the room is create it by instantiating it with a room token.
-The room token will be provided by us, beforehand</p>
-<h3>Parameters</h3>
-<p><a name="token"></a>
-<code>token</code> - RoomToken</p>
-<h3>Constructors</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="-init-.html">&lt;init&gt;</a></p>
-</td>
-<td>
-<code><span class="identifier">Room</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$<init>(com.bandyer.core_av.room.RoomToken)/token">token</span><span class="symbol">:</span>&nbsp;<a href="../-room-token/index.html"><span class="identifier">RoomToken</span></a><span class="symbol">)</span></code>
-<p>Creates a room</p>
-</td>
-</tr>
-</tbody>
-</table>
+<code><span class="keyword">interface </span><span class="identifier">Room</span></code>
+<p>This class represents a Bandyer room where the users will join and talk.</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
 <h3>Properties</h3>
 <table>
 <tbody>
@@ -37,7 +20,7 @@ The room token will be provided by us, beforehand</p>
 <p><a href="room-info.html">roomInfo</a></p>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">roomInfo</span><span class="symbol">: </span><a href="../-room-info/index.html"><span class="identifier">RoomInfo</span></a><span class="symbol">?</span></code>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">roomInfo</span><span class="symbol">: </span><a href="../-room-info/index.html"><span class="identifier">RoomInfo</span></a><span class="symbol">?</span></code>
 <p>Represents the properties of the room, which are set after the user has joined in.</p>
 </td>
 </tr>
@@ -46,7 +29,7 @@ The room token will be provided by us, beforehand</p>
 <p><a href="room-state.html">roomState</a></p>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">roomState</span><span class="symbol">: </span><a href="../-room-state/index.html"><span class="identifier">RoomState</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">roomState</span><span class="symbol">: </span><a href="../-room-state/index.html"><span class="identifier">RoomState</span></a></code>
 <p>Current room state, default value is RoomState.DISCONNECTED</p>
 </td>
 </tr>
@@ -60,9 +43,29 @@ The room token will be provided by us, beforehand</p>
 <p><a href="add-room-observer.html">addRoomObserver</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">addRoomObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$addRoomObserver(com.bandyer.core_av.room.RoomObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-room-observer/index.html"><span class="identifier">RoomObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Room</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">addRoomObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$addRoomObserver(com.bandyer.core_av.room.RoomObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-room-observer/index.html"><span class="identifier">RoomObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Room</span></a></code>
 <p>Method to add an observer to the room.
 The observer will be notified when a change has occurred</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="create.html">create</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">create</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$create(com.bandyer.core_av.BaseUser)/user">user</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-base-user/index.html"><span class="identifier">BaseUser</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.publisher/-publisher/index.html"><span class="identifier">Publisher</span></a></code>
+<p>Method to create a room actor given a user</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">create</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$create(com.bandyer.core_av.Stream)/stream">stream</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a></code>
+<p>Method to create a room actor given a stream</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-all-actors.html">getAllActors</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getAllActors</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-room-actor/index.html"><span class="identifier">RoomActor</span></a><span class="symbol">&gt;</span><span class="symbol">?</span></code>
+<p>Method to get the current list of publishers&subscribers in the room</p>
 </td>
 </tr>
 <tr>
@@ -70,8 +73,17 @@ The observer will be notified when a change has occurred</p>
 <p><a href="get-publisher.html">getPublisher</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">getPublisher</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.publisher/-publisher/index.html"><span class="identifier">Publisher</span></a><span class="symbol">?</span></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getPublisher</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$getPublisher(com.bandyer.core_av.Stream)/stream">stream</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.publisher/-publisher/index.html"><span class="identifier">Publisher</span></a><span class="symbol">?</span></code>
 <p>Method to get the current publisher in the room.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-publishers.html">getPublishers</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getPublishers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.publisher/-publisher/index.html"><span class="identifier">Publisher</span></a><span class="symbol">&gt;</span></code>
+<p>Method to get the current list of publishers in the room</p>
 </td>
 </tr>
 <tr>
@@ -79,7 +91,7 @@ The observer will be notified when a change has occurred</p>
 <p><a href="get-streams.html">getStreams</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">getStreams</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">&gt;</span></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getStreams</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">&gt;</span></code>
 <p>Method to get the current remote streams in the room. ( Publisher stream excluded )</p>
 </td>
 </tr>
@@ -88,7 +100,7 @@ The observer will be notified when a change has occurred</p>
 <p><a href="get-subscriber.html">getSubscriber</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">getSubscriber</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$getSubscriber(com.bandyer.core_av.Stream)/stream">stream</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">?</span></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getSubscriber</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$getSubscriber(com.bandyer.core_av.Stream)/stream">stream</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">?</span></code>
 <p>Method to get a subscriber given a stream</p>
 </td>
 </tr>
@@ -97,7 +109,7 @@ The observer will be notified when a change has occurred</p>
 <p><a href="get-subscribers.html">getSubscribers</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">getSubscribers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">&gt;</span></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getSubscribers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">&gt;</span></code>
 <p>Method to get the current list of subscribers in the room</p>
 </td>
 </tr>
@@ -106,7 +118,7 @@ The observer will be notified when a change has occurred</p>
 <p><a href="join.html">join</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">join</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">join</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Method to connect and join to the room created.
 This method must be called if you want to setup a call.</p>
 </td>
@@ -116,26 +128,53 @@ This method must be called if you want to setup a call.</p>
 <p><a href="leave.html">leave</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">leave</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">leave</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Method to dispose everything, usually used when you want to close the call.</p>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="mute-all-audio.html">muteAllAudio</a></p>
+<p><a href="mute-all-publishers-audio.html">muteAllPublishersAudio</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">muteAllAudio</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$muteAllAudio(kotlin.Boolean)/mute">mute</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">muteAllPublishersAudio</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$muteAllPublishersAudio(kotlin.Boolean)/mute">mute</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Utility method to mute the audio for all publishers</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mute-all-publishers-video.html">muteAllPublishersVideo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">muteAllPublishersVideo</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$muteAllPublishersVideo(kotlin.Boolean)/mute">mute</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Utility method to mute the video for all publishers</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mute-all-subscribers-audio.html">muteAllSubscribersAudio</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">muteAllSubscribersAudio</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$muteAllSubscribersAudio(kotlin.Boolean)/mute">mute</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Utility method to mute the audio for all subscribers</p>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="mute-all-video.html">muteAllVideo</a></p>
+<p><a href="mute-all-subscribers-video.html">muteAllSubscribersVideo</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">muteAllVideo</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$muteAllVideo(kotlin.Boolean)/mute">mute</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">muteAllSubscribersVideo</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$muteAllSubscribersVideo(kotlin.Boolean)/mute">mute</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Utility method to mute the video for all subscribers</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mute-audio-all-actors.html">muteAudioAllActors</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">muteAudioAllActors</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$muteAudioAllActors(kotlin.Boolean, kotlin.Boolean)/microphone">microphone</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.room.Room$muteAudioAllActors(kotlin.Boolean, kotlin.Boolean)/speaker">speaker</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Utility method to mute the audio for all room actors, publishers and subscribers</p>
 </td>
 </tr>
 <tr>
@@ -143,7 +182,7 @@ This method must be called if you want to setup a call.</p>
 <p><a href="publish.html">publish</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">publish</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$publish(com.bandyer.core_av.publisher.Publisher)/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.publisher/-publisher/index.html"><span class="identifier">Publisher</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">publish</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$publish(com.bandyer.core_av.publisher.Publisher)/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.publisher/-publisher/index.html"><span class="identifier">Publisher</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Method used to add a new publisher in the room.</p>
 </td>
 </tr>
@@ -152,7 +191,7 @@ This method must be called if you want to setup a call.</p>
 <p><a href="remove-room-observer.html">removeRoomObserver</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">removeRoomObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$removeRoomObserver(com.bandyer.core_av.room.RoomObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-room-observer/index.html"><span class="identifier">RoomObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Room</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">removeRoomObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$removeRoomObserver(com.bandyer.core_av.room.RoomObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-room-observer/index.html"><span class="identifier">RoomObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Room</span></a></code>
 <p>Method to remove an observer, usually used when not interested anymore in any event coming from the room.</p>
 </td>
 </tr>
@@ -161,17 +200,8 @@ This method must be called if you want to setup a call.</p>
 <p><a href="subscribe.html">subscribe</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">subscribe</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$subscribe(com.bandyer.core_av.subscriber.Subscriber)/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">subscribe</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$subscribe(com.bandyer.core_av.subscriber.Subscriber)/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Method used to add a new subscriber in the room.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="to-string.html">toString</a></p>
-</td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
-<p>Method returns a string representation of the room.</p>
 </td>
 </tr>
 <tr>
@@ -179,7 +209,7 @@ This method must be called if you want to setup a call.</p>
 <p><a href="unpublish.html">unpublish</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">unpublish</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$unpublish(com.bandyer.core_av.publisher.Publisher)/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.publisher/-publisher/index.html"><span class="identifier">Publisher</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">unpublish</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$unpublish(com.bandyer.core_av.publisher.Publisher)/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.publisher/-publisher/index.html"><span class="identifier">Publisher</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Method used to remove a publisher from the room</p>
 </td>
 </tr>
@@ -188,9 +218,32 @@ This method must be called if you want to setup a call.</p>
 <p><a href="unsubscribe.html">unsubscribe</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">unsubscribe</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$unsubscribe(com.bandyer.core_av.subscriber.Subscriber)/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">unsubscribe</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room$unsubscribe(com.bandyer.core_av.subscriber.Subscriber)/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Method to remove a subscriber from the room.
 Generally used when you are not anymore interested in a remote stream.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="destroy-all.html">destroyAll</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">destroyAll</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Destroy all rooms</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get.html">get</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">get</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.Room.Registry$get(com.bandyer.core_av.room.RoomToken)/token">token</span><span class="symbol">:</span>&nbsp;<a href="../-room-token/index.html"><span class="identifier">RoomToken</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Room</span></a></code>
+<p>Get a room where actors can interact</p>
 </td>
 </tr>
 </tbody>

@@ -35,6 +35,33 @@ kristiyan</p>
 </tr>
 <tr>
 <td>
+<p><a href="on-local-subscriber-joined.html">onLocalSubscriberJoined</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalSubscriberJoined</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.RoomObserver$onLocalSubscriberJoined(com.bandyer.core_av.subscriber.Subscriber)/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when the local subscriber has been added in the server room</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-local-subscriber-removed.html">onLocalSubscriberRemoved</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalSubscriberRemoved</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.RoomObserver$onLocalSubscriberRemoved(com.bandyer.core_av.subscriber.Subscriber)/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when the local subscriber has been removed you may need to remove it from the UI</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-local-subscriber-update-stream.html">onLocalSubscriberUpdateStream</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalSubscriberUpdateStream</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.RoomObserver$onLocalSubscriberUpdateStream(com.bandyer.core_av.subscriber.Subscriber)/subscriber">subscriber</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html"><span class="identifier">Subscriber</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when the local subscriber has updated his stream details</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="on-remote-publisher-joined.html">onRemotePublisherJoined</a></p>
 </td>
 <td>
@@ -49,6 +76,15 @@ kristiyan</p>
 <td>
 <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onRemotePublisherLeft</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.RoomObserver$onRemotePublisherLeft(com.bandyer.core_av.Stream)/stream">stream</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Called when a remote publisher referenced by the stream has left</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-remote-publisher-update-stream.html">onRemotePublisherUpdateStream</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onRemotePublisherUpdateStream</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.RoomObserver$onRemotePublisherUpdateStream(com.bandyer.core_av.Stream)/stream">stream</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when a remote stream has updated his stream in the room</p>
 </td>
 </tr>
 <tr>

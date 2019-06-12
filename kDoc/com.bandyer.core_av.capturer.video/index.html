@@ -13,39 +13,29 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-camera-video-feeder/index.html">CameraVideoFeeder</a></p>
+<p><a href="-base-capturer-video-interface/index.html">BaseCapturerVideoInterface</a></p>
 </td>
 <td>
-<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">CameraVideoFeeder</span></code>
-<p>Capturer feeder</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-capturer-quality/index.html">CapturerQuality</a></p>
-</td>
-<td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">CapturerQuality</span></code>
-<p>Video Quality</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-capturer-video/index.html">CapturerVideo</a></p>
-</td>
-<td>
-<code><span class="keyword">class </span><span class="identifier">CapturerVideo</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.bandyer.core_av.capturer/-abstract-base-capturer/index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><a href="-capturer-video/index.html"><span class="identifier">CapturerVideo</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="-video-interface/index.html"><span class="identifier">VideoInterface</span></a><span class="symbol">&lt;</span><a href="-capturer-video/index.html"><span class="identifier">CapturerVideo</span></a><span class="symbol">&gt;</span></code>
-<p>Video Capturer from the camera
-It will follow the activity lifecycle, so you don't need to pause/resume/destroy</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-video-interface/index.html">VideoInterface</a></p>
-</td>
-<td>
-<code><span class="keyword">interface </span><span class="identifier">VideoInterface</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">interface </span><span class="identifier">BaseCapturerVideoInterface</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.bandyer.core_av.capturer/-capturer/index.html"><span class="identifier">Capturer</span></a><span class="symbol">&gt;</span></code>
 <p>Capturer video interface</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-capturer-video.html">CapturerVideo</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CapturerVideo</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.bandyer.core_av.capturer/-capturer/index.html"><span class="identifier">Capturer</span></a><span class="symbol">, </span><a href="-base-capturer-video-interface/index.html"><span class="identifier">BaseCapturerVideoInterface</span></a><span class="symbol">&lt;</span><a href="-capturer-video.html"><span class="identifier">CapturerVideo</span></a><span class="symbol">&gt;</span></code>
+<p>This represents a capturer for video only</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-capturer-video-quality/index.html">CapturerVideoQuality</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">CapturerVideoQuality</span></code>
+<p>Video Quality</p>
 </td>
 </tr>
 </tbody>

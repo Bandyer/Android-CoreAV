@@ -13,30 +13,29 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-abstract-base-capturer/index.html">AbstractBaseCapturer</a></p>
+<p><a href="-capturer/index.html">Capturer</a></p>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractBaseCapturer</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span></code>
-<p>Abstract class defining how the capturers must behave</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-camera-video-feeder-changed-listener/index.html">CameraVideoFeederChangedListener</a></p>
-</td>
-<td>
-<code><span class="keyword">interface </span><span class="identifier">CameraVideoFeederChangedListener</span></code>
-<p>CameraVideoFeederChangeListener</p>
+<code><span class="keyword">interface </span><span class="identifier">Capturer</span></code>
+<p>A capturer is a representation of what(device audio/camera/screen) can be used to publish in the room</p>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="-capturer-a-v/index.html">CapturerAV</a></p>
+<p><a href="-capturer-audio-options/index.html">CapturerAudioOptions</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">CapturerAV</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-abstract-base-capturer/index.html"><span class="identifier">AbstractBaseCapturer</span></a><span class="symbol">&lt;</span><a href="-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../com.bandyer.core_av.capturer.video/-video-interface/index.html"><span class="identifier">VideoInterface</span></a><span class="symbol">&lt;</span><a href="-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../com.bandyer.core_av.capturer.audio/-audio-interface/index.html"><span class="identifier">AudioInterface</span></a><span class="symbol">&lt;</span><a href="-capturer-a-v/index.html"><span class="identifier">CapturerAV</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="-capturer-observer/index.html"><span class="identifier">CapturerObserver</span></a></code>
-<p>This class captures device audio and video from the camera
-It will follow the activity lifecycle, so you don't need to pause/resume/destroy</p>
+<code><span class="keyword">class </span><span class="identifier">CapturerAudioOptions</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-capturer-options/index.html"><span class="identifier">CapturerOptions</span></a></code>
+<p>Audio capturing options</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-capturer-camera-options/index.html">CapturerCameraOptions</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CapturerCameraOptions</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-capturer-options/index.html"><span class="identifier">CapturerOptions</span></a></code>
+<p>VideoCamera capturing options</p>
 </td>
 </tr>
 <tr>
@@ -45,7 +44,25 @@ It will follow the activity lifecycle, so you don't need to pause/resume/destroy
 </td>
 <td>
 <code><span class="keyword">interface </span><span class="identifier">CapturerObserver</span></code>
-<p>Capturer listener</p>
+<p>Capturer observer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-capturer-options/index.html">CapturerOptions</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CapturerOptions</span></code>
+<p>Interface representing the options with which we want to create the capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-capturer-screen-options/index.html">CapturerScreenOptions</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CapturerScreenOptions</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-capturer-options/index.html"><span class="identifier">CapturerOptions</span></a></code>
+<p>ScreenShare capturing options</p>
 </td>
 </tr>
 <tr>
@@ -55,6 +72,38 @@ It will follow the activity lifecycle, so you don't need to pause/resume/destroy
 <td>
 <code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">CapturerState</span></code>
 <p>Capturer states</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-capturer-exception/index.html">CapturerException</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">CapturerException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a></code>
+<p>Capturer exception</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-capturer-freeze-exception/index.html">CapturerFreezeException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CapturerFreezeException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-capturer-exception/index.html"><span class="identifier">CapturerException</span></a></code>
+<p>Capturer is frozen exception</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-capturer-start-exception/index.html">CapturerStartException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CapturerStartException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-capturer-exception/index.html"><span class="identifier">CapturerException</span></a></code>
+<p>Capturer has failed to start exception</p>
 </td>
 </tr>
 </tbody>

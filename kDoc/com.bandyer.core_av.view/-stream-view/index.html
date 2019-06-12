@@ -38,6 +38,15 @@
 </tr>
 <tr>
 <td>
+<p><a href="is-audio-playing.html">isAudioPlaying</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">isAudioPlaying</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>True if the view is currently playing audio</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="is-rendering.html">isRendering</a></p>
 </td>
 <td>
@@ -61,21 +70,30 @@
 </tr>
 <tr>
 <td>
-<p><a href="audio-enabled.html">audioEnabled</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">audioEnabled</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.view.StreamView$audioEnabled(kotlin.Boolean)/enabled">enabled</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Method to enable/disable the audio</p>
-</td>
-</tr>
-<tr>
-<td>
 <p><a href="capture-frame.html">captureFrame</a></p>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">captureFrame</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Capture frame from the view
 The frame will be forwarded to all status observers of the view</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="disable-audio-playing.html">disableAudioPlaying</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">disableAudioPlaying</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.view.StreamView$disableAudioPlaying(kotlin.Boolean)/disable">disable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to enable/disable the audio play</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="disable-video-rendering.html">disableVideoRendering</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">disableVideoRendering</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.view.StreamView$disableVideoRendering(kotlin.Boolean)/disable">disable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to enable/disable the video</p>
 </td>
 </tr>
 <tr>
@@ -148,15 +166,6 @@ The frame will be forwarded to all status observers of the view</p>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">stop</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Method to stop the video streaming</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="video-enabled.html">videoEnabled</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">videoEnabled</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.view.StreamView$videoEnabled(kotlin.Boolean)/enabled">enabled</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Method to enable/disable the video</p>
 </td>
 </tr>
 </tbody>

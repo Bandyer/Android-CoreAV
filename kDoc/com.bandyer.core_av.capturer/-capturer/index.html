@@ -1,0 +1,248 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Capturer - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.capturer</a>&nbsp;/&nbsp;<a href="./index.html">Capturer</a><br/>
+<br/>
+<h1>Capturer</h1>
+<code><span class="keyword">interface </span><span class="identifier">Capturer</span></code>
+<p>A capturer is a representation of what(device audio/camera/screen) can be used to publish in the room</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="id.html">id</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Capturer identifier</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-running.html">isRunning</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">isRunning</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>True if the capturer is running, false otherwise</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="state.html">state</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">state</span><span class="symbol">: </span><a href="../-capturer-state/index.html"><span class="identifier">CapturerState</span></a></code>
+<p>Capturer current state</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="stream.html">stream</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">stream</span><span class="symbol">: </span><a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">?</span></code>
+<p>Captured audio or video</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="destroy.html">destroy</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">destroy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method used to dispose the capturer, called onDestroy of the activity</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="pause.html">pause</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">pause</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Pause the capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="resume.html">resume</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">resume</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Resume the capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="start.html">start</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">start</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>starts the capturer, called by the user</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="audio-capturer-requests-count.html">audioCapturerRequestsCount</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">audioCapturerRequestsCount</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Number of requests for the audio capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="audio-video-camera-capturer-request-count.html">audioVideoCameraCapturerRequestCount</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">audioVideoCameraCapturerRequestCount</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Number of requests for the audio&video camera capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="audio-video-screen-capturer-request-count.html">audioVideoScreenCapturerRequestCount</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">audioVideoScreenCapturerRequestCount</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Number of requests for the  audio&video screen capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="camera-capturer-requests-count.html">cameraCapturerRequestsCount</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">cameraCapturerRequestsCount</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Number of requests for the camera capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="capturers.html">capturers</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">capturers</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">Capturer</span></a><span class="symbol">&gt;</span></code>
+<p>Returns the list of all capturers requested</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="screen-capturer-requests-count.html">screenCapturerRequestsCount</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">screenCapturerRequestsCount</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Number of requests for the screen capturer</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-capturer-observer.html">addCapturerObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addCapturerObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.Capturer.Registry$addCapturerObserver(com.bandyer.core_av.capturer.CapturerObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-observer/index.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to add an observer to the registry</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="destroy.html">destroy</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">destroy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Destroy all capturers and free all resources</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get.html">get</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">get</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.Capturer.Registry$get(android.support.v7.app.AppCompatActivity, com.bandyer.core_av.capturer.CapturerOptions)/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">AppCompatActivity</span><span class="symbol">, </span><span class="identifier" id="com.bandyer.core_av.capturer.Capturer.Registry$get(android.support.v7.app.AppCompatActivity, com.bandyer.core_av.capturer.CapturerOptions)/options">options</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-options/index.html"><span class="identifier">CapturerOptions</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Capturer</span></a></code>
+<p>Get a capturer based on the options</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="release.html">release</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">release</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.Capturer.Registry$release(com.bandyer.core_av.capturer.Capturer)/capturer">capturer</span><span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Capturer</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Release a capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="release-by-options.html">releaseByOptions</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">releaseByOptions</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.Capturer.Registry$releaseByOptions(com.bandyer.core_av.capturer.CapturerOptions)/options">options</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-options/index.html"><span class="identifier">CapturerOptions</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Release a capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-all-observers.html">removeAllObservers</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeAllObservers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to remove all observers</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-capturer-observer.html">removeCapturerObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeCapturerObserver</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.capturer.Capturer.Registry$removeCapturerObserver(com.bandyer.core_av.capturer.CapturerObserver)/observer">observer</span><span class="symbol">:</span>&nbsp;<a href="../-capturer-observer/index.html"><span class="identifier">CapturerObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Method to remove an observer from the registry</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.bandyer.core_av.capturer.audio/-capturer-audio.html">CapturerAudio</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CapturerAudio</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Capturer</span></a><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer.audio/-base-capturer-audio-interface/index.html"><span class="identifier">BaseCapturerAudioInterface</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.capturer.audio/-capturer-audio.html"><span class="identifier">CapturerAudio</span></a><span class="symbol">&gt;</span></code>
+<p>This represents a capturer for audio only</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.bandyer.core_av.capturer.video/-capturer-video.html">CapturerVideo</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CapturerVideo</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Capturer</span></a><span class="symbol">, </span><a href="../../com.bandyer.core_av.capturer.video/-base-capturer-video-interface/index.html"><span class="identifier">BaseCapturerVideoInterface</span></a><span class="symbol">&lt;</span><a href="../../com.bandyer.core_av.capturer.video/-capturer-video.html"><span class="identifier">CapturerVideo</span></a><span class="symbol">&gt;</span></code>
+<p>This represents a capturer for video only</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

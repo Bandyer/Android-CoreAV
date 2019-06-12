@@ -4,7 +4,10 @@ $dokka.linkExtension:html
 com.bandyer.core_av
 com.bandyer.core_av.capturer
 com.bandyer.core_av.capturer.audio
+com.bandyer.core_av.capturer.mix
 com.bandyer.core_av.capturer.video
+com.bandyer.core_av.capturer.video.camera
+com.bandyer.core_av.capturer.video.screen
 com.bandyer.core_av.peerconnection.bandwidthThrottling
 com.bandyer.core_av.publisher
 com.bandyer.core_av.publisher.exceptions

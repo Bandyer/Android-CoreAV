@@ -17,20 +17,6 @@
 </tr>
 <tr>
 <td>
-<a href="../com.bandyer.core_av.capturer/-abstract-base-capturer/index.html">com.bandyer.core_av.capturer.AbstractBaseCapturer</a></td>
-<td>
-<p>Abstract class defining how the capturers must behave</p>
-</td>
-</tr>
-<tr>
-<td>
-<a href="../com.bandyer.core_av.capturer.audio/-audio-interface/index.html">com.bandyer.core_av.capturer.audio.AudioInterface</a></td>
-<td>
-<p>Audio capturer interface</p>
-</td>
-</tr>
-<tr>
-<td>
 <a href="../com.bandyer.core_av/-bandyer-core-a-v/index.html">com.bandyer.core_av.BandyerCoreAV</a></td>
 <td>
 <p>Sdk Initializer
@@ -46,6 +32,34 @@ set in the following way to ensure a decent Java interface</p>
 </tr>
 <tr>
 <td>
+<a href="../com.bandyer.core_av.capturer.audio/-base-capturer-audio-interface/index.html">com.bandyer.core_av.capturer.audio.BaseCapturerAudioInterface</a></td>
+<td>
+<p>Audio capturer interface</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer.video.camera/-base-capturer-camera-video-interface/index.html">com.bandyer.core_av.capturer.video.camera.BaseCapturerCameraVideoInterface</a></td>
+<td>
+<p>Capturer video interface</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer.video.screen/-base-capturer-screen-video-interface.html">com.bandyer.core_av.capturer.video.screen.BaseCapturerScreenVideoInterface</a></td>
+<td>
+<p>Capturer screen interface</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer.video/-base-capturer-video-interface/index.html">com.bandyer.core_av.capturer.video.BaseCapturerVideoInterface</a></td>
+<td>
+<p>Capturer video interface</p>
+</td>
+</tr>
+<tr>
+<td>
 <a href="../com.bandyer.core_av/-base-user/index.html">com.bandyer.core_av.BaseUser</a></td>
 <td>
 <p>Interface representing an user</p>
@@ -53,21 +67,35 @@ set in the following way to ensure a decent Java interface</p>
 </tr>
 <tr>
 <td>
-<a href="../com.bandyer.core_av.capturer.video/-camera-video-feeder/index.html">com.bandyer.core_av.capturer.video.CameraVideoFeeder</a></td>
+<a href="../com.bandyer.core_av.capturer/-capturer/index.html">com.bandyer.core_av.capturer.Capturer</a></td>
 <td>
-<p>Capturer feeder</p>
+<p>A capturer is a representation of what(device audio/camera/screen) can be used to publish in the room</p>
 </td>
 </tr>
 <tr>
 <td>
-<a href="../com.bandyer.core_av.capturer/-camera-video-feeder-changed-listener/index.html">com.bandyer.core_av.capturer.CameraVideoFeederChangedListener</a></td>
+<a href="../com.bandyer.core_av.capturer.audio/-capturer-audio.html">com.bandyer.core_av.capturer.audio.CapturerAudio</a></td>
 <td>
-<p>CameraVideoFeederChangeListener</p>
+<p>This represents a capturer for audio only</p>
 </td>
 </tr>
 <tr>
 <td>
-<a href="../com.bandyer.core_av.capturer/-capturer-a-v/index.html">com.bandyer.core_av.capturer.CapturerAV</a></td>
+<a href="../com.bandyer.core_av.capturer/-capturer-audio-options/index.html">com.bandyer.core_av.capturer.CapturerAudioOptions</a></td>
+<td>
+<p>Audio capturing options</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer.mix/-capturer-audio-video/index.html">com.bandyer.core_av.capturer.mix.CapturerAudioVideo</a></td>
+<td>
+<p>Capturer with audio&video</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer.mix/-capturer-audio-video-camera.html">com.bandyer.core_av.capturer.mix.CapturerAudioVideoCamera</a></td>
 <td>
 <p>This class captures device audio and video from the camera
 It will follow the activity lifecycle, so you don't need to pause/resume/destroy</p>
@@ -75,23 +103,87 @@ It will follow the activity lifecycle, so you don't need to pause/resume/destroy
 </tr>
 <tr>
 <td>
-<a href="../com.bandyer.core_av.capturer.audio/-capturer-audio/index.html">com.bandyer.core_av.capturer.audio.CapturerAudio</a></td>
+<a href="../com.bandyer.core_av.capturer.mix/-capturer-audio-video-screen.html">com.bandyer.core_av.capturer.mix.CapturerAudioVideoScreen</a></td>
 <td>
-<p>Audio capturer from the device</p>
+<p>Screen Video Capturer
+It will follow the activity lifecycle, so you don't need to pause/resume/destroy</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer/-capturer-camera-options/index.html">com.bandyer.core_av.capturer.CapturerCameraOptions</a></td>
+<td>
+<p>VideoCamera capturing options</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer.video.camera/-capturer-camera-video.html">com.bandyer.core_av.capturer.video.camera.CapturerCameraVideo</a></td>
+<td>
+<p>This represents a capturer for camera video only</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer.video.camera/-capturer-camera-video-feeder/index.html">com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeeder</a></td>
+<td>
+<p>Capturer feederCapturerCamera</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer.video.camera/-capturer-camera-video-feeder-changed-listener/index.html">com.bandyer.core_av.capturer.video.camera.CapturerCameraVideoFeederChangedListener</a></td>
+<td>
+<p>CameraVideoFeederChangeListener</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer/-capturer-exception/index.html">com.bandyer.core_av.capturer.CapturerException</a></td>
+<td>
+<p>Capturer exception</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer/-capturer-freeze-exception/index.html">com.bandyer.core_av.capturer.CapturerFreezeException</a></td>
+<td>
+<p>Capturer is frozen exception</p>
 </td>
 </tr>
 <tr>
 <td>
 <a href="../com.bandyer.core_av.capturer/-capturer-observer/index.html">com.bandyer.core_av.capturer.CapturerObserver</a></td>
 <td>
-<p>Capturer listener</p>
+<p>Capturer observer</p>
 </td>
 </tr>
 <tr>
 <td>
-<a href="../com.bandyer.core_av.capturer.video/-capturer-quality/index.html">com.bandyer.core_av.capturer.video.CapturerQuality</a></td>
+<a href="../com.bandyer.core_av.capturer/-capturer-options/index.html">com.bandyer.core_av.capturer.CapturerOptions</a></td>
 <td>
-<p>Video Quality</p>
+<p>Interface representing the options with which we want to create the capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer/-capturer-screen-options/index.html">com.bandyer.core_av.capturer.CapturerScreenOptions</a></td>
+<td>
+<p>ScreenShare capturing options</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer.video.screen/-capturer-screen-video.html">com.bandyer.core_av.capturer.video.screen.CapturerScreenVideo</a></td>
+<td>
+<p>This represents a capturer for screen video only</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer/-capturer-start-exception/index.html">com.bandyer.core_av.capturer.CapturerStartException</a></td>
+<td>
+<p>Capturer has failed to start exception</p>
 </td>
 </tr>
 <tr>
@@ -103,10 +195,16 @@ It will follow the activity lifecycle, so you don't need to pause/resume/destroy
 </tr>
 <tr>
 <td>
-<a href="../com.bandyer.core_av.capturer.video/-capturer-video/index.html">com.bandyer.core_av.capturer.video.CapturerVideo</a></td>
+<a href="../com.bandyer.core_av.capturer.video/-capturer-video.html">com.bandyer.core_av.capturer.video.CapturerVideo</a></td>
 <td>
-<p>Video Capturer from the camera
-It will follow the activity lifecycle, so you don't need to pause/resume/destroy</p>
+<p>This represents a capturer for video only</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.capturer.video/-capturer-video-quality/index.html">com.bandyer.core_av.capturer.video.CapturerVideoQuality</a></td>
+<td>
+<p>Video Quality</p>
 </td>
 </tr>
 <tr>
@@ -163,9 +261,7 @@ It will follow the activity lifecycle, so you don't need to pause/resume/destroy
 <a href="../com.bandyer.core_av.publisher/-publisher/index.html">com.bandyer.core_av.publisher.Publisher</a></td>
 <td>
 <p>This class represents a publisher of a stream.
-A publisher is someone who is in read-write mode on a stream.
-There can be only one local publisher at a time in the room.
-The publisher needs a capturer ( audio/video ) to be able to fetch the data to stream.</p>
+A publisher is someone who is in read-write mode on a stream.</p>
 </td>
 </tr>
 <tr>
@@ -214,9 +310,14 @@ The publisher needs a capturer ( audio/video ) to be able to fetch the data to s
 <td>
 <a href="../com.bandyer.core_av.room/-room/index.html">com.bandyer.core_av.room.Room</a></td>
 <td>
-<p>This class represents a Bandyer room where the users will join and talk.
-The first step to use the room is create it by instantiating it with a room token.
-The room token will be provided by us, beforehand</p>
+<p>This class represents a Bandyer room where the users will join and talk.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.bandyer.core_av.room/-room-actor/index.html">com.bandyer.core_av.room.RoomActor</a></td>
+<td>
+<p>A room actor is an entity representing an object that has specific role in the room.</p>
 </td>
 </tr>
 <tr>
@@ -330,13 +431,6 @@ A subscriber is someone who is in read-only mode on a stream.</p>
 <a href="../com.bandyer.core_av.subscriber/-video-fps-quality/index.html">com.bandyer.core_av.subscriber.VideoFpsQuality</a></td>
 <td>
 <p>Class to request another type of VideoFpsQuality to the subscriber</p>
-</td>
-</tr>
-<tr>
-<td>
-<a href="../com.bandyer.core_av.capturer.video/-video-interface/index.html">com.bandyer.core_av.capturer.video.VideoInterface</a></td>
-<td>
-<p>Capturer video interface</p>
 </td>
 </tr>
 <tr>
