@@ -47,4 +47,5 @@
     <string name="connection">Connection</string>
     <string name="receiver">Receiver</string>
     <string name="sender">Sender</string>
+    <string name="screenshare_button">ScreenShare</string>
 </resources>

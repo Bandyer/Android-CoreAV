@@ -7,7 +7,6 @@ package com.bandyer.demo_core_av_2.room.adapter_items;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
@@ -113,6 +112,8 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
 
         Dialog screenShotDialog;
 
+        Subscriber subscriber;
+
         ViewHolder(View itemView) {
             super(itemView);
             ImageZoomHelper.setViewZoomable(preview);
@@ -146,6 +147,7 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
 
         @Override
         public void bindView(@NonNull final SubscriberItem item, @NonNull List<Object> payloads) {
+            subscriber = item.subscriber;
             item.subscriber.setView(preview, new OnStreamListener() {
                 @Override
                 public void onReadyToPlay(@NotNull StreamView view, @NonNull Stream stream) {
@@ -250,14 +252,16 @@ public class SubscriberItem extends AbstractItem<SubscriberItem, SubscriberItem.
         void onAudioToggle(AppCompatImageButton view) {
             audioMuted = !audioMuted;
             view.setImageResource(audioMuted ? R.drawable.ic_volume_off : R.drawable.ic_volume_up);
-            preview.audioEnabled(!audioMuted);
+            preview.disableAudioPlaying(audioMuted);
+            subscriber.disableAudio(audioMuted);
         }
 
         @OnClick(R.id.videoButton)
         void onVideoToggle(AppCompatImageButton view) {
             videoMuted = !videoMuted;
             view.setImageResource(videoMuted ? R.drawable.ic_videocam_off : R.drawable.ic_videocam);
-            preview.videoEnabled(!videoMuted);
+            preview.disableVideoRendering(videoMuted);
+            subscriber.disableVideo(videoMuted);
         }
 
         @OnClick(R.id.changeScaleTypeButton)

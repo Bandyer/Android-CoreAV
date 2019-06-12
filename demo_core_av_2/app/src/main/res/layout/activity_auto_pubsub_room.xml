@@ -15,6 +15,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/screenShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/space16"
+        android:src="@drawable/ic_add"
+        app:fabSize="normal"
+        app:layout_behavior="com.bandyer.demo_core_av_2.design.ScrollAwareFABBehavior" />
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/close_room"
         android:layout_width="wrap_content"

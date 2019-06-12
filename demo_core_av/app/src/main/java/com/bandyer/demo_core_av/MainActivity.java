@@ -20,7 +20,10 @@ import android.widget.LinearLayout;
 
 import com.bandyer.core_av.OnStreamListener;
 import com.bandyer.core_av.Stream;
-import com.bandyer.core_av.capturer.CapturerAV;
+import com.bandyer.core_av.capturer.Capturer;
+import com.bandyer.core_av.capturer.CapturerOptions;
+import com.bandyer.core_av.capturer.mix.CapturerAudioVideo;
+import com.bandyer.core_av.capturer.video.screen.CapturerScreenVideo;
 import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.PublisherObserver;
 import com.bandyer.core_av.publisher.PublisherState;
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     void hasPermissions() {
         // Let's create a call
         try {
-            room = new Room(new RoomToken(TOKEN));
+            room = Room.Registry.get(new RoomToken(TOKEN));
             room.addRoomObserver(this);
             room.join();
         } catch (Throwable error) {
@@ -90,9 +93,9 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     @Override
     public void onRoomEnter() {
         Log.d("Room", "onRoomEnter");
-        CapturerAV capturerAV = new CapturerAV(this);
+        Capturer capturerAV = Capturer.Registry.get(this, new CapturerOptions.Builder().withAudio().withCamera());
         capturerAV.start();
-        publisher = new Publisher(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"))
+        publisher = room.create(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"))
                 .addPublisherObserver(MainActivity.this)
                 .setCapturer(capturerAV);
         room.publish(publisher);
@@ -126,6 +129,25 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        for (Capturer capturer : Capturer.Registry.getCapturers()) capturer.resume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        for (Capturer capturer : Capturer.Registry.getCapturers()) {
+            if (capturer instanceof CapturerScreenVideo) return;
+
+            if (capturer instanceof CapturerAudioVideo)
+                ((CapturerAudioVideo) capturer).pause(true, false);
+            else
+                capturer.pause();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         // close the call
@@ -153,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     public void onRemotePublisherJoined(@NonNull final Stream stream) {
         Log.d("Publisher", "onRemotePublisherJoined");
 
-        final Subscriber subscriber = new Subscriber(stream).addSubscribeObserver(this);
+        final Subscriber subscriber = room.create(stream).addSubscribeObserver(this);
         room.subscribe(subscriber);
 
         // set the view where the stream will be played
@@ -191,6 +213,11 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     @Override
     public void onLocalSubscriberAdded(@NonNull Subscriber subscriber) {
         Log.d("Subscriber", "onLocalSubscriberAdded");
+    }
+
+    @Override
+    public void onLocalSubscriberRemoved(@NonNull Subscriber subscriber) {
+        Log.d("Subscriber", "onLocalSubscriberRemoved");
     }
 
     @Override
@@ -262,5 +289,33 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
+    @Override
+    public void onRemotePublisherUpdateStream(@NonNull Stream stream) {
 
+    }
+
+    @Override
+    public void onLocalSubscriberJoined(@NonNull Subscriber subscriber) {
+
+    }
+
+    @Override
+    public void onLocalSubscriberUpdateStream(@NonNull Subscriber subscriber) {
+
+    }
+
+    @Override
+    public void onLocalSubscriberAudioMuted(@NonNull Subscriber subscriber, boolean muted) {
+
+    }
+
+    @Override
+    public void onLocalSubscriberVideoMuted(@NonNull Subscriber subscriber, boolean muted) {
+
+    }
+
+    @Override
+    public void onLocalSubscriberStartedScreenSharing(@NonNull Subscriber subscriber, boolean started) {
+
+    }
 }

@@ -5,11 +5,14 @@
 
 package com.bandyer.demo_core_av_2.room;
 
+
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,12 +21,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
 
+import com.bandyer.android_audiosession.AudioOutputDeviceType;
+import com.bandyer.android_audiosession.AudioSession;
+import com.bandyer.android_audiosession.AudioSessionOptions;
+import com.bandyer.android_audiosession.audiosession.AudioSessionListener;
+import com.bandyer.android_common.proximity_listener.ProximitySensorListener;
 import com.bandyer.core_av.Stream;
-import com.bandyer.core_av.capturer.AbstractBaseCapturer;
-import com.bandyer.core_av.capturer.CapturerAV;
-import com.bandyer.core_av.capturer.audio.CapturerAudio;
+import com.bandyer.core_av.capturer.Capturer;
+import com.bandyer.core_av.capturer.CapturerException;
+import com.bandyer.core_av.capturer.CapturerObserver;
+import com.bandyer.core_av.capturer.CapturerOptions;
+import com.bandyer.core_av.capturer.mix.CapturerAudioVideo;
+import com.bandyer.core_av.capturer.video.screen.CapturerScreenVideo;
+import com.bandyer.core_av.networking.models.MuteStreamOption;
+import com.bandyer.core_av.networking.models.PubSubOptions;
 import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.PublisherObserver;
 import com.bandyer.core_av.publisher.PublisherState;
@@ -43,21 +55,15 @@ import com.bandyer.demo_core_av_2.R;
 import com.bandyer.demo_core_av_2.StatsPage;
 import com.bandyer.demo_core_av_2.StatsPagerAdapter;
 import com.bandyer.demo_core_av_2.design.bottom_sheet.picker.BottomListPicker;
-import com.bandyer.demo_core_av_2.design.bottom_sheet.picker.BottomListPickerItem;
 import com.bandyer.demo_core_av_2.room.adapter_items.PublisherItem;
 import com.bandyer.demo_core_av_2.room.adapter_items.StreamItem;
 import com.bandyer.demo_core_av_2.room.adapter_items.SubscriberItem;
-import com.mikepenz.fastadapter.IAdapter;
-import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
-import com.mikepenz.fastadapter.listeners.OnLongClickListener;
 import com.viven.imagezoom.ImageZoomHelper;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,14 +73,12 @@ import butterknife.OnClick;
 /**
  * @author kristiyan
  **/
-public class RoomActivity extends BaseActivity implements RoomObserver, SubscriberObserver, PublisherObserver, InternalStatsLogger {
+public class RoomActivity extends BaseActivity implements RoomObserver, SubscriberObserver, PublisherObserver, InternalStatsLogger, CapturerObserver {
 
     public static final String ROOM_TOKEN = "token";
     public static final String ROOM_AUDIO_MUTED = "audio_muted";
 
     private Room room;
-
-    private Publisher publisher;
 
     @BindView(R.id.streams)
     RecyclerView streams;
@@ -86,6 +90,8 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     private FastItemAdapter pubSubsAdapter = new FastItemAdapter<>();
 
     private ImageZoomHelper imageZoomHelper;
+
+    private Snackbar snackbar;
 
     public static void show(BaseActivity activity, String token, boolean roomAudioMuted) {
         Intent intent = new Intent(activity, RoomActivity.class);
@@ -119,76 +125,158 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
 
         setAdapterListeners();
 
-        room = new Room(new RoomToken(token));
+
+        AudioSession.getInstance().startWithOptions(
+                this,
+                new AudioSessionOptions.Builder()
+                        .withDefaultSpeakerPhoneOutputHardWareDevice()
+                        .build(),
+                new AudioSessionListener() {
+                    @Override
+                    public void onOutputDeviceConnected(@NonNull AudioOutputDeviceType oldAudioOutputDeviceType, @NonNull AudioOutputDeviceType connectedAudioOutputDevice, @NonNull List<? extends AudioOutputDeviceType> availableOutputs) {
+                        Log.d("AudioSession", "changed from old: " + oldAudioOutputDeviceType.name() + " to connected: " + connectedAudioOutputDevice.name());
+                        if (snackbar != null)
+                            snackbar.dismiss();
+                        snackbar = Snackbar.make(pubSubs, connectedAudioOutputDevice.name(), Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                    }
+
+                    @Override
+                    public void onOutputDeviceAttached(@NonNull AudioOutputDeviceType currentAudioOutputDevice, @NonNull AudioOutputDeviceType attachedAudioOutputDevice, @NonNull List<? extends AudioOutputDeviceType> availableOutputs) {
+                        Log.d("AudioSession", "current: " + currentAudioOutputDevice.name() + " attached audioDevice: " + attachedAudioOutputDevice.name());
+                    }
+
+                    @Override
+                    public void onOutputDeviceDetached(@NonNull AudioOutputDeviceType currentAudioOutputDevice, @NonNull AudioOutputDeviceType detachedAudioOutputDevice, @NonNull List<? extends AudioOutputDeviceType> availableOutputs) {
+                        Log.d("AudioSession", "current: " + currentAudioOutputDevice.name() + " detached audioDevice: " + detachedAudioOutputDevice.name());
+                    }
+                }, new ProximitySensorListener() {
+                    @Override
+                    public void onProximitySensorChanged(boolean isNear) {
+                        Log.d("ProximitySensor", "proximity triggered: " + isNear);
+                    }
+                });
+
+        Capturer.Registry.addCapturerObserver(this);
+
+        room = Room.Registry.get(new RoomToken(token));
         room.addRoomObserver(this);
-        room.muteAllAudio(getIntent().getBooleanExtra(ROOM_AUDIO_MUTED, false));
+        room.muteAllSubscribersAudio(getIntent().getBooleanExtra(ROOM_AUDIO_MUTED, false));
         room.join();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        for (Capturer capturer : Capturer.Registry.getCapturers())
+            capturer.resume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        for (Capturer capturer : Capturer.Registry.getCapturers()) {
+            if (capturer instanceof CapturerScreenVideo)  return;
+
+            if (capturer instanceof CapturerAudioVideo)
+                ((CapturerAudioVideo) capturer).pause(true, false);
+            else
+                capturer.pause();
+        }
+    }
+
+    @Override
+    public void onRoomEnter() {
+        Log.d("RoomActivity", "onRoomEnter");
+    }
+
+    @Override
+    public void onRoomExit() {
+        Log.d("RoomActivity", "exit");
+    }
+
+    @Override
+    public void onRoomStateChanged(@NonNull RoomState state) {
+        Log.d("RoomActivity", "onRoomStateChanged " + state);
+    }
+
+    @Override
+    public void onRoomError(@NonNull String reason) {
+        Log.e("RoomActivity", "onRoomError " + reason);
+    }
+
+    @Override
+    public void onRoomReconnecting() {
+        Log.d("RoomActivity", "reconnecting...");
+    }
+
+    @Override
+    public void onRemotePublisherJoined(@NonNull final Stream stream) {
+        Log.d("RoomActivity", "onRemotePublisherJoined");
+        StreamItem streamItem = new StreamItem(stream);
+        streamAdapter.add(0, streamItem);
+    }
+
+    @Override
+    public void onRemotePublisherLeft(@NonNull Stream stream) {
+        Log.d("RoomActivity", "onRemotePublisherLeft");
+        streamAdapter.getItemAdapter().removeByIdentifier(stream.getStreamId().hashCode());
+    }
+
+    @Override
+    public void onRemotePublisherUpdateStream(@NotNull Stream stream) {
+        Log.d("RoomActivity", "onRemotePublisherUpdateStream " + stream);
     }
 
     @SuppressWarnings("unchecked")
     private void setAdapterListeners() {
         pubSubsAdapter.withEventHook(new PublisherItem.PublisherItemClickListener());
         pubSubsAdapter.withEventHook(new SubscriberItem.SubscriberItemClickListener());
-        pubSubsAdapter.withOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(@NonNull View v, @NonNull IAdapter adapter, @NonNull IItem item, int position) {
-                if (item instanceof PublisherItem) {
-                    room.unpublish(publisher);
-                    publisher = null;
-                } else if (item instanceof SubscriberItem) {
-                    Subscriber subscriber = ((SubscriberItem) item).getSubscriber();
-                    room.unsubscribe(subscriber);
-                    onRemotePublisherJoined(subscriber.getStream());
-                }
-                pubSubsAdapter.remove(position);
-                return false;
+        pubSubsAdapter.withOnLongClickListener((v, adapter, item, position) -> {
+            if (item instanceof PublisherItem) {
+                Publisher publisher = ((PublisherItem) item).getPublisher();
+                room.unpublish(publisher);
+            } else if (item instanceof SubscriberItem) {
+                Subscriber subscriber = ((SubscriberItem) item).getSubscriber();
+                room.unsubscribe(subscriber);
+                onRemotePublisherJoined(subscriber.getStream());
             }
+            pubSubsAdapter.remove(position);
+            return false;
         });
 
-        streamAdapter.withOnClickListener(new OnClickListener<StreamItem>() {
-            @Override
-            public boolean onClick(@javax.annotation.Nullable View v, @NonNull IAdapter<StreamItem> adapter, @NonNull StreamItem item, int position) {
-                addNewSubscriber(item.getStream());
-                streamAdapter.remove(position);
-                return false;
-            }
+        streamAdapter.withOnClickListener((v, adapter, item, position) -> {
+            addNewSubscriber(item.getStream());
+            streamAdapter.remove(position);
+            return false;
         });
     }
 
     @OnClick(R.id.add_publish)
     void chooseTypeOfCall() {
         final BottomListPicker<String> joinType = new BottomListPicker<>(this, getString(R.string.room_join_title));
-        List<String> types = Arrays.asList("Audio Call", "Video Call");
-        joinType.setItems(types, -1, new BottomListPickerItem.Delegate<String>() {
-            @Override
-            public void onClicked(int adapterPosition, String item) {
-                onAddPublish(item.equals("Audio Call"));
-                joinType.dismiss();
+        List<String> types = new ArrayList<String>() {{
+            add("Audio Call");
+            add("VideoOnly Call");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                add("ScreenShare");
+                add("Audio&ScreenShare");
             }
+            add("Audio&Video Call");
+        }};
+
+        joinType.setItems(types, -1, (adapterPosition, item) -> {
+            onAddPublish(item);
+            joinType.dismiss();
         }).show();
-    }
-
-    @SuppressWarnings("unchecked")
-    void onAddPublish(boolean isAudioOnlyCall) {
-        if (room == null || room.getRoomState() != RoomState.CONNECTED || publisher != null)
-            return;
-
-        AbstractBaseCapturer<?> capturer = isAudioOnlyCall ? new CapturerAudio(this) : new CapturerAV(this);
-        publisher = new Publisher(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"))
-                .addPublisherObserver(RoomActivity.this)
-                .setCapturer(capturer);
-        capturer.start();
-        room.publish(publisher);
-
-        PublisherItem item = new PublisherItem(publisher, capturer);
-        pubSubsAdapter.add(0, item);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (room != null)
-            room.leave();
+        if (snackbar != null) snackbar.dismiss();
+        Capturer.Registry.destroy();
+        Room.Registry.destroyAll();
     }
 
     @Override
@@ -218,46 +306,28 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
             add("Room Properties");
             add("Remote Streams");
             add("Subscribers");
-            if (publisher != null)
-                add("Publishers");
+            add("Publishers");
         }};
 
         ArrayList<String> items = new ArrayList<String>() {{
             add(App.gson.toJson(room.getRoomInfo()));
             add(App.gson.toJson(room.getStreams()));
             add(App.gson.toJson(room.getSubscribers()));
-            if (publisher != null)
-                add(App.gson.toJson(room.getPublisher()));
+            add(App.gson.toJson(room.getPublishers()));
         }};
 
         InformationActivity.show(this, headers, items);
     }
 
-    @Override
-    public void onLocalPublisherJoined(@NotNull Publisher publisher) {
-        Log.d("Publisher", "onLocalPublisherJoined");
-    }
-
-    @Override
-    public void onRemotePublisherJoined(@NonNull final Stream stream) {
-        StreamItem streamItem = new StreamItem(stream);
-        streamAdapter.add(0, streamItem);
-    }
-
     @SuppressWarnings("unchecked")
     private void addNewSubscriber(final Stream stream) {
-        final Subscriber subscriber = new Subscriber(stream)
-                .addSubscribeObserver(RoomActivity.this);
+        final Subscriber subscriber = room.create(stream);
+        subscriber.addSubscribeObserver(RoomActivity.this);
         room.subscribe(subscriber);
         SubscriberItem subscriberItem = new SubscriberItem(subscriber);
         pubSubsAdapter.add(0, subscriberItem);
     }
 
-
-    @Override
-    public void onRemotePublisherLeft(@NonNull Stream stream) {
-        streamAdapter.getItemAdapter().removeByIdentifier(stream.getStreamId().hashCode());
-    }
 
     StatsPagerAdapter pagerAdapter;
 
@@ -289,70 +359,136 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     }
 
     @Override
-    public void onRoomExit() {
-        Log.d("Room", "exit");
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return imageZoomHelper != null && (imageZoomHelper.onDispatchTouchEvent(ev) || super.dispatchTouchEvent(ev));
+    }
+
+    void onAddPublish(String capturerType) {
+        if (room == null || room.getRoomState() != RoomState.CONNECTED) return;
+
+        Capturer capturer = null;
+
+        switch (capturerType) {
+            case "Audio Call":
+                capturer = Capturer.Registry.get(this, new CapturerOptions.Builder().withAudio());
+                break;
+            case "VideoOnly Call":
+                capturer = Capturer.Registry.get(this, new CapturerOptions.Builder().withCamera());
+                break;
+            case "ScreenShare":
+                capturer = Capturer.Registry.get(this, new CapturerOptions.Builder().withScreenShare());
+                break;
+            case "Audio&ScreenShare":
+                capturer = Capturer.Registry.get(this, new CapturerOptions.Builder().withAudio().withScreenShare());
+                break;
+            case "Audio&Video Call":
+                capturer = (CapturerAudioVideo) Capturer.Registry.get(this, new CapturerOptions.Builder().withAudio().withCamera());
+                break;
+        }
+        Publisher publisher = room.create(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"));
+        publisher.addPublisherObserver(RoomActivity.this)
+                .setCapturer(capturer);
+        room.publish(publisher);
+        PublisherItem item = new PublisherItem(publisher, capturer);
+        pubSubsAdapter.add(item);
+        capturer.start();
     }
 
     @Override
-    public void onRoomStateChanged(@NonNull RoomState state) {
-        Log.d("Room", "onRoomStateChanged " + state);
+    public void onCapturerStarted(@NotNull Capturer capturer, @NotNull Stream stream) {
+        Log.d("RoomActivity", "onCapturerStarted");
     }
 
     @Override
-    public void onRoomError(@NonNull String reason) {
-        Log.e("Room", "onRoomError " + reason);
+    public void onCapturerResumed(@NotNull Capturer capturer) {
+        Log.d("RoomActivity", "onCapturerResumed " + capturer.getId());
     }
 
     @Override
-    public void onRoomEnter() {
-        Log.d("RoomActivity", "onRoomEnter");
-    }
-
-
-    @Override
-    public void onRoomReconnecting() {
-        Log.d("RoomActivity", "reconnecting...");
-    }
-
-
-    @Override
-    public void onLocalSubscriberAdded(@NonNull Subscriber subscriber) {
-        Log.d("RoomActivity", "onLocalSubscriberAdded");
+    public void onCapturerError(@NotNull Capturer capturer, @NotNull CapturerException reason) {
+        Log.e("RoomActivity", "onCapturerError " + reason.getLocalizedMessage());
     }
 
     @Override
-    public void onLocalSubscriberError(@NonNull Subscriber subscriber, @NonNull String reason) {
-        pubSubsAdapter.getItemAdapter().removeByIdentifier(subscriber.getId().hashCode());
+    public void onCapturerPaused(@NotNull Capturer capturer) {
+        Log.d("RoomActivity", "onCapturerPaused");
     }
 
-    @Override
-    public void onLocalSubscriberStateChanged(@NonNull Subscriber subscriber, @NonNull SubscriberState subscriberState) {
-        Log.d("RoomActivity", "onLocalSubscriberStateChanged");
-    }
+    // LOCAL PUBLISHER
 
     @Override
-    public void onLocalPublisherAdded(@NonNull Publisher publisher) {
-        Log.d("RoomActivity", "onLocalPublisherAdded");
+    public void onLocalPublisherJoined(@NotNull Publisher publisher) {
+        Log.d("RoomActivity", "publisher" + publisher.getId() + " onLocalPublisherJoined");
     }
 
     @Override
     public void onLocalPublisherRemoved(@NonNull Publisher publisher) {
-        streamAdapter.getItemAdapter().removeByIdentifier(publisher.getStream().getStreamId().hashCode());
+        Log.d("RoomActivity", "publisher" + publisher.getId() + " onLocalPublisherRemoved");
+        pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
     }
 
     @Override
     public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
-        Log.e("RoomActivity", "onLocalPublisherError: " + reason);
+        Log.e("RoomActivity", "publisher" + publisher.getId() + " onLocalPublisherError: " + reason);
         pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
     }
 
     @Override
     public void onLocalPublisherStateChanged(@NonNull Publisher publisher, @NonNull PublisherState publisherState) {
-        Log.d("RoomActivity", "onLocalPublisherStateChanged");
+        Log.d("RoomActivity", "publisher" + publisher.getId() + " onLocalPublisherStateChanged" + publisherState.name());
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        return imageZoomHelper != null && (imageZoomHelper.onDispatchTouchEvent(ev) || super.dispatchTouchEvent(ev));
+    public void onLocalPublisherAdded(@NonNull Publisher publisher) {
+        Log.d("RoomActivity", "publisher" + publisher.getId() + " onLocalPublisherAdded");
+    }
+
+    // LOCAL SUBSCRIBER
+
+    @Override
+    public void onLocalSubscriberJoined(@NotNull Subscriber subscriber) {
+        Log.d("RoomActivity", "subscriber" + subscriber.getId() + " onLocalSubscriberJoined");
+    }
+
+    @Override
+    public void onLocalSubscriberAdded(@NonNull Subscriber subscriber) {
+        Log.d("RoomActivity", "subscriber" + subscriber.getId() + " onLocalSubscriberAdded");
+    }
+
+    @Override
+    public void onLocalSubscriberError(@NonNull Subscriber subscriber, @NonNull String reason) {
+        Log.e("RoomActivity", "subscriber" + subscriber.getId() + " onLocalSubscriberError " + reason);
+        pubSubsAdapter.getItemAdapter().removeByIdentifier(subscriber.getId().hashCode());
+    }
+
+    @Override
+    public void onLocalSubscriberStateChanged(@NonNull Subscriber subscriber, @NonNull SubscriberState subscriberState) {
+        Log.d("RoomActivity", "subscriber" + subscriber.getId() + " onLocalSubscriberStateChanged " + subscriberState);
+    }
+
+    @Override
+    public void onLocalSubscriberRemoved(@NotNull Subscriber subscriber) {
+        Log.d("RoomActivity", "subscriber" + subscriber.getId() + " onLocalSubscriberRemoved");
+        pubSubsAdapter.getItemAdapter().removeByIdentifier(subscriber.getId().hashCode());
+    }
+
+    @Override
+    public void onLocalSubscriberUpdateStream(@NotNull Subscriber subscriber) {
+        Log.d("RoomActivity", "subscriber" + subscriber.getId() + " onLocalSubscriberUpdateStream");
+    }
+
+    @Override
+    public void onLocalSubscriberAudioMuted(@NotNull Subscriber subscriber, boolean muted) {
+        Log.d("RoomActivity", "subscriber" + subscriber.getId() + " onLocalSubscriberAudioMuted " + muted);
+    }
+
+    @Override
+    public void onLocalSubscriberVideoMuted(@NotNull Subscriber subscriber, boolean muted) {
+        Log.d("RoomActivity", "subscriber" + subscriber.getId() + " onLocalSubscriberVideoMuted " + muted);
+    }
+
+    @Override
+    public void onLocalSubscriberStartedScreenSharing(@NotNull Subscriber subscriber, boolean started) {
+        Log.d("RoomActivity", "subscriber" + subscriber.getId() + " onLocalSubscriberStartedScreenSharing " + started);
     }
 }

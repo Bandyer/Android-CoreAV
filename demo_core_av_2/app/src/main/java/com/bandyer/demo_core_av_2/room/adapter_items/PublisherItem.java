@@ -25,10 +25,8 @@ import android.widget.Toast;
 
 import com.bandyer.core_av.OnStreamListener;
 import com.bandyer.core_av.Stream;
-import com.bandyer.core_av.capturer.AbstractBaseCapturer;
-import com.bandyer.core_av.capturer.CapturerAV;
-import com.bandyer.core_av.capturer.video.CapturerQuality;
-import com.bandyer.core_av.capturer.video.CapturerVideo;
+import com.bandyer.core_av.capturer.Capturer;
+import com.bandyer.core_av.capturer.video.camera.CapturerCameraVideo;
 import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.RecordingException;
 import com.bandyer.core_av.publisher.RecordingListener;
@@ -59,11 +57,11 @@ import static android.view.View.GONE;
 public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.ViewHolder> {
 
     private Publisher publisher;
-    private AbstractBaseCapturer capturerAV;
+    private Capturer capturer;
 
-    public PublisherItem(Publisher publisher, AbstractBaseCapturer capturerAV) {
+    public PublisherItem(Publisher publisher, Capturer capturer) {
         this.publisher = publisher;
-        this.capturerAV = capturerAV;
+        this.capturer = capturer;
     }
 
     public Publisher getPublisher() {
@@ -130,7 +128,7 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
             ImageZoomHelper.setViewZoomable(preview);
         }
 
-        AbstractBaseCapturer capturerAV;
+        Capturer capturer;
 
         Publisher publisher;
 
@@ -157,7 +155,7 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
 
         @Override
         public void bindView(@NonNull final PublisherItem item, @NonNull List<Object> payloads) {
-            capturerAV = item.capturerAV;
+            capturer = item.capturer;
             publisher = item.publisher;
             preview.addViewStatusObserver(viewStatusObserver);
 
@@ -195,16 +193,16 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
         public void unbindView(@NonNull PublisherItem item) {
             item.publisher.releaseView();
             streamId.setText(null);
+            preview.stop();
             switchCameraButton.setVisibility(View.VISIBLE);
             videoButton.setVisibility(View.VISIBLE);
             micButton.setVisibility(View.VISIBLE);
             audioMuted = false;
             videoMuted = false;
-            capturerAV = null;
+            capturer = null;
             publisher = null;
             listener = null;
             if (screenShotDialog != null) screenShotDialog.dismiss();
-            preview.removeViewStatusObserver(viewStatusObserver);
         }
 
         void updateAudioVideoButton(Boolean previewHasVideo, Boolean previewHasAudio, Boolean audioMuted, Boolean videoMuted) {
@@ -227,22 +225,22 @@ public class PublisherItem extends AbstractItem<PublisherItem, PublisherItem.Vie
         void onAudioToggle(AppCompatImageButton view) {
             audioMuted = !audioMuted;
             view.setImageResource(audioMuted ? R.drawable.ic_mic_off : R.drawable.ic_mic);
-            preview.audioEnabled(!audioMuted);
+            preview.disableAudioPlaying(audioMuted);
+            publisher.disableAudio(audioMuted);
         }
 
         @OnClick(R.id.videoButton)
         void onVideoToggle(AppCompatImageButton view) {
             videoMuted = !videoMuted;
             view.setImageResource(videoMuted ? R.drawable.ic_videocam_off : R.drawable.ic_videocam);
-            preview.videoEnabled(!videoMuted);
+            preview.disableVideoRendering(videoMuted);
+            publisher.disableVideo(videoMuted);
         }
 
         @OnClick(R.id.switchCameraButton)
         void onSwitchCamera(AppCompatImageButton view) {
-            if (capturerAV instanceof CapturerVideo) {
-                ((CapturerVideo) capturerAV).switchVideoFeeder();
-            } else if (capturerAV instanceof CapturerAV) {
-                ((CapturerAV) capturerAV).switchVideoFeeder();
+            if (capturer instanceof CapturerCameraVideo) {
+                ((CapturerCameraVideo) capturer).switchVideoFeeder();
             }
         }
 
