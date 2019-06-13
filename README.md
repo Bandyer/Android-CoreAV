@@ -73,7 +73,7 @@ android {
 Download the [latest JAR](https://bintray.com/bandyer/Android-CoreAV/Android-CoreAV) or grab via Gradle:
 
 ```groovy
-implementation 'com.bandyer:core_av:1.2.0'
+implementation 'com.bandyer:core_av:1.2.1'
 ```
 
 ## Quickstart
