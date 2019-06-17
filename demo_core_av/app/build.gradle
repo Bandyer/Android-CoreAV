@@ -50,5 +50,5 @@ dependencies {
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:${permissionsDispatcherVersion}"
 
     // Bandyer Libs
-    implementation "com.bandyer:core_av:1.2.1"
+    implementation "com.bandyer:core_av:1.2.2"
 }
