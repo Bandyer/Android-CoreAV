@@ -151,8 +151,8 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     protected void onDestroy() {
         super.onDestroy();
         // close the call
-        if (room != null)
-            room.leave();
+        Capturer.Registry.destroy();
+        Room.Registry.destroyAll();
     }
 
     /**
