@@ -4,13 +4,48 @@
   -->
 
 <resources>
-    <string name="app_name">CoreAV</string>
+    <string name="app_name">CoreAV_2</string>
 
+    <string name="back">Back</string>
     <string name="button_allow">Allow</string>
+    <string name="button_ok">OK</string>
     <string name="button_deny">Deny</string>
+
+    <string name="show_camera">Show camera preview</string>
 
     <string name="permission_camera_rationale">Camera permission is needed to show the camera preview.</string>
     <string name="permission_camera_denied">Camera permission was denied. Please consider granting it in order to access the camera!</string>
     <string name="permission_camera_never_ask_again">Camera permission was denied with never ask again.</string>
 
+
+    <string name="type_title">Room type</string>
+    <string name="type_p2p">Relay</string>
+    <string name="type_mtm">Routed</string>
+
+    <string name="role_title">Join as</string>
+    <string name="choose_role">Choose a role</string>
+    <string name="role_presenter">presenter</string>
+    <string name="role_viewer">viewer</string>
+    <string name="role_publishOnly">publishOnly</string>
+    <string name="role_viewerWithData">viewerWithData</string>
+
+    <string name="join_button">Join</string>
+    <string name="room_server_url">Room Server URL</string>
+    <string name="auto_pub_sub">Auto Pub/Sub</string>
+    <string name="title_info">Information</string>
+    <string name="internal_stats">Internal Stats</string>
+    <string name="subscribers_title">Publisher &amp; Subscribers</string>
+    <string name="available_streams_title">Available Streams</string>
+    <string name="mute_all_subscribers_audio">Mute All Subscribers Audio</string>
+    <string name="fps_title">Fps</string>
+    <string name="resolution_title">Resolution</string>
+    <string name="video_quality_picker_title">Change the video quality</string>
+    <string name="room_join_title">How do you want to join?</string>
+    <string name="close_button">close</string>
+    <string name="encoder">Encoder</string>
+    <string name="bandwidth">Bandwidth</string>
+    <string name="connection">Connection</string>
+    <string name="receiver">Receiver</string>
+    <string name="sender">Sender</string>
+    <string name="screenshare_button">ScreenShare</string>
 </resources>

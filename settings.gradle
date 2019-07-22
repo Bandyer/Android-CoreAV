@@ -4,6 +4,4 @@
  */
 
 include ':demo_core_av'
-include ':demo_core_av_2'
 project(':demo_core_av').projectDir = file('demo_core_av/app')
-project(':demo_core_av_2').projectDir = file('demo_core_av_2/app')
