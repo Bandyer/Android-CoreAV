@@ -74,7 +74,7 @@ Java && AppCompat => **v1.2.5**
 
 ## Installation
 
-Download the [latest JAR](https://bintray.com/bandyer/Android-CoreAV/Android-CoreAV) or grab via Gradle:
+Download the [latest AAR](https://bintray.com/bandyer/Android-CoreAV/Android-CoreAV) or grab via Gradle:
 
 ```groovy
 implementation 'com.bandyer:core_av:1.3.0'
@@ -333,12 +333,12 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
 
 You can find the complete documentation in two different styles
 
-Kotlin Doc: [https://bandyer.github.io/Android-CoreAV/kDoc/](https://bandyer.github.io/Android-CoreAV/kDoc/)
+Kotlin Doc: [https://bandyer.github.io/Bandyer-Android-CoreAV/kDoc/](https://bandyer.github.io/Bandyer-Android-CoreAV/kDoc/)
 
-Java Doc: [https://bandyer.github.io/Android-CoreAV/jDoc/](https://bandyer.github.io/Android-CoreAV/jDoc/)
+Java Doc: [https://bandyer.github.io/Bandyer-Android-CoreAV/jDoc/](https://bandyer.github.io/Bandyer-Android-CoreAV/jDoc/)
 
 ## Support
-To get basic support please submit an [Issue](https://github.com/Bandyer/Android-CoreAV/issues) 
+To get basic support please submit an [Issue](https://github.com/Bandyer/Bandyer-Android-CoreAV/issues) 
 
 If you prefer commercial support, please contact [bandyer.com](https://bandyer.com) by mail: <mailto:info@bandyer.com>.
 
