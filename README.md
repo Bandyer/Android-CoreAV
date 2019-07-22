@@ -66,7 +66,9 @@ android {
     }
 }
 ```
-
+## Latest releases
+Java && AndroidX | v1.3.0
+Java && AppCompat | v1.2.5
 
 ## Installation
 
