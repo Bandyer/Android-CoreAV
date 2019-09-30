@@ -10,17 +10,17 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.viewpager.widget.ViewPager;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bandyer.android_audiosession.AudioOutputDeviceType;
 import com.bandyer.android_audiosession.AudioSession;
@@ -56,6 +56,8 @@ import com.bandyer.demo_core_av.design.bottom_sheet.picker.BottomListPicker;
 import com.bandyer.demo_core_av.room.adapter_items.PublisherItem;
 import com.bandyer.demo_core_av.room.adapter_items.StreamItem;
 import com.bandyer.demo_core_av.room.adapter_items.SubscriberItem;
+import com.bandyer.demo_core_av.room.utils.ScreenSharingUtils;
+import com.google.android.material.snackbar.Snackbar;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.viven.imagezoom.ImageZoomHelper;
 
@@ -187,7 +189,7 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     protected void onStop() {
         super.onStop();
         for (Capturer capturer : Capturer.Registry.getCapturers()) {
-            if (capturer instanceof CapturerScreenVideo)  return;
+            if (capturer instanceof CapturerScreenVideo) return;
 
             if (capturer instanceof CapturerAudioVideo)
                 ((CapturerAudioVideo) capturer).pause(true, false);
@@ -288,6 +290,7 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
         if (snackbar != null) snackbar.dismiss();
         Capturer.Registry.destroy();
         Room.Registry.destroyAll();
+        ScreenSharingUtils.hideScreenShareNotification();
     }
 
     @Override
@@ -393,9 +396,13 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
                 capturer = Capturer.Registry.get(this, new CapturerOptions.Builder().withAudio().withScreenShare());
                 break;
             case "Audio&Video Call":
-                capturer = (CapturerAudioVideo) Capturer.Registry.get(this, new CapturerOptions.Builder().withAudio().withCamera());
+                capturer = Capturer.Registry.get(this, new CapturerOptions.Builder().withAudio().withCamera());
                 break;
         }
+        
+        // on Android Q before launching a screenShare a notification MUST be shown as foreground service with mediaProjection
+        if (capturer instanceof CapturerScreenVideo) ScreenSharingUtils.showScreenShareNotification(this);
+
         Publisher publisher = room.create(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"));
         publisher.addPublisherObserver(RoomActivity.this)
                 .setCapturer(capturer);
@@ -418,6 +425,7 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     @Override
     public void onCapturerError(@NotNull Capturer capturer, @NotNull CapturerException reason) {
         Log.e("RoomActivity", "onCapturerError " + reason.getLocalizedMessage());
+        if (capturer instanceof CapturerScreenVideo) ScreenSharingUtils.hideScreenShareNotification();
     }
 
     @Override
@@ -436,12 +444,15 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     public void onLocalPublisherRemoved(@NonNull Publisher publisher) {
         Log.d("RoomActivity", "publisher" + publisher.getId() + " onLocalPublisherRemoved");
         pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
+        if (publisher.getStream().isScreenshare()) ScreenSharingUtils.hideScreenShareNotification();
+
     }
 
     @Override
     public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
         Log.e("RoomActivity", "publisher" + publisher.getId() + " onLocalPublisherError: " + reason);
         pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
+        if (publisher.getStream().isScreenshare()) ScreenSharingUtils.hideScreenShareNotification();
     }
 
     @Override

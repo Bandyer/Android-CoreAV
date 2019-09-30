@@ -10,19 +10,19 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.viewpager.widget.ViewPager;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bandyer.android_audiosession.AudioOutputDeviceType;
 import com.bandyer.android_audiosession.AudioSession;
@@ -56,6 +56,8 @@ import com.bandyer.demo_core_av.StatsPage;
 import com.bandyer.demo_core_av.StatsPagerAdapter;
 import com.bandyer.demo_core_av.room.adapter_items.PublisherItem;
 import com.bandyer.demo_core_av.room.adapter_items.SubscriberItem;
+import com.bandyer.demo_core_av.room.utils.ScreenSharingUtils;
+import com.google.android.material.snackbar.Snackbar;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
@@ -345,6 +347,7 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
         if (snackbar != null) snackbar.dismiss();
         Capturer.Registry.destroy();
         Room.Registry.destroyAll();
+        ScreenSharingUtils.hideScreenShareNotification();
     }
 
     @Override
@@ -356,6 +359,8 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     void onScreenShare() {
         if (room == null || room.getRoomState() != RoomState.CONNECTED) return;
+        // on Android Q before launching a screenShare a notification MUST be shown as foreground service with mediaProjection
+        ScreenSharingUtils.showScreenShareNotification(this);
         Capturer capturerScreenVideo = Capturer.Registry.get(this, new CapturerOptions.Builder().withAudio().withScreenShare());
         capturerScreenVideo.start();
     }
@@ -379,12 +384,11 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
 
     @Override
     public void onCapturerError(@NotNull Capturer capturer, @NotNull CapturerException error) {
-
+        if (capturer instanceof CapturerScreenVideo) ScreenSharingUtils.hideScreenShareNotification();
     }
 
     @Override
     public void onCapturerPaused(@NotNull Capturer capturer) {
-
     }
 
     // LOCAL PUBLISHER
@@ -398,12 +402,14 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     public void onLocalPublisherRemoved(@NonNull Publisher publisher) {
         Log.d("AutoPubSubRoomActivity", "publisher" + publisher.getId() + " onLocalPublisherRemoved");
         pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
+        if (publisher.getStream().isScreenshare()) ScreenSharingUtils.hideScreenShareNotification();
     }
 
     @Override
     public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
         Log.e("AutoPubSubRoomActivity", "publisher" + publisher.getId() + " onLocalPublisherError: " + reason);
         pubSubsAdapter.getItemAdapter().removeByIdentifier(publisher.getId().hashCode());
+        if (publisher.getStream().isScreenshare()) ScreenSharingUtils.hideScreenShareNotification();
     }
 
     @Override
