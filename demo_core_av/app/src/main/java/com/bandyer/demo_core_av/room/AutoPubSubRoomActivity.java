@@ -163,32 +163,18 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
     @Override
     protected void onResume() {
         super.onResume();
-        for (Capturer capturer : Capturer.Registry.getCapturers()) capturer.resume();
+        for (Capturer capturer : Capturer.Registry.getCapturers())
+            capturer.resume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         for (Capturer capturer : Capturer.Registry.getCapturers()) {
-            if (capturer instanceof CapturerScreenVideo) return;
-
+            if (capturer instanceof CapturerScreenVideo) continue;
             if (capturer instanceof CapturerAudioVideo)
                 ((CapturerAudioVideo) capturer).pause(true, false);
-            else
-                capturer.pause();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        for (Capturer capturer : Capturer.Registry.getCapturers()) {
-            if (capturer instanceof CapturerScreenVideo) return;
-
-            if (capturer instanceof CapturerAudioVideo)
-                ((CapturerAudioVideo) capturer).pause(true, false);
-            else
-                capturer.pause();
+            else capturer.pause();
         }
     }
 

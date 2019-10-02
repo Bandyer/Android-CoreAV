@@ -176,25 +176,10 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     protected void onPause() {
         super.onPause();
         for (Capturer capturer : Capturer.Registry.getCapturers()) {
-            if (capturer instanceof CapturerScreenVideo) return;
-
+            if (capturer instanceof CapturerScreenVideo) continue;
             if (capturer instanceof CapturerAudioVideo)
                 ((CapturerAudioVideo) capturer).pause(true, false);
-            else
-                capturer.pause();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        for (Capturer capturer : Capturer.Registry.getCapturers()) {
-            if (capturer instanceof CapturerScreenVideo) return;
-
-            if (capturer instanceof CapturerAudioVideo)
-                ((CapturerAudioVideo) capturer).pause(true, false);
-            else
-                capturer.pause();
+            else capturer.pause();
         }
     }
 
