@@ -77,7 +77,7 @@ Java && AppCompat <= **v1.2.5**
 Download the [latest AAR](https://bintray.com/bandyer/Android-CoreAV/Android-CoreAV) or grab via Gradle:
 
 ```groovy
-implementation 'com.bandyer:core_av:1.3.4'
+implementation 'com.bandyer:core_av:1.3.5'
 ```
 
 ## Quickstart
