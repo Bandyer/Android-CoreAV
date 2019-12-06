@@ -35,6 +35,15 @@ kristiyan</p>
 </tr>
 <tr>
 <td>
+<p><a href="on-local-publisher-update-stream.html">onLocalPublisherUpdateStream</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalPublisherUpdateStream</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.RoomObserver$onLocalPublisherUpdateStream(com.bandyer.core_av.publisher.Publisher)/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.publisher/-publisher/index.html"><span class="identifier">Publisher</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when the local publisher has updated his stream details</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="on-local-subscriber-joined.html">onLocalSubscriberJoined</a></p>
 </td>
 <td>
@@ -85,6 +94,15 @@ kristiyan</p>
 <td>
 <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onRemotePublisherUpdateStream</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.RoomObserver$onRemotePublisherUpdateStream(com.bandyer.core_av.Stream)/stream">stream</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">Stream</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Called when a remote stream has updated his stream in the room</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-room-actor-update-stream.html">onRoomActorUpdateStream</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onRoomActorUpdateStream</span><span class="symbol">(</span><span class="identifier" id="com.bandyer.core_av.room.RoomObserver$onRoomActorUpdateStream(com.bandyer.core_av.room.RoomActor)/roomActor">roomActor</span><span class="symbol">:</span>&nbsp;<a href="../-room-actor/index.html"><span class="identifier">RoomActor</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when the publisher/subscriber has updated his stream details</p>
 </td>
 </tr>
 <tr>
