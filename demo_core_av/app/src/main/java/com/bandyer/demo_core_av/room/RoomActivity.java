@@ -38,6 +38,7 @@ import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.PublisherObserver;
 import com.bandyer.core_av.publisher.PublisherState;
 import com.bandyer.core_av.room.Room;
+import com.bandyer.core_av.room.RoomActor;
 import com.bandyer.core_av.room.RoomObserver;
 import com.bandyer.core_av.room.RoomState;
 import com.bandyer.core_av.room.RoomToken;
@@ -226,6 +227,26 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
         Log.d("RoomActivity", "onRemotePublisherUpdateStream " + stream);
     }
 
+    @Override
+    public void onLocalPublisherAudioMuted(@NotNull Publisher publisher, boolean muted) {
+        Log.d("RoomActivity", "publisher" + publisher.getId() + " onLocalPublisherAudioMuted " + muted);
+    }
+
+    @Override
+    public void onLocalPublisherUpdateStream(@NotNull Publisher publisher) {
+        Log.d("RoomActivity", "publisher" + publisher.getId() + " onLocalPublisherUpdateStream");
+    }
+
+    @Override
+    public void onLocalPublisherVideoMuted(@NotNull Publisher publisher, boolean muted) {
+        Log.d("RoomActivity", "publisher" + publisher.getId() + " onLocalPublisherVideoMuted " + muted);
+    }
+
+    @Override
+    public void onRoomActorUpdateStream(@NotNull RoomActor roomActor) {
+        Log.d("RoomActivity", "roomActor" + roomActor.getId() + " onRoomActorUpdateStream " );
+    }
+
     @SuppressWarnings("unchecked")
     private void setAdapterListeners() {
         pubSubsAdapter.withEventHook(new PublisherItem.PublisherItemClickListener());
@@ -384,9 +405,10 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
                 capturer = Capturer.Registry.get(this, new CapturerOptions.Builder().withAudio().withCamera());
                 break;
         }
-        
+
         // on Android Q before launching a screenShare a notification MUST be shown as foreground service with mediaProjection
-        if (capturer instanceof CapturerScreenVideo) ScreenSharingUtils.showScreenShareNotification(this);
+        if (capturer instanceof CapturerScreenVideo)
+            ScreenSharingUtils.showScreenShareNotification(this);
 
         Publisher publisher = room.create(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"));
         publisher.addPublisherObserver(RoomActivity.this)
@@ -410,7 +432,8 @@ public class RoomActivity extends BaseActivity implements RoomObserver, Subscrib
     @Override
     public void onCapturerError(@NotNull Capturer capturer, @NotNull CapturerException reason) {
         Log.e("RoomActivity", "onCapturerError " + reason.getLocalizedMessage());
-        if (capturer instanceof CapturerScreenVideo) ScreenSharingUtils.hideScreenShareNotification();
+        if (capturer instanceof CapturerScreenVideo)
+            ScreenSharingUtils.hideScreenShareNotification();
     }
 
     @Override

@@ -40,6 +40,7 @@ import com.bandyer.core_av.publisher.Publisher;
 import com.bandyer.core_av.publisher.PublisherObserver;
 import com.bandyer.core_av.publisher.PublisherState;
 import com.bandyer.core_av.room.Room;
+import com.bandyer.core_av.room.RoomActor;
 import com.bandyer.core_av.room.RoomObserver;
 import com.bandyer.core_av.room.RoomState;
 import com.bandyer.core_av.room.RoomToken;
@@ -176,6 +177,26 @@ public class AutoPubSubRoomActivity extends BaseActivity implements RoomObserver
                 ((CapturerAudioVideo) capturer).pause(true, false);
             else capturer.pause();
         }
+    }
+
+    @Override
+    public void onRoomActorUpdateStream(@NotNull RoomActor roomActor) {
+        Log.d("AutoPubSubRoomActivity", "roomActor" + roomActor.getId() + " onRoomActorUpdateStream " );
+    }
+
+    @Override
+    public void onLocalPublisherAudioMuted(@NotNull Publisher publisher, boolean muted) {
+        Log.d("AutoPubSubRoomActivity", "publisher" + publisher.getId() + " onLocalPublisherAudioMuted " + muted);
+    }
+
+    @Override
+    public void onLocalPublisherUpdateStream(@NotNull Publisher publisher) {
+        Log.d("AutoPubSubRoomActivity", "publisher" + publisher.getId() + " onLocalPublisherUpdateStream");
+    }
+
+    @Override
+    public void onLocalPublisherVideoMuted(@NotNull Publisher publisher, boolean muted) {
+        Log.d("AutoPubSubRoomActivity", "publisher" + publisher.getId() + " onLocalPublisherVideoMuted " + muted);
     }
 
     @Override
