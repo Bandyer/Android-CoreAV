@@ -86,6 +86,7 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer) : Abstract
         override fun bindView(item: PublisherItem, payloads: List<Any>) {
             capturer = item.capturer
             publisher = item.publisher
+            containerView.preview.removeViewStatusObserver(viewStatusObserver)
             containerView.preview.addViewStatusObserver(viewStatusObserver)
             item.publisher.setView(containerView.preview, object : OnStreamListener {
                 override fun onReadyToPlay(view: StreamView, stream: Stream) {

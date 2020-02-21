@@ -100,6 +100,7 @@ class SubscriberItem(val subscriber: Subscriber) : AbstractItem<SubscriberItem, 
                     view.play(stream)
                 }
             })
+            containerView.preview.removeViewStatusObserver(viewStatusObserver)
             containerView.preview.addViewStatusObserver(viewStatusObserver)
             containerView.stream_id!!.text = item.subscriber.stream.streamId
             containerView.stream_id!!.isSelected = true
