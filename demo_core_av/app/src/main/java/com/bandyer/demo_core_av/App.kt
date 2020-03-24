@@ -31,15 +31,13 @@ class App : Application(), NetworkLogger {
         Stetho.initializeWithDefaults(this)
 
         stethoReporter = StethoReporter()
-        okHttpClient = OkHttpClient.Builder()
-                .addNetworkInterceptor(StethoInterceptor())
-                .build()
 
+        val okHttpClientBuilder = OkHttpClient.Builder().addNetworkInterceptor(StethoInterceptor())
         val gsonBuilder = GsonBuilder().setLenient()
-        gson = gsonBuilder.create()
 
         BandyerCoreAV.init(BandyerCoreAV.Builder(this)
-                .setHttpStack(okHttpClient!!)
+                .setHttpStackBuilder(okHttpClientBuilder)
+                .setGsonBuilder(gsonBuilder)
                 .setNetworkLogger(this)
                 .setLogger(object : CoreLogger(BaseLogger.ERROR) {
                     // add all the levels you want to debug
@@ -67,8 +65,10 @@ class App : Application(), NetworkLogger {
                         Log.e(tag, message)
                     }
                 })
-                .setGsonBuilder(gsonBuilder)
         )
+
+        gson = BandyerCoreAV.instance!!.gson
+        okHttpClient = BandyerCoreAV.instance!!.httpStack
     }
 
     override fun onConnected(tag: String, url: String) {
