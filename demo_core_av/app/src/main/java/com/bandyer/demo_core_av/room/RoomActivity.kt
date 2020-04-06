@@ -164,6 +164,14 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
         streamAdapter.itemAdapter.removeByIdentifier(stream.streamId.hashCode().toLong())
     }
 
+    override fun onLocalPublisherConnected(publisher: Publisher, connected: Boolean) {
+        Log.d("RoomActivity", "onLocalPublisherConnected $connected")
+    }
+
+    override fun onLocalSubscriberConnected(subscriber: Subscriber, connected: Boolean) {
+        Log.d("RoomActivity", "onLocalSubscriberConnected $connected")
+    }
+
     override fun onRemotePublisherUpdateStream(stream: Stream) {
         Log.d("RoomActivity", "onRemotePublisherUpdateStream $stream")
     }

@@ -324,6 +324,14 @@ class AutoPubSubRoomActivity : BaseActivity(), RoomObserver, SubscriberObserver,
         Log.d("AutoPubSubRoomActivity", "publisher" + publisher.id + " onLocalPublisherAdded")
     }
 
+    override fun onLocalPublisherConnected(publisher: Publisher, connected: Boolean) {
+        Log.d("AutoPubSubRoomActivity", "onLocalPublisherConnected $connected")
+    }
+
+    override fun onLocalSubscriberConnected(subscriber: Subscriber, connected: Boolean) {
+        Log.d("AutoPubSubRoomActivity", "onLocalSubscriberConnected $connected")
+    }
+
     // LOCAL SUBSCRIBER
     override fun onLocalSubscriberJoined(subscriber: Subscriber) {
         Log.d("AutoPubSubRoomActivity", "subscriber" + subscriber.id + " onLocalSubscriberJoined")

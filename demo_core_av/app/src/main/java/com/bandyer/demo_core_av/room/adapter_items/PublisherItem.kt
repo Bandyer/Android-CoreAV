@@ -59,23 +59,23 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer) : Abstract
 
         private val viewStatusObserver: OnViewStatusObserver = object : OnViewStatusObserver {
             override fun onRenderingPaused() {
-                Log.e("PubView", "onRenderingPaused")
+                Log.d("PubView", "onRenderingPaused")
             }
 
             override fun onRenderingStopped() {
-                Log.e("PubView", "onRenderingStopped")
+                Log.d("PubView", "onRenderingStopped")
             }
 
             override fun onRenderingStarted() {
-                Log.e("PubView", "onRenderingStarted")
+                Log.d("PubView", "onRenderingStarted")
             }
 
             override fun onViewSizeChanged(width: Int, height: Int, rotationDegree: Int) {
-                Log.e("PubView", "w " + width + " h " + height + "r " + rotationDegree)
+                Log.d("PubView", "w " + width + " h " + height + "r " + rotationDegree)
             }
 
             override fun onFirstFrameRendered() {
-                Log.e("PubView", "frameRendered")
+                Log.d("PubView", "frameRendered")
             }
 
             override fun onFrameCaptured(bitmap: Bitmap?) {

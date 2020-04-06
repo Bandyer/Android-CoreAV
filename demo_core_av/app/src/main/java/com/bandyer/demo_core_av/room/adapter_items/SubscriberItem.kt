@@ -65,23 +65,23 @@ class SubscriberItem(val subscriber: Subscriber) : AbstractItem<SubscriberItem, 
 
         private val viewStatusObserver: OnViewStatusObserver = object : OnViewStatusObserver {
             override fun onRenderingPaused() {
-                Log.e("SubView", "onRenderingPaused")
+                Log.d("SubView", "onRenderingPaused")
             }
 
             override fun onRenderingStopped() {
-                Log.e("SubView", "onRenderingStopped")
+                Log.d("SubView", "onRenderingStopped")
             }
 
             override fun onRenderingStarted() {
-                Log.e("SubView", "onRenderingStarted")
+                Log.d("SubView", "onRenderingStarted")
             }
 
             override fun onFirstFrameRendered() {
-                Log.e("SubView", "frameRendered")
+                Log.d("SubView", "frameRendered")
             }
 
             override fun onViewSizeChanged(width: Int, height: Int, rotationDegree: Int) {
-                Log.e("SubView", "w " + width + " h " + height + "r " + rotationDegree)
+                Log.d("SubView", "w " + width + " h " + height + "r " + rotationDegree)
             }
 
             override fun onFrameCaptured(bitmap: Bitmap?) {
