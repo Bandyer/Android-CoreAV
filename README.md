@@ -34,6 +34,7 @@ While **WebRTC** may be open and free it does not make your life as a developer 
 In Bandyer-CoreAV we have decided to represent a call with 3 Major entities.
 
 * **Room** - The place where publishers and subscribers meet.
+* **RoomActor** - An user of the room
 * **Publisher** - An user that wants to add his audio/video in the room.
 * **Subscriber** - An user that wants to see the audio/video of a publisher in the room.
 
@@ -168,11 +169,11 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         publisher.setView(publisherView, new OnStreamListener() {
             @Override
             public void onReadyToPlay(@NonNull StreamView view, @NonNull Stream stream) {
-                view.play(stream); 
+                view.play(stream);
             }
         });
     }
-    
+
     @Override
     public void onRoomReconnecting() {
         Log.d("Room", "onRoomReconnecting ...");
@@ -189,9 +190,10 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     @Override
-    public void onRoomError(@NonNull String reason) {
-        Log.e("Room", reason);
-    }
+    public void onRoomError(@NonNull String reason) { Log.e("Room", reason); }
+
+    @Override
+    public void onRoomActorUpdateStream(@NotNull RoomActor roomActor) { }
 
     @Override
     protected void onDestroy() {
@@ -200,19 +202,9 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
         Capturer.Registry.destroy();
         Room.Registry.destroyAll();
     }
-    
-    /**
-    * The local publisher has started to stream in the room
-    *
-    * @param publisher the publisher created in this activity
-    */
-    @Override
-    public void onLocalPublisherJoined(@NonNull Publisher publisher) {
-        Log.d("Publisher", "onLocalPublisherJoined");
-    }
 
     /**
-     * A new publisher has started to stream in the room
+     * A new publisher has entered the remote room
      * Let's add a subscriber for each published stream
      *
      * @param stream remote audio/video stream
@@ -221,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     public void onRemotePublisherJoined(@NonNull final Stream stream) {
         Log.d("Publisher", "onRemotePublisherJoined");
 
-        final Subscriber subscriber = new Subscriber(stream).addSubscribeObserver(this);
+        final Subscriber subscriber = room.create(stream).addSubscribeObserver(this);
         room.subscribe(subscriber);
 
         // set the view where the stream will be played
@@ -243,6 +235,16 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     /**
+     * The local publisher has joined the local room
+     *
+     * @param publisher the publisher created in this activity
+     */
+    @Override
+    public void onLocalPublisherJoined(@NonNull Publisher publisher) {
+        Log.d("Publisher", "onLocalPublisherJoined");
+    }
+
+    /**
      * If a remote publisher has left we should remove the subscriber related
      *
      * @param stream remote stream
@@ -257,75 +259,66 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
     }
 
     @Override
-    public void onLocalSubscriberAdded(@NonNull Subscriber subscriber) {
-        Log.d("Subscriber", "onLocalSubscriberAdded");
-    }
-
-    @Override
-    public void onLocalSubscriberError(@NonNull Subscriber subscriber, @NonNull String reason) {
-        Log.e("Subscriber", reason);
-    }
+    public void onRemotePublisherUpdateStream(@NonNull Stream stream) { }
+    
+    // LOCAL SUBSCRIBER EVENTS
     
     @Override
-    public void onLocalSubscriberStateChanged(Subscriber subscriber, SubscriberState subscriberState) {
-        Log.d("Subscriber", "onLocalSubscriberStateChanged" + subscriberState.name());
-    }
+    public void onLocalSubscriberAdded(@NonNull Subscriber subscriber) { }
 
     @Override
-    public void onLocalPublisherAdded(@NonNull Publisher publisher) {
-        Log.d("Publisher", "onLocalPublisherAdded");
-    }
+    public void onLocalSubscriberError(@NonNull Subscriber subscriber, @NonNull String reason) { }
+
+    @Override
+    public void onLocalSubscriberStateChanged(@NonNull Subscriber subscriber, @NonNull SubscriberState subscriberState) { }
+   
+    @Override
+    public void onLocalSubscriberJoined(@NonNull Subscriber subscriber) { }
+
+    @Override
+    public void onLocalSubscriberUpdateStream(@NonNull Subscriber subscriber) { }
+
+    @Override
+    public void onLocalSubscriberAudioMuted(@NonNull Subscriber subscriber, boolean muted) { }
+
+    @Override
+    public void onLocalSubscriberVideoMuted(@NonNull Subscriber subscriber, boolean muted) { }
+
+    @Override
+    public void onLocalSubscriberStartedScreenSharing(@NonNull Subscriber subscriber, boolean started) { }
+
+    @Override
+    public void onLocalSubscriberRemoved(@NotNull Subscriber subscriber) { }
+
+    @Override
+    public void onLocalSubscriberConnected(@NotNull Subscriber subscriber, boolean connected) { }
+
+    // LOCAL PUBLISHER EVENTS
     
     @Override
-    public void onLocalPublisherRemoved(@NonNull Publisher publisher) {
-        Log.d("Publisher", "onLocalPublisherRemoved");
-    }
-    
-    @Override
-    public void onLocalPublisherStateChanged(@NonNull Publisher publisher, @NonNull PublisherState publisherState) {
-        Log.d("Publisher", "onLocalPublisherStateChanged" + publisherState.name());
-    }
+    public void onLocalPublisherAudioMuted(@NotNull Publisher publisher, boolean muted) { }
 
     @Override
-    public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) {
-        Log.e("Publisher", reason);
-    }
+    public void onLocalPublisherConnected(@NotNull Publisher publisher, boolean connected) { }
 
     @Override
-    public void onLocalPublisherStateChanged(Publisher publisher, PublisherState publisherState) {
-        Log.d("Publisher", "onLocalPublisherStateChanged" + publisherState.name());
-    }
-    
-    @Override
-    public void onRemotePublisherUpdateStream(@NonNull Stream stream) {
-
-    }
+    public void onLocalPublisherVideoMuted(@NotNull Publisher publisher, boolean muted) { }
 
     @Override
-    public void onLocalSubscriberJoined(@NonNull Subscriber subscriber) {
-
-    }
+    public void onLocalPublisherUpdateStream(@NotNull Publisher publisher) { }
 
     @Override
-    public void onLocalSubscriberUpdateStream(@NonNull Subscriber subscriber) {
-
-    }
+    public void onLocalPublisherAdded(@NonNull Publisher publisher) { }
 
     @Override
-    public void onLocalSubscriberAudioMuted(@NonNull Subscriber subscriber, boolean muted) {
-
-    }
+    public void onLocalPublisherRemoved(@NonNull Publisher publisher) { }
 
     @Override
-    public void onLocalSubscriberVideoMuted(@NonNull Subscriber subscriber, boolean muted) {
-
-    }
+    public void onLocalPublisherStateChanged(@NonNull Publisher publisher, @NonNull PublisherState publisherState) { }
 
     @Override
-    public void onLocalSubscriberStartedScreenSharing(@NonNull Subscriber subscriber, boolean started) {
+    public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) { }
 
-    }
-    
 }
 ```
 
