@@ -1,3 +1,6 @@
+$dokka.format:html-as-java
+$dokka.linkExtension:html
+
 com.bandyer.core_av
 com.bandyer.core_av.capturer
 com.bandyer.core_av.capturer.audio

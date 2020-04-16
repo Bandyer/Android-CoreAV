@@ -1,0 +1,138 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Publisher - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.publisher</a>&nbsp;/&nbsp;<a href="./index.html">Publisher</a><br/>
+<br/>
+<h1>Publisher</h1>
+<code><span class="keyword">interface </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.room/-room-actor/index.html"><span class="identifier">com.bandyer.core_av.room.RoomActor</span></a><span class="symbol">, </span><a href="../-recordable/index.html"><span class="identifier">com.bandyer.core_av.publisher.Recordable</span></a></code>
+<p>This class represents a publisher of a stream.
+A publisher is someone who is in read-write mode on a stream.</p>
+<p>The publisher needs a capturer ( audio/video ) to be able to fetch the data to stream.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-default-impls/index.html">DefaultImpls</a></p>
+</td>
+<td>
+<code><span class="keyword">static</span> <span class="keyword">class </span><span class="identifier">DefaultImpls</span></code>
+<p>This class represents a publisher of a stream.
+A publisher is someone who is in read-write mode on a stream.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-publisher-observer.html">addPublisherObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">addPublisherObserver</span><span class="symbol">(</span><span class="identifier">observer</span><span class="symbol">:</span>&nbsp;<a href="../-publisher-observer/index.html"><span class="identifier">com.bandyer.core_av.publisher.PublisherObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a></code>
+<p>Method to add an observer to the publisher.
+The observer will be notified when a change has occurred</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-capturer.html">getCapturer</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getCapturer</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.capturer/-capturer/index.html"><span class="identifier">com.bandyer.core_av.capturer.Capturer</span></a></code>
+<p>The capturer this publisher is using to communicate in the room</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-observers.html">getObservers</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getObservers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">java.util.List</span><span class="symbol">&lt;</span><a href="../-publisher-observer/index.html"><span class="identifier">com.bandyer.core_av.publisher.PublisherObserver</span></a><span class="symbol">&gt;</span></code>
+<p>Method to get all publisher observers</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-options.html">getOptions</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getOptions</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.networking.models/-pub-sub-options/index.html"><span class="identifier">com.bandyer.core_av.networking.models.PubSubOptions</span></a></code>
+<p>Publishing options, by default the publishing is done with audio and video</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-state.html">getState</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getState</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-publisher-state/index.html"><span class="identifier">com.bandyer.core_av.publisher.PublisherState</span></a></code>
+<p>Publisher state, by default is set to UN_PUBLISHED</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-user.html">getUser</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getUser</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av/-base-user/index.html"><span class="identifier">com.bandyer.core_av.BaseUser</span></a></code>
+<p>User publishing</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="release-view.html">releaseView</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">releaseView</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to stop a view attached to this publisher</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-publisher-observer.html">removePublisherObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">removePublisherObserver</span><span class="symbol">(</span><span class="identifier">observer</span><span class="symbol">:</span>&nbsp;<a href="../-publisher-observer/index.html"><span class="identifier">com.bandyer.core_av.publisher.PublisherObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a></code>
+<p>Method to remove an observer, usually used when not interested anymore in any event coming from the publisher.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-bandwidth-throttling-strategy.html">setBandwidthThrottlingStrategy</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setBandwidthThrottlingStrategy</span><span class="symbol">(</span><span class="identifier">bandwidthThrottlingStrategy</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.peerconnection.bandwidth-throttling/-abstract-bandwidth-throttling-strategy/index.html"><span class="identifier">com.bandyer.core_av.peerconnection.bandwidthThrottling.AbstractBandwidthThrottlingStrategy</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a></code>
+<p>Method used to set a cap on the internet usage</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-capturer.html">setCapturer</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setCapturer</span><span class="symbol">(</span><span class="identifier">capturer</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-capturer/index.html"><span class="identifier">com.bandyer.core_av.capturer.Capturer</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a></code>
+<p>Method to set the capturer to be used</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setCapturer</span><span class="symbol">(</span><span class="identifier">capturer</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.capturer/-capturer/index.html"><span class="identifier">com.bandyer.core_av.capturer.Capturer</span></a><span class="symbol">, </span><span class="identifier">muteOption</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.networking.models/-mute-stream-option/index.html"><span class="identifier">com.bandyer.core_av.networking.models.MuteStreamOption</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a></code>
+<p>Method to set the capturer to be used, and the additional options such as mute a channel</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-view.html">setView</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setView</span><span class="symbol">(</span><span class="identifier">view</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.view/-stream-view/index.html"><span class="identifier">com.bandyer.core_av.view.StreamView</span></a><span class="symbol">, </span><span class="identifier">streamListener</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-on-stream-listener/index.html"><span class="identifier">com.bandyer.core_av.OnStreamListener</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a></code>
+<p>Utility method to attach a view to the publisher</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

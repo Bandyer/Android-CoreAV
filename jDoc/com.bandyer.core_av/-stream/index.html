@@ -1,0 +1,229 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Stream - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av</a>&nbsp;/&nbsp;<a href="./index.html">Stream</a><br/>
+<br/>
+<h1>Stream</h1>
+<code><span class="keyword">class </span><span class="identifier">Stream</span></code>
+<p>This class represents the stream being transmitted.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">Stream</span><span class="symbol">(</span><span class="identifier">isRemote</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="equals.html">equals</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">equals</span><span class="symbol">(</span><span class="identifier">other</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.Object</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Equality method based on the stream identifier</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-attributes.html">getAttributes</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getAttributes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">java.util.Map</span><span class="symbol">&lt;</span><span class="identifier">java.lang.String</span><span class="symbol">,</span>&nbsp;<span class="identifier">java.lang.Object</span><span class="symbol">&gt;</span></code>
+<p>Stream additional attributes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-has-audio.html">getHasAudio</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getHasAudio</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Represents if the stream has an audio channel attached</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-has-data.html">getHasData</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getHasData</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Represents if the stream has a data channel attached</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-has-video.html">getHasVideo</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getHasVideo</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Represents if the stream has a video channel attached</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-room-user.html">getRoomUser</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getRoomUser</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.room/-room-user/index.html"><span class="identifier">com.bandyer.core_av.room.RoomUser</span></a></code>
+<p>The user this stream refers to</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-stream-id.html">getStreamId</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getStreamId</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">java.lang.String</span></code>
+<p>Unique id which identifies the stream</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="hash-code.html">hashCode</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>HashCode based on the stream identifier</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-audio-muted.html">isAudioMuted</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isAudioMuted</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Represents if the stream has the audio channel muted</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-remote.html">isRemote</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isRemote</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>represents if the stream has been created from this device or not</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-screenshare.html">isScreenshare</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isScreenshare</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Inquire if the stream is a screenshare
+True if is a screenshare, false otherwise</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-video-muted.html">isVideoMuted</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isVideoMuted</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Represents if the stream has the video channel muted</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-attributes$module.html">setAttributes$module</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setAttributes$module</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.util.Map</span><span class="symbol">&lt;</span><span class="identifier">java.lang.String</span><span class="symbol">,</span>&nbsp;<span class="identifier">java.lang.Object</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Stream additional attributes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-audio-muted$module.html">setAudioMuted$module</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setAudioMuted$module</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Represents if the stream has the audio channel muted</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-has-audio$module.html">setHasAudio$module</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setHasAudio$module</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Represents if the stream has an audio channel attached</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-has-data$module.html">setHasData$module</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setHasData$module</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Represents if the stream has a data channel attached</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-has-video$module.html">setHasVideo$module</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setHasVideo$module</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Represents if the stream has a video channel attached</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-room-user$module.html">setRoomUser$module</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setRoomUser$module</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.room/-room-user/index.html"><span class="identifier">com.bandyer.core_av.room.RoomUser</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>The user this stream refers to</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-screenshare$module.html">setScreenshare$module</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setScreenshare$module</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Inquire if the stream is a screenshare
+True if is a screenshare, false otherwise</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-stream-id$module.html">setStreamId$module</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setStreamId$module</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Unique id which identifies the stream</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-video-muted$module.html">setVideoMuted$module</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setVideoMuted$module</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Represents if the stream has the video channel muted</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="to-string.html">toString</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">java.lang.String</span></code>
+<p>Method returns a string representation of the stream.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

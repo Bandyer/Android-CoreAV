@@ -1,0 +1,275 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>StreamView - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.view</a>&nbsp;/&nbsp;<a href="./index.html">StreamView</a><br/>
+<br/>
+<h1>StreamView</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">StreamView</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">android.widget.FrameLayout</span></code>
+<p>Abstract view which extends FrameLayout and is used to render the stream of the subscriber and publisher</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">StreamView</span><span class="symbol">(</span><span class="identifier">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">android.content.Context</span><span class="symbol">, </span><span class="identifier">attrs</span><span class="symbol">:</span>&nbsp;<span class="identifier">android.util.AttributeSet</span><span class="symbol">, </span><span class="identifier">defStyleAttr</span><span class="symbol">:</span>&nbsp;<span class="identifier">int</span><span class="symbol">)</span></code><br/>
+<code><span class="identifier">StreamView</span><span class="symbol">(</span><span class="identifier">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">android.content.Context</span><span class="symbol">, </span><span class="identifier">attrs</span><span class="symbol">:</span>&nbsp;<span class="identifier">android.util.AttributeSet</span><span class="symbol">)</span></code><br/>
+<code><span class="identifier">StreamView</span><span class="symbol">(</span><span class="identifier">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">android.content.Context</span><span class="symbol">)</span></code>
+<p>Abstract view which extends FrameLayout and is used to render the stream of the subscriber and publisher</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-view-status-observer.html">addViewStatusObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addViewStatusObserver</span><span class="symbol">(</span><span class="identifier">viewObserver</span><span class="symbol">:</span>&nbsp;<a href="../-on-view-status-observer/index.html"><span class="identifier">com.bandyer.core_av.view.OnViewStatusObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Observer the view status such as size changes, frame capture or frame rendering</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="capture-frame.html">captureFrame</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">captureFrame</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Capture frame from the view
+The frame will be forwarded to all status observers of the view</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="disable-audio-playing.html">disableAudioPlaying</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">disableAudioPlaying</span><span class="symbol">(</span><span class="identifier">disable</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to enable/disable the audio play</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="disable-video-rendering.html">disableVideoRendering</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">disableVideoRendering</span><span class="symbol">(</span><span class="identifier">disable</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to enable/disable the video</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-current-scale-type.html">getCurrentScaleType</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getCurrentScaleType</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-scale-type/index.html"><span class="identifier">com.bandyer.core_av.view.ScaleType</span></a></code>
+<p>current view-port scale type, by default is FIT</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-frame-height.html">getFrameHeight</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getFrameHeight</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Represents the original frame height rendered</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-frame-rotation.html">getFrameRotation</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getFrameRotation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Represents the original frame rotation rendered</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-frame-width.html">getFrameWidth</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getFrameWidth</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Represents the original frame width rendered</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-audio-playing.html">isAudioPlaying</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isAudioPlaying</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>True if the view is currently playing audio</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-rendering.html">isRendering</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isRendering</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>True if the view is currently rendering a stream</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="pause.html">pause</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">pause</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to put on pause the video streaming</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="play.html">play</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">play</span><span class="symbol">(</span><span class="identifier">stream</span><span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">com.bandyer.core_av.Stream</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to play the stream on the view</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-all-observers.html">removeAllObservers</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeAllObservers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Remove all observers</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-view-status-observer.html">removeViewStatusObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeViewStatusObserver</span><span class="symbol">(</span><span class="identifier">viewObserver</span><span class="symbol">:</span>&nbsp;<a href="../-on-view-status-observer/index.html"><span class="identifier">com.bandyer.core_av.view.OnViewStatusObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Remove the observer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="resume.html">resume</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">resume</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to resume the video streaming</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-audio-playing.html">setAudioPlaying</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setAudioPlaying</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>True if the view is currently playing audio</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-current-scale-type.html">setCurrentScaleType</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setCurrentScaleType</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<a href="../-scale-type/index.html"><span class="identifier">com.bandyer.core_av.view.ScaleType</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>current view-port scale type, by default is FIT</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-frame-height.html">setFrameHeight</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setFrameHeight</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">int</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Represents the original frame height rendered</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-frame-rotation.html">setFrameRotation</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setFrameRotation</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">int</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Represents the original frame rotation rendered</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-frame-width.html">setFrameWidth</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setFrameWidth</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">int</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Represents the original frame width rendered</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-mirror.html">setMirror</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setMirror</span><span class="symbol">(</span><span class="identifier">enable</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method used to enable mirroring of the video stream.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-rendering.html">setRendering</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setRendering</span><span class="symbol">(</span><span class="identifier">p</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>True if the view is currently rendering a stream</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-scale-type.html">setScaleType</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setScaleType</span><span class="symbol">(</span><span class="identifier">scaleType</span><span class="symbol">:</span>&nbsp;<a href="../-scale-type/index.html"><span class="identifier">com.bandyer.core_av.view.ScaleType</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to change the scale type of the preview</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="stop.html">stop</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">stop</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to stop the video streaming</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-bandyer-view/index.html">BandyerView</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">BandyerView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">com.bandyer.core_av.view.StreamView</span></a></code>
+<p>Custom view which extends FrameLayout and is used to render the stream of the subscriber and publisher</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-video-stream-view/index.html">VideoStreamView</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">VideoStreamView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">com.bandyer.core_av.view.StreamView</span></a><span class="symbol">, </span><span class="identifier">com.bandyer.android_common.RoundedView</span></code>
+<p>Custom which extends FrameLayout and is used to render the stream of the subscriber and publisher using TextureView as rendering view</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

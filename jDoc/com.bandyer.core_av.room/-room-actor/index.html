@@ -1,0 +1,123 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RoomActor - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.room</a>&nbsp;/&nbsp;<a href="./index.html">RoomActor</a><br/>
+<br/>
+<h1>RoomActor</h1>
+<code><span class="keyword">interface </span><span class="identifier">RoomActor</span></code>
+<p>A room actor is an entity representing an object that has specific role in the room.</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-default-impls/index.html">DefaultImpls</a></p>
+</td>
+<td>
+<code><span class="keyword">static</span> <span class="keyword">class </span><span class="identifier">DefaultImpls</span></code>
+<p>A room actor is an entity representing an object that has specific role in the room.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="disable-audio.html">disableAudio</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">disableAudio</span><span class="symbol">(</span><span class="identifier">disable</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to disable/enable the audio publishing/subscribing</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="disable-video.html">disableVideo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">disableVideo</span><span class="symbol">(</span><span class="identifier">disable</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to disable/enable the video publishing/subscribing</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-id.html">getId</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getId</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">java.lang.String</span></code>
+<p>Unique identifier</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-stream.html">getStream</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getStream</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av/-stream/index.html"><span class="identifier">com.bandyer.core_av.Stream</span></a></code>
+<p>Stream binded to this actor</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-view.html">getView</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getView</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bandyer.core_av.view/-stream-view/index.html"><span class="identifier">com.bandyer.core_av.view.StreamView</span></a></code>
+<p>Utility method to get the view where the actor will render</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-audio-disabled.html">isAudioDisabled</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isAudioDisabled</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Indicates if audio is disabled/enabled</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-video-disabled.html">isVideoDisabled</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isVideoDisabled</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Indicates if video is disabled/enabled</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.bandyer.core_av.publisher/-publisher/index.html">Publisher</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">com.bandyer.core_av.room.RoomActor</span></a><span class="symbol">, </span><a href="../../com.bandyer.core_av.publisher/-recordable/index.html"><span class="identifier">com.bandyer.core_av.publisher.Recordable</span></a></code>
+<p>This class represents a publisher of a stream.
+A publisher is someone who is in read-write mode on a stream.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.bandyer.core_av.subscriber/-subscriber/index.html">Subscriber</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Subscriber</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">com.bandyer.core_av.room.RoomActor</span></a></code>
+<p>This class represents a subscriber to a stream.
+A subscriber is someone who is in read-only mode on a stream.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

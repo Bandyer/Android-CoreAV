@@ -1,0 +1,167 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>CoreLogger - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.utils.logging</a>&nbsp;/&nbsp;<a href="./index.html">CoreLogger</a><br/>
+<br/>
+<h1>CoreLogger</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CoreLogger</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">com.bandyer.android_common.logging.PriorityLogger</span></code>
+<p>CoreAV logger abstraction</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-companion/index.html">Companion</a></p>
+</td>
+<td>
+<code><span class="keyword">static</span> <span class="keyword">class </span><span class="identifier">Companion</span></code>
+<p>CoreLogger</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">CoreLogger</span><span class="symbol">(</span><span class="identifier">priority</span><span class="symbol">:</span>&nbsp;<span class="identifier">int</span><span class="symbol">)</span></code><br/>
+<code><span class="identifier">CoreLogger</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="debug.html">debug</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">debug</span><span class="symbol">(</span><span class="identifier">tag</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">, </span><span class="identifier">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="error.html">error</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">error</span><span class="symbol">(</span><span class="identifier">tag</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">, </span><span class="identifier">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="get-target.html">getTarget</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getTarget</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Logging target it may log one or more targets concatenated ( ex. PUBLISHER | SUBSCRIBER )</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="info.html">info</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">info</span><span class="symbol">(</span><span class="identifier">tag</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">, </span><span class="identifier">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="verbose.html">verbose</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">verbose</span><span class="symbol">(</span><span class="identifier">tag</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">, </span><span class="identifier">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="warn.html">warn</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">warn</span><span class="symbol">(</span><span class="identifier">tag</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">, </span><span class="identifier">message</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Other members</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-c-a-p-t-u-r-e-r.html">CAPTURER</a></p>
+</td>
+<td>
+<code><span class="identifier">CAPTURER</span></code>
+<p>Audio/Video capturer target</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-companion.html">Companion</a></p>
+</td>
+<td>
+<code><span class="identifier">Companion</span></code>
+<p>CoreLogger</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-p-e-e-r_-c-o-n-n-e-c-t-i-o-n.html">PEER_CONNECTION</a></p>
+</td>
+<td>
+<code><span class="identifier">PEER_CONNECTION</span></code>
+<p>PeerConnection target</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-p-u-b-l-i-s-h-e-r.html">PUBLISHER</a></p>
+</td>
+<td>
+<code><span class="identifier">PUBLISHER</span></code>
+<p>Publisher target</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-r-o-o-m.html">ROOM</a></p>
+</td>
+<td>
+<code><span class="identifier">ROOM</span></code>
+<p>Room target</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-s-t-r-e-a-m_-v-i-d-e-o_-v-i-e-w.html">STREAM_VIDEO_VIEW</a></p>
+</td>
+<td>
+<code><span class="identifier">STREAM_VIDEO_VIEW</span></code>
+<p>Stream video view</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-s-u-b-s-c-r-i-b-e-r.html">SUBSCRIBER</a></p>
+</td>
+<td>
+<code><span class="identifier">SUBSCRIBER</span></code>
+<p>Subscriber target</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-w-e-b-r-t-c.html">WEBRTC</a></p>
+</td>
+<td>
+<code><span class="identifier">WEBRTC</span></code>
+<p>Stream video view</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

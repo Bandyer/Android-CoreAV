@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Capturer.Registry - </title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">com.bandyer.core_av.capturer</a>&nbsp;/&nbsp;<a href="../index.html">Capturer</a>&nbsp;/&nbsp;<a href="./index.html">Registry</a><br/>
+<br/>
+<h1>Registry</h1>
+<code><span class="keyword">static</span> <span class="keyword">class </span><span class="identifier">Registry</span></code>
+<p>Registry to create capturers
+Capturers are limited by hardware, there can be only one capturer for camera and screen, while there can be multiple capturers for audio.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-capturer-observer.html">addCapturerObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addCapturerObserver</span><span class="symbol">(</span><span class="identifier">observer</span><span class="symbol">:</span>&nbsp;<a href="../../-capturer-observer/index.html"><span class="identifier">com.bandyer.core_av.capturer.CapturerObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to add an observer to the registry</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="destroy.html">destroy</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">destroy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Destroy all capturers and free all resources</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get.html">get</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">get</span><span class="symbol">(</span><span class="identifier">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">androidx.appcompat.app.AppCompatActivity</span><span class="symbol">, </span><span class="identifier">options</span><span class="symbol">:</span>&nbsp;<a href="../../-capturer-options/index.html"><span class="identifier">com.bandyer.core_av.capturer.CapturerOptions</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../index.html"><span class="identifier">com.bandyer.core_av.capturer.Capturer</span></a></code>
+<p>Get a capturer based on the options</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-audio-capturer-requests-count.html">getAudioCapturerRequestsCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getAudioCapturerRequestsCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Number of requests for the audio capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-audio-video-camera-capturer-request-count.html">getAudioVideoCameraCapturerRequestCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getAudioVideoCameraCapturerRequestCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Number of requests for the audio&video camera capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-audio-video-screen-capturer-request-count.html">getAudioVideoScreenCapturerRequestCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getAudioVideoScreenCapturerRequestCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Number of requests for the  audio&video screen capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-camera-capturer-requests-count.html">getCameraCapturerRequestsCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getCameraCapturerRequestsCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Number of requests for the camera capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-capturers.html">getCapturers</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getCapturers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">java.util.List</span><span class="symbol">&lt;</span><a href="../index.html"><span class="identifier">com.bandyer.core_av.capturer.Capturer</span></a><span class="symbol">&gt;</span></code>
+<p>Returns the list of all capturers requested</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-screen-capturer-requests-count.html">getScreenCapturerRequestsCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getScreenCapturerRequestsCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Number of requests for the screen capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="release.html">release</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">release</span><span class="symbol">(</span><span class="identifier">capturer</span><span class="symbol">:</span>&nbsp;<a href="../index.html"><span class="identifier">com.bandyer.core_av.capturer.Capturer</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Release a capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="release-by-options.html">releaseByOptions</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">releaseByOptions</span><span class="symbol">(</span><span class="identifier">options</span><span class="symbol">:</span>&nbsp;<a href="../../-capturer-options/index.html"><span class="identifier">com.bandyer.core_av.capturer.CapturerOptions</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Release a capturer</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-all-observers.html">removeAllObservers</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeAllObservers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to remove all observers</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-capturer-observer.html">removeCapturerObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeCapturerObserver</span><span class="symbol">(</span><span class="identifier">observer</span><span class="symbol">:</span>&nbsp;<a href="../../-capturer-observer/index.html"><span class="identifier">com.bandyer.core_av.capturer.CapturerObserver</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to remove an observer from the registry</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

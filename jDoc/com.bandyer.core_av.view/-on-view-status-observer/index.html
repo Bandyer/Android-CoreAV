@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>OnViewStatusObserver - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.view</a>&nbsp;/&nbsp;<a href="./index.html">OnViewStatusObserver</a><br/>
+<br/>
+<h1>OnViewStatusObserver</h1>
+<code><span class="keyword">interface </span><span class="identifier">OnViewStatusObserver</span></code>
+<p>View status change observer</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<p><strong>Since</strong><br/>
+v1.1.0</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="on-first-frame-rendered.html">onFirstFrameRendered</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onFirstFrameRendered</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method called when the view has started playing</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-frame-captured.html">onFrameCaptured</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onFrameCaptured</span><span class="symbol">(</span><span class="identifier">bitmap</span><span class="symbol">:</span>&nbsp;<span class="identifier">android.graphics.Bitmap</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method called when a frame has been captured</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-rendering-paused.html">onRenderingPaused</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onRenderingPaused</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method called when the view has paused rendering</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-rendering-started.html">onRenderingStarted</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onRenderingStarted</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method called when the view has started rendering</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-rendering-stopped.html">onRenderingStopped</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onRenderingStopped</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method called when the view has stopped rendering</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-view-size-changed.html">onViewSizeChanged</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onViewSizeChanged</span><span class="symbol">(</span><span class="identifier">width</span><span class="symbol">:</span>&nbsp;<span class="identifier">int</span><span class="symbol">, </span><span class="identifier">height</span><span class="symbol">:</span>&nbsp;<span class="identifier">int</span><span class="symbol">, </span><span class="identifier">rotationDegree</span><span class="symbol">:</span>&nbsp;<span class="identifier">int</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method called when the view frame has changed size/orientation</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

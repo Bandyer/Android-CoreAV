@@ -1,0 +1,92 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AbstractBandwidthThrottlingStrategy - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.peerconnection.bandwidthThrottling</a>&nbsp;/&nbsp;<a href="./index.html">AbstractBandwidthThrottlingStrategy</a><br/>
+<br/>
+<h1>AbstractBandwidthThrottlingStrategy</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractBandwidthThrottlingStrategy</span></code>
+<p>Abstract implementation for Bandwidth throttling</p>
+<p><strong>Since</strong><br/>
+v1.0.1</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-track/index.html">Track</a></p>
+</td>
+<td>
+<code><span class="keyword">static</span> <span class="keyword">class </span><span class="identifier">Track</span></code>
+<p>Track to throttle</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">AbstractBandwidthThrottlingStrategy</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Abstract implementation for Bandwidth throttling</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="max-bandwidth.html">maxBandwidth</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">maxBandwidth</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Method to choose the max bandwidth allowed for the track</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="track-to-throttle.html">trackToThrottle</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">trackToThrottle</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="-track/index.html"><span class="identifier">com.bandyer.core_av.peerconnection.bandwidthThrottling.AbstractBandwidthThrottlingStrategy.Track</span></a></code>
+<p>Method to choose the track to throttle</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-fixed-bandwidth-throttling-strategy/index.html">FixedBandwidthThrottlingStrategy</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FixedBandwidthThrottlingStrategy</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">com.bandyer.core_av.peerconnection.bandwidthThrottling.AbstractBandwidthThrottlingStrategy</span></a></code>
+<p>Class to change the bandwidth of a AV track</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-network-aware-bandwidth-throttling-strategy/index.html">NetworkAwareBandwidthThrottlingStrategy</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">NetworkAwareBandwidthThrottlingStrategy</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">com.bandyer.core_av.peerconnection.bandwidthThrottling.AbstractBandwidthThrottlingStrategy</span></a></code>
+<p>Class to change the bandwidth based on the current type of connection</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

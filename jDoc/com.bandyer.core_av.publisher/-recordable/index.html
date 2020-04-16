@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Recordable - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.publisher</a>&nbsp;/&nbsp;<a href="./index.html">Recordable</a><br/>
+<br/>
+<h1>Recordable</h1>
+<code><span class="keyword">interface </span><span class="identifier">Recordable</span></code>
+<p>Recordable interface</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<p><strong>Since</strong><br/>
+v1.0.12</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-can-record.html">getCanRecord</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getCanRecord</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Indicates whether the receiver can be recorded, or not.
+<strong>Note:</strong> Recording is supported in ROUTED rooms only.
+true if the receiver can be recorded, false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-can-start-recorder.html">getCanStartRecorder</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getCanStartRecorder</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Indicates whether the receiver can start the recorder, or not.
+The recorder can be started only when in routed rooms and in connected state.
+true if the receiver can start the recorder, false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-recording-id.html">getRecordingId</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getRecordingId</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">java.lang.String</span></code>
+<p>Recording identifcation</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-recording.html">isRecording</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">isRecording</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">boolean</span></code>
+<p>Indicates whether the receiver is recording, or not.
+true if the receiver is recording, false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="start-recording.html">startRecording</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">startRecording</span><span class="symbol">(</span><span class="identifier">listener</span><span class="symbol">:</span>&nbsp;<a href="../-recording-listener/index.html"><span class="identifier">com.bandyer.core_av.publisher.RecordingListener</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Sends a request to the room host asking to start the recording of the published stream.
+Upon success or failure the observers will be notified on the respective callbacks.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="stop-recording.html">stopRecording</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">stopRecording</span><span class="symbol">(</span><span class="identifier">listener</span><span class="symbol">:</span>&nbsp;<a href="../-recording-listener/index.html"><span class="identifier">com.bandyer.core_av.publisher.RecordingListener</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Sends a request to the room host asking to stop the recording of the published stream.
+Upon success or failure the observers will be notified on the respective callbacks.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-publisher/index.html">Publisher</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Publisher</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bandyer.core_av.room/-room-actor/index.html"><span class="identifier">com.bandyer.core_av.room.RoomActor</span></a><span class="symbol">, </span><a href="./index.html"><span class="identifier">com.bandyer.core_av.publisher.Recordable</span></a></code>
+<p>This class represents a publisher of a stream.
+A publisher is someone who is in read-write mode on a stream.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

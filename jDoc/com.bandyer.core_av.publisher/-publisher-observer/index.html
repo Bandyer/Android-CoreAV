@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PublisherObserver - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.publisher</a>&nbsp;/&nbsp;<a href="./index.html">PublisherObserver</a><br/>
+<br/>
+<h1>PublisherObserver</h1>
+<code><span class="keyword">interface </span><span class="identifier">PublisherObserver</span></code>
+<p>Class observer on the publisher</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="on-local-publisher-added.html">onLocalPublisherAdded</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalPublisherAdded</span><span class="symbol">(</span><span class="identifier">publisher</span><span class="symbol">:</span>&nbsp;<a href="../-publisher/index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Called when a local publisher has joined the room</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-local-publisher-audio-muted.html">onLocalPublisherAudioMuted</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalPublisherAudioMuted</span><span class="symbol">(</span><span class="identifier">publisher</span><span class="symbol">:</span>&nbsp;<a href="../-publisher/index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a><span class="symbol">, </span><span class="identifier">muted</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Called when a publisher has muted/unmuted his audio</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-local-publisher-connected.html">onLocalPublisherConnected</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalPublisherConnected</span><span class="symbol">(</span><span class="identifier">publisher</span><span class="symbol">:</span>&nbsp;<a href="../-publisher/index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a><span class="symbol">, </span><span class="identifier">connected</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Called when a local publisher is connected</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-local-publisher-error.html">onLocalPublisherError</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalPublisherError</span><span class="symbol">(</span><span class="identifier">publisher</span><span class="symbol">:</span>&nbsp;<a href="../-publisher/index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a><span class="symbol">, </span><span class="identifier">reason</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Called when an error occurred with the publisher</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-local-publisher-state-changed.html">onLocalPublisherStateChanged</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalPublisherStateChanged</span><span class="symbol">(</span><span class="identifier">publisher</span><span class="symbol">:</span>&nbsp;<a href="../-publisher/index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a><span class="symbol">, </span><span class="identifier">state</span><span class="symbol">:</span>&nbsp;<a href="../-publisher-state/index.html"><span class="identifier">com.bandyer.core_av.publisher.PublisherState</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Called when a local publisher has changed it's state</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-local-publisher-video-muted.html">onLocalPublisherVideoMuted</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onLocalPublisherVideoMuted</span><span class="symbol">(</span><span class="identifier">publisher</span><span class="symbol">:</span>&nbsp;<a href="../-publisher/index.html"><span class="identifier">com.bandyer.core_av.publisher.Publisher</span></a><span class="symbol">, </span><span class="identifier">muted</span><span class="symbol">:</span>&nbsp;<span class="identifier">boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Called when a publisher has muted his video</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
