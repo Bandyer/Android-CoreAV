@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>VideoFrame - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.bandyer.core_av.capturer.video</a>&nbsp;/&nbsp;<a href="./index.html">VideoFrame</a><br/>
+<br/>
+<h1>VideoFrame</h1>
+<code><span class="keyword">interface </span><span class="identifier">VideoFrame</span></code>
+<p>Interface defining a single frame of a video stream</p>
+<p><strong>Author</strong><br/>
+kristiyan</p>
+<p><strong>Since</strong><br/>
+v1.5.17</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-default-impls/index.html">DefaultImpls</a></p>
+</td>
+<td>
+<code><span class="keyword">static</span> <span class="keyword">class </span><span class="identifier">DefaultImpls</span></code>
+<p>Interface defining a single frame of a video stream</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get.html">get</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">get</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">android.graphics.YuvImage</span></code>
+<p>Returns the video frame</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-height.html">getHeight</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getHeight</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Height of the image</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-width.html">getWidth</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getWidth</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">int</span></code>
+<p>Width of the image</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="write-to-bitmap.html">writeToBitmap</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">writeToBitmap</span><span class="symbol">(</span><span class="identifier">cutRegion</span><span class="symbol">:</span>&nbsp;<span class="identifier">android.graphics.Rect</span><span class="symbol">, </span><span class="identifier">quality</span><span class="symbol">:</span>&nbsp;<span class="identifier">int</span><span class="symbol">, </span><span class="identifier">onSuccess</span><span class="symbol">:</span>&nbsp;<span class="identifier">kotlin.jvm.functions.Function1</span><span class="symbol">&lt;</span><span class="identifier">? super android.graphics.Bitmap</span><span class="symbol">,</span>&nbsp;<span class="identifier">kotlin.Unit</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">onError</span><span class="symbol">:</span>&nbsp;<span class="identifier">kotlin.jvm.functions.Function1</span><span class="symbol">&lt;</span><span class="identifier">? super java.lang.String</span><span class="symbol">,</span>&nbsp;<span class="identifier">kotlin.Unit</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to convert the frame to Bitmap of type JPEG</p>
+<code><span class="keyword">fun </span><span class="identifier">writeToBitmap</span><span class="symbol">(</span><span class="identifier">onSuccess</span><span class="symbol">:</span>&nbsp;<span class="identifier">kotlin.jvm.functions.Function1</span><span class="symbol">&lt;</span><span class="identifier">? super android.graphics.Bitmap</span><span class="symbol">,</span>&nbsp;<span class="identifier">kotlin.Unit</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">onError</span><span class="symbol">:</span>&nbsp;<span class="identifier">kotlin.jvm.functions.Function1</span><span class="symbol">&lt;</span><span class="identifier">? super java.lang.String</span><span class="symbol">,</span>&nbsp;<span class="identifier">kotlin.Unit</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to convert the frame to Bitmap of type JPEG with 80% compression rate</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="write-to-file.html">writeToFile</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">writeToFile</span><span class="symbol">(</span><span class="identifier">path</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">, </span><span class="identifier">cutRegion</span><span class="symbol">:</span>&nbsp;<span class="identifier">android.graphics.Rect</span><span class="symbol">, </span><span class="identifier">quality</span><span class="symbol">:</span>&nbsp;<span class="identifier">int</span><span class="symbol">, </span><span class="identifier">onSuccess</span><span class="symbol">:</span>&nbsp;<span class="identifier">kotlin.jvm.functions.Function1</span><span class="symbol">&lt;</span><span class="identifier">? super java.io.File</span><span class="symbol">,</span>&nbsp;<span class="identifier">kotlin.Unit</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">onError</span><span class="symbol">:</span>&nbsp;<span class="identifier">kotlin.jvm.functions.Function1</span><span class="symbol">&lt;</span><span class="identifier">? super java.lang.String</span><span class="symbol">,</span>&nbsp;<span class="identifier">kotlin.Unit</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to convert the frame to File of type JPEG</p>
+<code><span class="keyword">fun </span><span class="identifier">writeToFile</span><span class="symbol">(</span><span class="identifier">path</span><span class="symbol">:</span>&nbsp;<span class="identifier">java.lang.String</span><span class="symbol">, </span><span class="identifier">onSuccess</span><span class="symbol">:</span>&nbsp;<span class="identifier">kotlin.jvm.functions.Function1</span><span class="symbol">&lt;</span><span class="identifier">? super java.io.File</span><span class="symbol">,</span>&nbsp;<span class="identifier">kotlin.Unit</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">onError</span><span class="symbol">:</span>&nbsp;<span class="identifier">kotlin.jvm.functions.Function1</span><span class="symbol">&lt;</span><span class="identifier">? super java.lang.String</span><span class="symbol">,</span>&nbsp;<span class="identifier">kotlin.Unit</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">void</span></code>
+<p>Method to convert the frame to File of type JPEG with 80% compression rate</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Other members</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-d-e-f-a-u-l-t_-c-o-m-p-r-e-s-s-i-o-n_-r-a-t-e.html">DEFAULT_COMPRESSION_RATE</a></p>
+</td>
+<td>
+<code><span class="identifier">DEFAULT_COMPRESSION_RATE</span></code>
+<p>Default compression rate when compressing the image</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
