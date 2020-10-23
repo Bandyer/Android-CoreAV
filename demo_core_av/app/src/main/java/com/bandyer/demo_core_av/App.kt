@@ -6,6 +6,7 @@ package com.bandyer.demo_core_av
 
 import android.app.Application
 import android.util.Log
+import androidx.multidex.MultiDexApplication
 import com.bandyer.android_common.logging.BaseLogger
 import com.bandyer.android_common.logging.NetworkLogger
 import com.bandyer.core_av.BandyerCoreAV
@@ -14,20 +15,17 @@ import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.squareup.leakcanary.LeakCanary
 import okhttp3.OkHttpClient
 
 /**
  * @author kristiyan
  */
-class App : Application(), NetworkLogger {
+class App : MultiDexApplication(), NetworkLogger {
 
     private var stethoReporter: StethoReporter? = null
 
     override fun onCreate() {
         super.onCreate()
-        if (LeakCanary.isInAnalyzerProcess(this)) return
-        LeakCanary.install(this)
         Stetho.initializeWithDefaults(this)
 
         stethoReporter = StethoReporter()
@@ -39,11 +37,11 @@ class App : Application(), NetworkLogger {
                 .setHttpStackBuilder(okHttpClientBuilder)
                 .setGsonBuilder(gsonBuilder)
                 .setNetworkLogger(this)
-                .setLogger(object : CoreLogger(BaseLogger.ERROR) {
+                .setLogger(object : CoreLogger(BaseLogger.VERBOSE) {
                     // add all the levels you want to debug
                     // will log only the errors type
                     override val target: Int
-                        get() = ROOM or PUBLISHER or SUBSCRIBER // add all the levels you want to debug
+                        get() = ROOM or PUBLISHER or SUBSCRIBER or CAPTURER or PEER_CONNECTION // add all the levels you want to debug
 
                     override fun verbose(tag: String, message: String) {
                         Log.v(tag, message)

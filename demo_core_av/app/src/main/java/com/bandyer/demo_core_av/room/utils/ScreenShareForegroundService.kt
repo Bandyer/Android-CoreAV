@@ -13,12 +13,12 @@ import com.bandyer.demo_core_av.R
 
 class ScreenShareForegroundService : Service() {
 
-    override fun onBind(intent: Intent): IBinder? {
+    override fun onBind(intent: Intent?): IBinder? {
         return null
     }
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        if (intent.action != ACTION_START_FOREGROUND_SERVICE) return super.onStartCommand(intent, flags, startId)
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if (intent?.action != ACTION_START_FOREGROUND_SERVICE) return super.onStartCommand(intent, flags, startId)
         val notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channelId = "122"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // Configure the notification channel.

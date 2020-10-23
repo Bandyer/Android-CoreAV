@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bandyer.core_av.OnStreamListener
 import com.bandyer.core_av.Stream
 import com.bandyer.core_av.capturer.Capturer
-import com.bandyer.core_av.capturer.video.camera.CapturerCameraVideo
+import com.bandyer.core_av.capturer.video.provider.camera.CameraFrameProvider
 import com.bandyer.core_av.publisher.Publisher
 import com.bandyer.core_av.publisher.RecordingException
 import com.bandyer.core_av.publisher.RecordingListener
@@ -38,7 +38,7 @@ import kotlinx.android.synthetic.main.item_publisher.view.*
 /**
  * @author kristiyan
  */
-class PublisherItem(val publisher: Publisher, val capturer: Capturer) : AbstractItem<PublisherItem, PublisherItem.ViewHolder>() {
+class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : AbstractItem<PublisherItem, PublisherItem.ViewHolder>() {
 
     //The layout to be used for this type of item
     override fun getLayoutRes(): Int = R.layout.item_publisher
@@ -53,7 +53,7 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer) : Abstract
     class ViewHolder internal constructor(override val containerView: View) : FastAdapter.ViewHolder<PublisherItem>(containerView), LayoutContainer {
         private var audioMuted = false
         private var videoMuted = false
-        private var capturer: Capturer? = null
+        private var capturer: Capturer<*, *>? = null
         private var publisher: Publisher? = null
         private var screenShotDialog: Dialog? = null
 
@@ -114,7 +114,7 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer) : Abstract
                 publisher!!.disableVideo(videoMuted)
             }
 
-            containerView.switchCameraButton.setOnClickListener { (capturer as? CapturerCameraVideo)?.switchVideoFeeder() }
+            containerView.switchCameraButton.setOnClickListener { (capturer?.video?.frameProvider as? CameraFrameProvider)?.switchVideoFeeder() }
             containerView.recordButton.setOnClickListener {
                 listener ?: return@setOnClickListener
                 publisher ?: return@setOnClickListener

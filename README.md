@@ -59,7 +59,7 @@ In this scenario a user wants to stream his video to 2 friends.
 Supports from API level 16 (Android 4.1 Jelly Bean).
 
 **Requires compileOptions for Java8**
-```java
+```groovy
 android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -78,18 +78,18 @@ Java && AppCompat <= **v1.2.5**
 Download the [latest AAR](https://bintray.com/bandyer/Android-CoreAV/Android-CoreAV) or grab via Gradle:
 
 ```groovy
-implementation 'com.bandyer:core_av:1.5.18'
+implementation 'com.bandyer:core_av:2.0.0'
 ```
 
 ## Quickstart
 
 In your **Application** class:
 
-```java
-public class App extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
+```kotlin
+class App : MultiDexApplication() {
+
+    override fun onCreate() {
+        super.onCreate()
         BandyerCoreAV.initWithDefaults(this);
     }
 }
@@ -123,85 +123,80 @@ Create **activity_main.xml** in **res/layout/**
 </RelativeLayout>
 ```
 
-Change your **MainActivity.java**
+Change your **MainActivity.kt**
 
-```java
-public class MainActivity extends AppCompatActivity implements RoomObserver, SubscriberObserver, PublisherObserver {
-
-    // the token will be provided to you by a rest call
-    private static final String TOKEN = "Bandyer-Token";
-
-    private Room room;
-    private Publisher publisher;
+```kotlin
+class MainActivity : AppCompatActivity(), RoomObserver, SubscriberObserver, PublisherObserver {
+    private var room: Room? = null;
+    private var publisher: Publisher? = null
 
     // Layout elements
-    private LinearLayout subscribersListView;
-    private BandyerView publisherView;
+    private var subscribersListView: LinearLayout? = null
+    private var publisherView: BandyerView? = null
+    
+    private var capturer: CameraCapturer? = null
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        subscribersListView = findViewById(R.id.subscribersListView);
-        publisherView = findViewById(R.id.publisherView);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        subscribersListView = findViewById(R.id.subscribersListView)
+        publisherView = findViewById(R.id.publisherView)
 
         // Let's create a video call!!
-        room = Room.Registry.get(new RoomToken(TOKEN));
-        room.addRoomObserver(this);
-        room.join();
+        room = Room.Registry.get(RoomToken(TOKEN));
+        room!!.addRoomObserver(this);
+        room!!.join();
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        capturer?.destroy()
+        Room.Registry.destroyAll();
     }
 
     /**
      * Once we have joined the call room
      * Let's add a publisher that will stream from the Frontal Camera
      */
-    @Override
-    public void onRoomEnter() {
-        Log.d("Room", "onRoomEnter");
+    override fun onRoomEnter() {
+        Log.d("Room", "onRoomEnter")
 
         // TODO: Publisher needs runtime permissions for AUDIO/VIDEO, otherwise it won't stream anything
-        Capturer capturerAV = Capturer.Registry.get(this, new CapturerOptions.Builder().withAudio().withCamera());
-        capturerAV.start();
-        publisher = room.create(new RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"))
-                .addPublisherObserver(MainActivity.this)
-                .setCapturer(capturerAV);
-        room.publish(publisher);
-        publisher.setView(publisherView, new OnStreamListener() {
-            @Override
-            public void onReadyToPlay(@NonNull StreamView view, @NonNull Stream stream) {
-                view.play(stream);
+        capturer = capturer<CameraCapturer>(this) {
+            video = camera()
+            audio = default()
+        }
+        capturer!!.start()
+
+        publisher = room!!.create(RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"))
+                .addPublisherObserver(this@MainActivity)
+                .setCapturer(capturer!!)
+        room!!.publish(publisher!!)
+        publisher!!.setView(publisherView!!, object : OnStreamListener {
+            override fun onReadyToPlay(view: StreamView, stream: Stream) {
+                view.play(stream)
             }
-        });
+        })
     }
 
-    @Override
-    public void onRoomReconnecting() {
-        Log.d("Room", "onRoomReconnecting ...");
+    override fun onRoomReconnecting() {
+        Log.d("Room", "onRoomReconnecting ...")
     }
 
-    @Override
-    public void onRoomStateChanged(@NonNull RoomState state) {
-        Log.d("Room", "onRoomStateChanged " + state.name());
+    override fun onRoomStateChanged(state: RoomState) {
+        Log.d("Room", "onRoomStateChanged " + state.name())
     }
 
-    @Override
-    public void onRoomExit() {
-        Log.d("Room", "onRoomExit");
+    override fun onRoomExit() {
+        Log.d("Room", "onRoomExit")
     }
 
-    @Override
-    public void onRoomError(@NonNull String reason) { Log.e("Room", reason); }
-
-    @Override
-    public void onRoomActorUpdateStream(@NotNull RoomActor roomActor) { }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // close the call
-        Capturer.Registry.destroy();
-        Room.Registry.destroyAll();
+    override fun onRoomError(reason: String) {
+        Log.e("Room", reason)
     }
+
+    override fun onRoomActorUpdateStream(roomActor: RoomActor) {}
+
 
     /**
      * A new publisher has entered the remote room
@@ -209,29 +204,25 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
      *
      * @param stream remote audio/video stream
      */
-    @Override
-    public void onRemotePublisherJoined(@NonNull final Stream stream) {
-        Log.d("Publisher", "onRemotePublisherJoined");
-
-        final Subscriber subscriber = room.create(stream).addSubscribeObserver(this);
-        room.subscribe(subscriber);
+    override fun onRemotePublisherJoined(stream: Stream) {
+        Log.d("Publisher", "onRemotePublisherJoined")
+        val subscriber = room!!.create(stream).addSubscribeObserver(this)
+        room!!.subscribe(subscriber);
 
         // set the view where the stream will be played
-        final BandyerView subscriberView = new BandyerView(this);
-        int size = getDp(60);
-
-        subscribersListView.addView(subscriberView, new LinearLayout.LayoutParams(size, size));
-        subscriber.setView(subscriberView, new OnStreamListener() {
-            @Override
-            public void onReadyToPlay(@NonNull StreamView view, @NonNull Stream stream) {
+        val subscriberView = BandyerView(this)
+        val size = getDp(60)
+        subscribersListView!!.addView(subscriberView, LinearLayout.LayoutParams(size, size))
+        subscriber.setView(subscriberView, object : OnStreamListener {
+            override fun onReadyToPlay(view: StreamView, stream: Stream) {
                 subscriberView.play(stream);
                 subscriberView.bringToFront(true);
             }
         });
     }
 
-    private int getDp(int size) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, getResources().getDisplayMetrics());
+    private fun getDp(size: Int): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size.toFloat(), getResources().getDisplayMetrics()).toInt()
     }
 
     /**
@@ -239,9 +230,8 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
      *
      * @param publisher the publisher created in this activity
      */
-    @Override
-    public void onLocalPublisherJoined(@NonNull Publisher publisher) {
-        Log.d("Publisher", "onLocalPublisherJoined");
+    override fun onLocalPublisherJoined(publisher: Publisher) {
+        Log.d("Publisher", "onLocalPublisherJoined")
     }
 
     /**
@@ -249,76 +239,40 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
      *
      * @param stream remote stream
      */
-    @Override
-    public void onRemotePublisherLeft(@NonNull Stream stream) {
-        Log.d("Publisher", "onRemotePublisherLeft");
-        Subscriber subscriber = room.getSubscriber(stream);
-        if (subscriber == null)
-            return;
-        room.unsubscribe(subscriber);
+    override fun onRemotePublisherLeft(stream: Stream) {
+        Log.d("Publisher", "onRemotePublisherLeft")
+        val subscriber = room!!.getSubscriber(stream) ?: return
+        room!!.unsubscribe(subscriber);
     }
 
-    @Override
-    public void onRemotePublisherUpdateStream(@NonNull Stream stream) { }
-    
+    override fun onRemotePublisherUpdateStream(stream: Stream) = Unit
+
     // LOCAL SUBSCRIBER EVENTS
-    
-    @Override
-    public void onLocalSubscriberAdded(@NonNull Subscriber subscriber) { }
-
-    @Override
-    public void onLocalSubscriberError(@NonNull Subscriber subscriber, @NonNull String reason) { }
-
-    @Override
-    public void onLocalSubscriberStateChanged(@NonNull Subscriber subscriber, @NonNull SubscriberState subscriberState) { }
-   
-    @Override
-    public void onLocalSubscriberJoined(@NonNull Subscriber subscriber) { }
-
-    @Override
-    public void onLocalSubscriberUpdateStream(@NonNull Subscriber subscriber) { }
-
-    @Override
-    public void onLocalSubscriberAudioMuted(@NonNull Subscriber subscriber, boolean muted) { }
-
-    @Override
-    public void onLocalSubscriberVideoMuted(@NonNull Subscriber subscriber, boolean muted) { }
-
-    @Override
-    public void onLocalSubscriberStartedScreenSharing(@NonNull Subscriber subscriber, boolean started) { }
-
-    @Override
-    public void onLocalSubscriberRemoved(@NotNull Subscriber subscriber) { }
-
-    @Override
-    public void onLocalSubscriberConnected(@NotNull Subscriber subscriber, boolean connected) { }
+    override fun onLocalSubscriberAdded(subscriber: Subscriber) = Unit
+    override fun onLocalSubscriberError(subscriber: Subscriber, reason: String) = Unit
+    override fun onLocalSubscriberStateChanged(subscriber: Subscriber, state: SubscriberState) = Unit
+    override fun onLocalSubscriberJoined(subscriber: Subscriber) = Unit
+    override fun onLocalSubscriberUpdateStream(subscriber: Subscriber) = Unit
+    override fun onLocalSubscriberAudioMuted(subscriber: Subscriber, muted: Boolean) = Unit
+    override fun onLocalSubscriberVideoMuted(subscriber: Subscriber, muted: Boolean) = Unit
+    override fun onLocalSubscriberStartedScreenSharing(subscriber: Subscriber, started: Boolean) = Unit
+    override fun onLocalSubscriberRemoved(subscriber: Subscriber) = Unit
+    override fun onLocalSubscriberConnected(subscriber: Subscriber, connected: Boolean) = Unit
 
     // LOCAL PUBLISHER EVENTS
-    
-    @Override
-    public void onLocalPublisherAudioMuted(@NotNull Publisher publisher, boolean muted) { }
+    override fun onLocalPublisherAudioMuted(publisher: Publisher, muted: Boolean) = Unit
+    override fun onLocalPublisherConnected(publisher: Publisher, connected: Boolean) = Unit
+    override fun onLocalPublisherVideoMuted(publisher: Publisher, muted: Boolean) = Unit
+    override fun onLocalPublisherUpdateStream(publisher: Publisher) = Unit
+    override fun onLocalPublisherAdded(publisher: Publisher) = Unit
+    override fun onLocalPublisherRemoved(publisher: Publisher) = Unit
+    override fun onLocalPublisherStateChanged(publisher: Publisher, state: PublisherState) = Unit
+    override fun onLocalPublisherError(publisher: Publisher, reason: String) = Unit
 
-    @Override
-    public void onLocalPublisherConnected(@NotNull Publisher publisher, boolean connected) { }
-
-    @Override
-    public void onLocalPublisherVideoMuted(@NotNull Publisher publisher, boolean muted) { }
-
-    @Override
-    public void onLocalPublisherUpdateStream(@NotNull Publisher publisher) { }
-
-    @Override
-    public void onLocalPublisherAdded(@NonNull Publisher publisher) { }
-
-    @Override
-    public void onLocalPublisherRemoved(@NonNull Publisher publisher) { }
-
-    @Override
-    public void onLocalPublisherStateChanged(@NonNull Publisher publisher, @NonNull PublisherState publisherState) { }
-
-    @Override
-    public void onLocalPublisherError(@NonNull Publisher publisher, @NonNull String reason) { }
-
+    companion object {
+        // the token will be provided to you by a rest call
+        private const val TOKEN = "Bandyer-Token"
+    }
 }
 ```
 
@@ -326,9 +280,7 @@ public class MainActivity extends AppCompatActivity implements RoomObserver, Sub
 
 You can find the complete documentation in two different styles
 
-Kotlin Doc: [https://bandyer.github.io/Bandyer-Android-CoreAV/kDoc/](https://bandyer.github.io/Bandyer-Android-CoreAV/kDoc/)
-
-Java Doc: [https://bandyer.github.io/Bandyer-Android-CoreAV/jDoc/](https://bandyer.github.io/Bandyer-Android-CoreAV/jDoc/)
+Kotlin Doc: [https://bandyer.github.io/Bandyer-Android-CoreAV/kDoc/core_av/](https://bandyer.github.io/Bandyer-Android-CoreAV/kDoc/core_av/)
 
 ## Support
 To get basic support please submit an [Issue](https://github.com/Bandyer/Bandyer-Android-CoreAV/issues) 

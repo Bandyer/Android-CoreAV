@@ -4,8 +4,10 @@
  */
 package com.bandyer.demo_core_av.room
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
+import android.hardware.usb.UsbDevice
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -26,9 +28,9 @@ import com.bandyer.core_av.Stream
 import com.bandyer.core_av.capturer.Capturer
 import com.bandyer.core_av.capturer.CapturerException
 import com.bandyer.core_av.capturer.CapturerObserver
-import com.bandyer.core_av.capturer.CapturerOptions
-import com.bandyer.core_av.capturer.mix.CapturerAudioVideo
-import com.bandyer.core_av.capturer.video.screen.CapturerScreenVideo
+import com.bandyer.core_av.capturer.audio.AudioController
+import com.bandyer.core_av.capturer.video.VideoController
+import com.bandyer.core_av.capturer.video.provider.screen.ScreenFrameProvider
 import com.bandyer.core_av.publisher.Publisher
 import com.bandyer.core_av.publisher.PublisherObserver
 import com.bandyer.core_av.publisher.PublisherState
@@ -36,12 +38,14 @@ import com.bandyer.core_av.room.*
 import com.bandyer.core_av.subscriber.Subscriber
 import com.bandyer.core_av.subscriber.SubscriberObserver
 import com.bandyer.core_av.subscriber.SubscriberState
+import com.bandyer.core_av.usb_camera.*
+import com.bandyer.core_av.usb_camera.capturer.UsbCapturer
+import com.bandyer.core_av.usb_camera.capturer.video.provider.UsbFrameProvider
+import com.bandyer.core_av.usb_camera.capturer.usbCamera
 import com.bandyer.core_av.utils.logging.InternalStatsLogger
 import com.bandyer.core_av.utils.logging.InternalStatsTypes
-import com.bandyer.demo_core_av.App
-import com.bandyer.demo_core_av.BaseActivity
+import com.bandyer.demo_core_av.*
 import com.bandyer.demo_core_av.R
-import com.bandyer.demo_core_av.StatsPagerAdapter
 import com.bandyer.demo_core_av.design.bottom_sheet.picker.BottomListPicker
 import com.bandyer.demo_core_av.design.bottom_sheet.picker.BottomListPickerItem
 import com.bandyer.demo_core_av.room.adapter_items.PublisherItem
@@ -60,7 +64,7 @@ import java.util.*
 /**
  * @author kristiyan
  */
-class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, PublisherObserver, InternalStatsLogger, CapturerObserver {
+class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, PublisherObserver, InternalStatsLogger, CapturerObserver<VideoController<*, *>, AudioController>, OnDeviceConnectListener {
 
     private var room: Room? = null
     private val streamAdapter = FastItemAdapter<StreamItem>()
@@ -68,6 +72,11 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
     private var pagerAdapter: StatsPagerAdapter? = null
     private var imageZoomHelper: ImageZoomHelper? = null
     private var snackbar: Snackbar? = null
+    private var usbDevice: UsbDevice? = null
+
+    private val usbConnector by lazy {
+        UsbConnector.Factory.create(this, this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,7 +119,7 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
                 Log.d("ProximitySensor", "proximity triggered: $isNear")
             }
         })
-        Capturer.Registry.addCapturerObserver(this)
+
         room = Room.Registry.get(RoomToken(token)).apply {
             addRoomObserver(this@RoomActivity)
             muteAllSubscribersAudio(intent.getBooleanExtra(ROOM_AUDIO_MUTED, false))
@@ -122,23 +131,27 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
 
     override fun onResume() {
         super.onResume()
-        Capturer.Registry.capturers.forEach { it.resume() }
+        capturers.forEach { it.resume() }
     }
 
     override fun onPause() {
         super.onPause()
-        Capturer.Registry.capturers.forEach { capturer ->
-            if (capturer is CapturerScreenVideo) return@forEach
-            if (capturer is CapturerAudioVideo) capturer.pause(video = true, audio = false) else capturer.pause()
+        capturers.forEach { capturer ->
+            capturer.pause {
+                pauseVideo = capturer.video?.frameProvider !is ScreenFrameProvider
+                pauseAudio = false
+            }
         }
     }
 
     override fun onRoomEnter() {
         Log.d("RoomActivity", "onRoomEnter")
+        usbConnector.register()
     }
 
     override fun onRoomExit() {
         Log.d("RoomActivity", "exit")
+        usbConnector.unregister()
     }
 
     override fun onRoomStateChanged(state: RoomState) {
@@ -224,11 +237,12 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
                     add("Audio&ScreenShare")
                 }
                 add("Audio&Video Call")
+                add("Audio&USBVideo Call")
             }
         }
         joinType.setItems(types, -1, object : BottomListPickerItem.Delegate<String> {
             override fun onClicked(adapterPosition: Int, item: String?) {
-                onAddPublish(item)
+                onAddCapturer(item)
                 joinType.dismiss()
             }
         }).show()
@@ -237,7 +251,7 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
     override fun onDestroy() {
         super.onDestroy()
         if (snackbar != null) snackbar!!.dismiss()
-        Capturer.Registry.destroy()
+        capturers.forEach { it.destroy() }
         Room.Registry.destroyAll()
         ScreenSharingUtils.hideScreenShareNotification()
     }
@@ -313,42 +327,97 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
         return imageZoomHelper != null && (imageZoomHelper!!.onDispatchTouchEvent(ev) || super.dispatchTouchEvent(ev))
     }
 
-    fun onAddPublish(capturerType: String?) {
+    private var capturers: MutableList<Capturer<*, *>> = mutableListOf()
+
+    @SuppressLint("NewApi")
+    fun onAddCapturer(capturerType: String?) {
         if (room?.roomState != RoomState.CONNECTED) return
-        var capturer: Capturer? = null
-        when (capturerType) {
-            "Audio Call" -> capturer = Capturer.Registry.get(this, CapturerOptions.Builder().withAudio())
-            "VideoOnly Call" -> capturer = Capturer.Registry.get(this, CapturerOptions.Builder().withCamera())
-            "ScreenShare" -> capturer = Capturer.Registry.get(this, CapturerOptions.Builder().withScreenShare())
-            "Audio&ScreenShare" -> capturer = Capturer.Registry.get(this, CapturerOptions.Builder().withAudio().withScreenShare())
-            "Audio&Video Call" -> capturer = Capturer.Registry.get(this, CapturerOptions.Builder().withAudio().withCamera())
+
+        if (capturerType == "Audio&USBVideo Call") {
+            usbDevice?.let { usbConnector.requestPermission(it) }
+            return
         }
+
+        val capturer = capturer<Capturer<*, *>>(this) {
+            when (capturerType) {
+                "Audio Call" -> {
+                    audio = default()
+                }
+                "VideoOnly Call" -> {
+                    video = camera()
+                }
+                "ScreenShare" -> {
+                    video = screen()
+                    ScreenSharingUtils.showScreenShareNotification(this@RoomActivity)
+                }
+                "Audio&ScreenShare" -> {
+                    video = screen()
+                    audio = default()
+                    ScreenSharingUtils.showScreenShareNotification(this@RoomActivity)
+                }
+                "Audio&Video Call" -> {
+                    video = camera()
+                    audio = default()
+                }
+                else -> Unit
+            }
+            observer = this@RoomActivity
+        }
+
+        capturer.start()
+        capturers.add(capturer)
+    }
+
+    override fun onCapturerStarted(capturer: Capturer<VideoController<*, *>, AudioController>, stream: Stream) {
+        Log.d("RoomActivity", "onCapturerStarted")
         // on Android Q before launching a screenShare a notification MUST be shown as foreground service with mediaProjection
-        if (capturer is CapturerScreenVideo) ScreenSharingUtils.showScreenShareNotification(this)
         val publisher: Publisher = room!!.create(RoomUser("aliasKris", "kristiyan", "petrov", "kris@bandyer.com", "image"))
         publisher.addPublisherObserver(this@RoomActivity)
-                .setCapturer(capturer!!)
+                .setCapturer(capturer)
         room!!.publish(publisher)
         pubSubsAdapter.add(PublisherItem(publisher, capturer))
-        capturer.start()
     }
 
-    override fun onCapturerStarted(capturer: Capturer, stream: Stream) {
-        Log.d("RoomActivity", "onCapturerStarted")
-    }
+    override fun onCapturerPaused(capturer: Capturer<VideoController<*, *>, AudioController>) = Unit
 
-    override fun onCapturerResumed(capturer: Capturer) {
-        Log.d("RoomActivity", "onCapturerResumed " + capturer.id)
-    }
+    override fun onCapturerResumed(capturer: Capturer<VideoController<*, *>, AudioController>) = Unit
 
-    override fun onCapturerError(capturer: Capturer, error: CapturerException) {
+    override fun onCapturerError(capturer: Capturer<VideoController<*, *>, AudioController>, error: CapturerException) {
         Log.e("RoomActivity", "onCapturerError " + error.localizedMessage)
-        if (capturer is CapturerScreenVideo) ScreenSharingUtils.hideScreenShareNotification()
+        if (capturer.video?.frameProvider is ScreenFrameProvider) ScreenSharingUtils.hideScreenShareNotification()
     }
 
-    override fun onCapturerPaused(capturer: Capturer) {
-        Log.d("RoomActivity", "onCapturerPaused")
+    override fun onCapturerDestroyed(capturer: Capturer<VideoController<*, *>, AudioController>) = Unit
+
+    override fun onAttach(device: UsbDevice) = runOnUiThread {
+        if (isFinishing) return@runOnUiThread
+        usbDevice = device
+        snackbar = Snackbar.make(pubsubs!!, "An usb device has been attached. ${device.info(this).productName}", Snackbar.LENGTH_SHORT)
+        snackbar!!.show()
     }
+
+    override fun onDetach(device: UsbDevice) = runOnUiThread {
+        if (isFinishing) return@runOnUiThread
+        val capturerIndex = capturers.indexOfFirst { it.video?.frameProvider is UsbFrameProvider }.takeIf { it != -1 }
+                ?: return@runOnUiThread
+        val capturer = capturers.removeAt(capturerIndex)
+        capturer.destroy()
+        usbDevice = null
+    }
+
+    override fun onDeviceUsageGranted(device: UsbDevice, usbData: UsbData) = runOnUiThread {
+        if (isFinishing) return@runOnUiThread
+        val capturer = capturer<UsbCapturer>(this) {
+            video = usbCamera(usbData)
+            audio = default()
+            observer = this@RoomActivity
+        }
+        capturer.start()
+        capturers.add(capturer)
+    }
+
+    override fun onDisconnect(device: UsbDevice, usbData: UsbData) = onDetach(device)
+    override fun onDeviceUsageDenied(device: UsbDevice?) = Unit
 
     // LOCAL PUBLISHER
     override fun onLocalPublisherJoined(publisher: Publisher) {
@@ -358,13 +427,13 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
     override fun onLocalPublisherRemoved(publisher: Publisher) {
         Log.d("RoomActivity", "publisher" + publisher.id + " onLocalPublisherRemoved")
         pubSubsAdapter.itemAdapter.removeByIdentifier(publisher.id.hashCode().toLong())
-        if (publisher.stream!!.isScreenshare) ScreenSharingUtils.hideScreenShareNotification()
+        if (publisher.stream.isScreenshare) ScreenSharingUtils.hideScreenShareNotification()
     }
 
     override fun onLocalPublisherError(publisher: Publisher, reason: String) {
         Log.e("RoomActivity", "publisher" + publisher.id + " onLocalPublisherError: " + reason)
         pubSubsAdapter.itemAdapter.removeByIdentifier(publisher.id.hashCode().toLong())
-        if (publisher.stream!!.isScreenshare) ScreenSharingUtils.hideScreenShareNotification()
+        if (publisher.stream.isScreenshare) ScreenSharingUtils.hideScreenShareNotification()
     }
 
     override fun onLocalPublisherStateChanged(publisher: Publisher, state: PublisherState) {

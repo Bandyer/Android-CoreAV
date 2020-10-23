@@ -18,6 +18,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name="com.bandyer.demo_core_av.App"
@@ -32,7 +33,6 @@
         <activity android:name="com.bandyer.demo_core_av.home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -52,14 +52,14 @@
         </activity>
         <activity
             android:name="com.bandyer.demo_core_av.room.RoomActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
         <activity android:name="com.bandyer.demo_core_av.room.InformationActivity" />
 
-        <service android:name=".room.utils.ScreenShareForegroundService"
-            android:foregroundServiceType="mediaProjection"
+        <service
+            android:name=".room.utils.ScreenShareForegroundService"
             android:enabled="true"
             android:exported="false"
-            />
+            android:foregroundServiceType="mediaProjection" />
     </application>
 
 </manifest>

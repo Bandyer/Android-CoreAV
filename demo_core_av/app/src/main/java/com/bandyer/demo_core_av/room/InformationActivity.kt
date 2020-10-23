@@ -27,8 +27,8 @@ class InformationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
         list!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val headers = intent.getStringArrayListExtra(INFO_HEADERS)
-        val items = intent.getStringArrayListExtra(INFO_ITEMS)
+        val headers = intent.getStringArrayListExtra(INFO_HEADERS)!!
+        val items = intent.getStringArrayListExtra(INFO_ITEMS)!!
         val itemAdapter = ItemAdapter<IItem<*, *>>()
         adapter = FastAdapter.with<IItem<*, *>, ItemAdapter<IItem<*, *>>>(itemAdapter)
         adapter!!.setHasStableIds(true)
