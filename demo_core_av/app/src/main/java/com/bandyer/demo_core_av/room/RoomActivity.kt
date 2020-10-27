@@ -39,7 +39,6 @@ import com.bandyer.core_av.subscriber.Subscriber
 import com.bandyer.core_av.subscriber.SubscriberObserver
 import com.bandyer.core_av.subscriber.SubscriberState
 import com.bandyer.core_av.usb_camera.*
-import com.bandyer.core_av.usb_camera.capturer.UsbCapturer
 import com.bandyer.core_av.usb_camera.capturer.video.provider.UsbFrameProvider
 import com.bandyer.core_av.usb_camera.capturer.usbCamera
 import com.bandyer.core_av.utils.logging.InternalStatsLogger
