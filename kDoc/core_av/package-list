@@ -69,12 +69,6 @@ $dokka.location:com.bandyer.core_av.capturer.video/YuvFrame/<get-height>/#/Point
 $dokka.location:com.bandyer.core_av.capturer.video/YuvFrame/<get-rotation>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-yuv-frame/get-rotation.html
 $dokka.location:com.bandyer.core_av.capturer.video/YuvFrame/<get-timestamp>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-yuv-frame/get-timestamp.html
 $dokka.location:com.bandyer.core_av.capturer.video/YuvFrame/<get-width>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-yuv-frame/get-width.html
-$dokka.location:com.bandyer.core_av.capturer/CameraCapturer/<get-audio>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer/get-audio.html
-$dokka.location:com.bandyer.core_av.capturer/CameraCapturer/<get-id>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer/get-id.html
-$dokka.location:com.bandyer.core_av.capturer/CameraCapturer/<get-isRunning>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer/get-is-running.html
-$dokka.location:com.bandyer.core_av.capturer/CameraCapturer/<get-state>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer/get-state.html
-$dokka.location:com.bandyer.core_av.capturer/CameraCapturer/<get-stream>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer/get-stream.html
-$dokka.location:com.bandyer.core_av.capturer/CameraCapturer/<get-video>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer/get-video.html
 $dokka.location:com.bandyer.core_av.capturer/Capturer.PauseOptions/<get-pauseAudio>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-capturer/-pause-options/get-pause-audio.html
 $dokka.location:com.bandyer.core_av.capturer/Capturer.PauseOptions/<get-pauseVideo>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-capturer/-pause-options/get-pause-video.html
 $dokka.location:com.bandyer.core_av.capturer/Capturer.PauseOptions/<set-pauseAudio>/#kotlin.Boolean/PointingToDeclaration/com.bandyer.core_av.capturer/-capturer/-pause-options/set-pause-audio.html
@@ -109,12 +103,6 @@ $dokka.location:com.bandyer.core_av.capturer/CapturerStartException/<get-cause>/
 $dokka.location:com.bandyer.core_av.capturer/CapturerStartException/<get-message>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-capturer-start-exception/get-message.html
 $dokka.location:com.bandyer.core_av.capturer/CapturerState/<get-name>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-capturer-state/get-name.html
 $dokka.location:com.bandyer.core_av.capturer/CapturerState/<get-ordinal>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-capturer-state/get-ordinal.html
-$dokka.location:com.bandyer.core_av.capturer/ScreenCapturer/<get-audio>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-screen-capturer/get-audio.html
-$dokka.location:com.bandyer.core_av.capturer/ScreenCapturer/<get-id>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-screen-capturer/get-id.html
-$dokka.location:com.bandyer.core_av.capturer/ScreenCapturer/<get-isRunning>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-screen-capturer/get-is-running.html
-$dokka.location:com.bandyer.core_av.capturer/ScreenCapturer/<get-state>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-screen-capturer/get-state.html
-$dokka.location:com.bandyer.core_av.capturer/ScreenCapturer/<get-stream>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-screen-capturer/get-stream.html
-$dokka.location:com.bandyer.core_av.capturer/ScreenCapturer/<get-video>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-screen-capturer/get-video.html
 $dokka.location:com.bandyer.core_av.networking.models/MuteStreamOption/<get-audio>/#/PointingToDeclaration/com.bandyer.core_av.networking.models/-mute-stream-option/get-audio.html
 $dokka.location:com.bandyer.core_av.networking.models/MuteStreamOption/<get-video>/#/PointingToDeclaration/com.bandyer.core_av.networking.models/-mute-stream-option/get-video.html
 $dokka.location:com.bandyer.core_av.networking.models/MuteStreamOption/<set-audio>/#kotlin.Boolean/PointingToDeclaration/com.bandyer.core_av.networking.models/-mute-stream-option/set-audio.html
