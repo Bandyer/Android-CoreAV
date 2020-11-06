@@ -62,6 +62,14 @@
             app:backgroundTint="@color/colorPrimary" />
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/broadcastButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_broadcast"
+            app:backgroundTint="@color/colorPrimary"
+            app:tint="@android:color/white" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/recordButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

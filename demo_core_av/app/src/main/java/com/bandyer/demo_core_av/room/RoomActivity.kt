@@ -25,12 +25,9 @@ import com.bandyer.android_audiosession.AudioSessionOptions
 import com.bandyer.android_audiosession.audiosession.AudioSessionListener
 import com.bandyer.android_common.proximity_listener.ProximitySensorListener
 import com.bandyer.core_av.Stream
-import com.bandyer.core_av.capturer.Capturer
-import com.bandyer.core_av.capturer.CapturerException
-import com.bandyer.core_av.capturer.CapturerObserver
+import com.bandyer.core_av.capturer.*
 import com.bandyer.core_av.capturer.audio.AudioController
 import com.bandyer.core_av.capturer.video.VideoController
-import com.bandyer.core_av.capturer.video.provider.screen.ScreenFrameProvider
 import com.bandyer.core_av.publisher.Publisher
 import com.bandyer.core_av.publisher.PublisherObserver
 import com.bandyer.core_av.publisher.PublisherState
@@ -38,13 +35,19 @@ import com.bandyer.core_av.room.*
 import com.bandyer.core_av.subscriber.Subscriber
 import com.bandyer.core_av.subscriber.SubscriberObserver
 import com.bandyer.core_av.subscriber.SubscriberState
-import com.bandyer.core_av.usb_camera.*
-import com.bandyer.core_av.usb_camera.capturer.video.provider.UsbFrameProvider
+import com.bandyer.core_av.usb_camera.OnDeviceConnectListener
+import com.bandyer.core_av.usb_camera.UsbConnector
+import com.bandyer.core_av.usb_camera.UsbData
+import com.bandyer.core_av.usb_camera.capturer.UsbCapturer
+import com.bandyer.core_av.usb_camera.capturer.isUsb
 import com.bandyer.core_av.usb_camera.capturer.usbCamera
+import com.bandyer.core_av.usb_camera.info
 import com.bandyer.core_av.utils.logging.InternalStatsLogger
 import com.bandyer.core_av.utils.logging.InternalStatsTypes
-import com.bandyer.demo_core_av.*
+import com.bandyer.demo_core_av.App
+import com.bandyer.demo_core_av.BaseActivity
 import com.bandyer.demo_core_av.R
+import com.bandyer.demo_core_av.StatsPagerAdapter
 import com.bandyer.demo_core_av.design.bottom_sheet.picker.BottomListPicker
 import com.bandyer.demo_core_av.design.bottom_sheet.picker.BottomListPickerItem
 import com.bandyer.demo_core_av.room.adapter_items.PublisherItem
@@ -137,7 +140,7 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
         super.onPause()
         capturers.forEach { capturer ->
             capturer.pause {
-                pauseVideo = capturer.video?.frameProvider !is ScreenFrameProvider
+                pauseVideo = !capturer.isScreen
                 pauseAudio = false
             }
         }
@@ -178,6 +181,9 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
 
     override fun onLocalPublisherConnected(publisher: Publisher, connected: Boolean) {
         Log.d("RoomActivity", "onLocalPublisherConnected $connected")
+        if (snackbar != null) snackbar!!.dismiss()
+        snackbar = Snackbar.make(pubsubs!!, "onLocalPublisherConnected $connected", Snackbar.LENGTH_SHORT)
+        snackbar!!.show()
     }
 
     override fun onLocalSubscriberConnected(subscriber: Subscriber, connected: Boolean) {
@@ -383,7 +389,7 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
 
     override fun onCapturerError(capturer: Capturer<VideoController<*, *>, AudioController>, error: CapturerException) {
         Log.e("RoomActivity", "onCapturerError " + error.localizedMessage)
-        if (capturer.video?.frameProvider is ScreenFrameProvider) ScreenSharingUtils.hideScreenShareNotification()
+        capturer.isScreen { ScreenSharingUtils.hideScreenShareNotification() }
     }
 
     override fun onCapturerDestroyed(capturer: Capturer<VideoController<*, *>, AudioController>) = Unit
@@ -397,7 +403,7 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
 
     override fun onDetach(device: UsbDevice) = runOnUiThread {
         if (isFinishing) return@runOnUiThread
-        val capturerIndex = capturers.indexOfFirst { it.video?.frameProvider is UsbFrameProvider }.takeIf { it != -1 }
+        val capturerIndex = capturers.indexOfFirst { it.isUsb }.takeIf { it != -1 }
                 ?: return@runOnUiThread
         val capturer = capturers.removeAt(capturerIndex)
         capturer.destroy()

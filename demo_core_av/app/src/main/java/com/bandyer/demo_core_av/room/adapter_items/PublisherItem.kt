@@ -21,10 +21,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bandyer.core_av.OnStreamListener
 import com.bandyer.core_av.Stream
 import com.bandyer.core_av.capturer.Capturer
+import com.bandyer.core_av.capturer.isCamera
+import com.bandyer.core_av.publisher.*
 import com.bandyer.core_av.capturer.video.provider.camera.CameraFrameProvider
-import com.bandyer.core_av.publisher.Publisher
-import com.bandyer.core_av.publisher.RecordingException
-import com.bandyer.core_av.publisher.RecordingListener
+import com.bandyer.core_av.publisher.*
 import com.bandyer.core_av.view.OnViewStatusObserver
 import com.bandyer.core_av.view.StreamView
 import com.bandyer.demo_core_av.R
@@ -113,16 +113,24 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
                 containerView.preview.disableVideoRendering(videoMuted)
                 publisher!!.disableVideo(videoMuted)
             }
-
-            containerView.switchCameraButton.setOnClickListener { (capturer?.video?.frameProvider as? CameraFrameProvider)?.switchVideoFeeder() }
+            capturer.isCamera {
+                containerView.switchCameraButton.setOnClickListener { video!!.frameProvider.switchVideoFeeder() }
+            }
             containerView.recordButton.setOnClickListener {
-                listener ?: return@setOnClickListener
+                recordListener ?: return@setOnClickListener
                 publisher ?: return@setOnClickListener
                 with(publisher!!) {
-                    if (isRecording) stopRecording(listener!!) else startRecording(listener!!)
+                    if (isRecording) stopRecording(recordListener!!) else startRecording(recordListener!!)
                 }
             }
             containerView.captureFrameButton.setOnClickListener { containerView.preview.captureFrame() }
+            containerView.broadcastButton.setOnClickListener {
+                broadcastListener ?: return@setOnClickListener
+                publisher ?: return@setOnClickListener
+                with(publisher!!) {
+                    if (isBroadcasting) stopBroadcast(broadcastListener!!) else startBroadcast(broadcastListener!!)
+                }
+            }
         }
 
         private fun showImage(bitmap: Bitmap?) {
@@ -151,7 +159,8 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
             videoMuted = false
             capturer = null
             publisher = null
-            listener = null
+            broadcastListener = null
+            recordListener = null
             if (screenShotDialog != null) screenShotDialog!!.dismiss()
         }
 
@@ -167,7 +176,7 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
             containerView.videoButton!!.setImageResource(if (videoMuted) R.drawable.ic_videocam_off else R.drawable.ic_videocam)
         }
 
-        var listener: RecordingListener? = object : RecordingListener {
+        var recordListener: RecordingListener? = object : RecordingListener {
             override fun onSuccess(recordId: String, isRecording: Boolean) {
                 val message = if (isRecording) "Started" else "Stopped"
                 Toast.makeText(containerView.preview.context, "$message recording", Toast.LENGTH_SHORT).show()
@@ -178,6 +187,20 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
                 ImageViewCompat.setImageTintList(containerView.recordButton!!, ColorStateList.valueOf(if (isRecording) Color.RED else Color.WHITE))
             }
         }
+
+        var broadcastListener: BroadcastingListener? = object : BroadcastingListener {
+
+            override fun onSuccess(broadcastId: String, isBroadcasting: Boolean) {
+                val message = if (isBroadcasting) "Started" else "Stopped"
+                Toast.makeText(containerView.preview.context, "$message broadcasting", Toast.LENGTH_SHORT).show()
+                ImageViewCompat.setImageTintList(containerView.broadcastButton!!, ColorStateList.valueOf(if (isBroadcasting) Color.RED else Color.WHITE))
+            }
+
+            override fun onError(broadcastId: String?, isBroadcasting: Boolean, reason: BroadcastingException) {
+                ImageViewCompat.setImageTintList(containerView.broadcastButton!!, ColorStateList.valueOf(if (isBroadcasting) Color.RED else Color.WHITE))
+            }
+        }
+
 
         init {
             ImageZoomHelper.setViewZoomable(containerView.preview)

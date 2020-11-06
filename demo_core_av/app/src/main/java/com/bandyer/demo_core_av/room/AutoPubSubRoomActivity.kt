@@ -27,7 +27,6 @@ import com.bandyer.core_av.Stream
 import com.bandyer.core_av.capturer.*
 import com.bandyer.core_av.capturer.audio.AudioController
 import com.bandyer.core_av.capturer.video.VideoController
-import com.bandyer.core_av.capturer.video.provider.screen.ScreenFrameProvider
 import com.bandyer.core_av.publisher.Publisher
 import com.bandyer.core_av.publisher.PublisherObserver
 import com.bandyer.core_av.publisher.PublisherState
@@ -36,14 +35,13 @@ import com.bandyer.core_av.subscriber.Subscriber
 import com.bandyer.core_av.subscriber.SubscriberObserver
 import com.bandyer.core_av.subscriber.SubscriberState
 import com.bandyer.core_av.usb_camera.*
+import com.bandyer.core_av.usb_camera.capturer.UsbCapturer
 import com.bandyer.core_av.usb_camera.capturer.video.provider.UsbFrameProvider
 import com.bandyer.core_av.usb_camera.capturer.usbCamera
 import com.bandyer.core_av.utils.logging.InternalStatsLogger
 import com.bandyer.core_av.utils.logging.InternalStatsTypes
 import com.bandyer.demo_core_av.*
-import com.bandyer.demo_core_av.CameraCapturer
 import com.bandyer.demo_core_av.R
-import com.bandyer.demo_core_av.ScreenCapturer
 import com.bandyer.demo_core_av.room.adapter_items.PublisherItem
 import com.bandyer.demo_core_av.room.adapter_items.SubscriberItem
 import com.bandyer.demo_core_av.room.utils.ScreenSharingUtils
@@ -146,7 +144,7 @@ class AutoPubSubRoomActivity : BaseActivity(), RoomObserver, SubscriberObserver,
         super.onPause()
         capturers.forEach {
             it.pause {
-                pauseVideo = it.video?.frameProvider !is ScreenFrameProvider
+                pauseVideo = !it.isScreen
                 pauseAudio = false
             }
         }
@@ -322,7 +320,7 @@ class AutoPubSubRoomActivity : BaseActivity(), RoomObserver, SubscriberObserver,
     }
 
     override fun onCapturerError(capturer: Capturer<VideoController<*, *>, AudioController>, error: CapturerException) {
-        if (capturer.video?.frameProvider is ScreenFrameProvider) ScreenSharingUtils.hideScreenShareNotification()
+        capturer.isScreen { ScreenSharingUtils.hideScreenShareNotification() }
     }
 
     override fun onCapturerDestroyed(capturer: Capturer<VideoController<*, *>, AudioController>) {
