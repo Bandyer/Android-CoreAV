@@ -27,6 +27,8 @@ import com.bandyer.core_av.Stream
 import com.bandyer.core_av.capturer.*
 import com.bandyer.core_av.capturer.audio.AudioController
 import com.bandyer.core_av.capturer.video.VideoController
+import com.bandyer.core_av.capturer.video.provider.FrameProvider
+import com.bandyer.core_av.capturer.video.provider.FrameProviderObserver
 import com.bandyer.core_av.publisher.Publisher
 import com.bandyer.core_av.publisher.PublisherObserver
 import com.bandyer.core_av.publisher.PublisherState
@@ -34,14 +36,19 @@ import com.bandyer.core_av.room.*
 import com.bandyer.core_av.subscriber.Subscriber
 import com.bandyer.core_av.subscriber.SubscriberObserver
 import com.bandyer.core_av.subscriber.SubscriberState
-import com.bandyer.core_av.usb_camera.*
+import com.bandyer.core_av.usb_camera.OnDeviceConnectListener
+import com.bandyer.core_av.usb_camera.UsbConnector
+import com.bandyer.core_av.usb_camera.UsbData
 import com.bandyer.core_av.usb_camera.capturer.UsbCapturer
-import com.bandyer.core_av.usb_camera.capturer.video.provider.UsbFrameProvider
 import com.bandyer.core_av.usb_camera.capturer.usbCamera
+import com.bandyer.core_av.usb_camera.capturer.video.provider.UsbFrameProvider
+import com.bandyer.core_av.usb_camera.info
 import com.bandyer.core_av.utils.logging.InternalStatsLogger
 import com.bandyer.core_av.utils.logging.InternalStatsTypes
-import com.bandyer.demo_core_av.*
+import com.bandyer.demo_core_av.App
+import com.bandyer.demo_core_av.BaseActivity
 import com.bandyer.demo_core_av.R
+import com.bandyer.demo_core_av.StatsPagerAdapter
 import com.bandyer.demo_core_av.room.adapter_items.PublisherItem
 import com.bandyer.demo_core_av.room.adapter_items.SubscriberItem
 import com.bandyer.demo_core_av.room.utils.ScreenSharingUtils
@@ -51,7 +58,6 @@ import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
 import com.mikepenz.fastadapter.listeners.EventHook
 import com.viven.imagezoom.ImageZoomHelper
 import kotlinx.android.synthetic.main.activity_auto_pubsub_room.*
-import kotlinx.android.synthetic.main.activity_auto_pubsub_room.pubsubs
 import java.util.*
 
 /**
@@ -144,7 +150,7 @@ class AutoPubSubRoomActivity : BaseActivity(), RoomObserver, SubscriberObserver,
         super.onPause()
         capturers.forEach {
             it.pause {
-                pauseVideo = !it.isScreen
+                pauseVideo = !it.video.isScreen
                 pauseAudio = false
             }
         }
@@ -320,11 +326,11 @@ class AutoPubSubRoomActivity : BaseActivity(), RoomObserver, SubscriberObserver,
     }
 
     override fun onCapturerError(capturer: Capturer<VideoController<*, *>, AudioController>, error: CapturerException) {
-        capturer.isScreen { ScreenSharingUtils.hideScreenShareNotification() }
+        capturer.video.isScreen { ScreenSharingUtils.hideScreenShareNotification() }
     }
 
     override fun onCapturerDestroyed(capturer: Capturer<VideoController<*, *>, AudioController>) {
-
+        capturer.video.isScreen { ScreenSharingUtils.hideScreenShareNotification() }
     }
 
 
@@ -336,13 +342,11 @@ class AutoPubSubRoomActivity : BaseActivity(), RoomObserver, SubscriberObserver,
     override fun onLocalPublisherRemoved(publisher: Publisher) {
         Log.d("AutoPubSubRoomActivity", "publisher" + publisher.id + " onLocalPublisherRemoved")
         pubSubsAdapter.itemAdapter.removeByIdentifier(publisher.id.hashCode().toLong())
-        if (publisher.stream.isScreenshare) ScreenSharingUtils.hideScreenShareNotification()
     }
 
     override fun onLocalPublisherError(publisher: Publisher, reason: String) {
         Log.e("AutoPubSubRoomActivity", "publisher" + publisher.id + " onLocalPublisherError: " + reason)
         pubSubsAdapter.itemAdapter.removeByIdentifier(publisher.id.hashCode().toLong())
-        if (publisher.stream.isScreenshare) ScreenSharingUtils.hideScreenShareNotification()
     }
 
     override fun onLocalPublisherStateChanged(publisher: Publisher, state: PublisherState) {

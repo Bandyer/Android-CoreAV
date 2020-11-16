@@ -113,8 +113,8 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
                 containerView.preview.disableVideoRendering(videoMuted)
                 publisher!!.disableVideo(videoMuted)
             }
-            capturer.isCamera {
-                containerView.switchCameraButton.setOnClickListener { video!!.frameProvider.switchVideoFeeder() }
+            capturer!!.video.isCamera {
+                containerView.switchCameraButton.setOnClickListener { frameProvider.switchVideoFeeder() }
             }
             containerView.recordButton.setOnClickListener {
                 recordListener ?: return@setOnClickListener

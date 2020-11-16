@@ -140,7 +140,7 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
         super.onPause()
         capturers.forEach { capturer ->
             capturer.pause {
-                pauseVideo = !capturer.isScreen
+                pauseVideo = !capturer.video.isScreen
                 pauseAudio = false
             }
         }
@@ -368,7 +368,6 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
             }
             observer = this@RoomActivity
         }
-
         capturer.start()
         capturers.add(capturer)
     }
@@ -389,10 +388,12 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
 
     override fun onCapturerError(capturer: Capturer<VideoController<*, *>, AudioController>, error: CapturerException) {
         Log.e("RoomActivity", "onCapturerError " + error.localizedMessage)
-        capturer.isScreen { ScreenSharingUtils.hideScreenShareNotification() }
+        capturer.video.isScreen { ScreenSharingUtils.hideScreenShareNotification() }
     }
 
-    override fun onCapturerDestroyed(capturer: Capturer<VideoController<*, *>, AudioController>) = Unit
+    override fun onCapturerDestroyed(capturer: Capturer<VideoController<*, *>, AudioController>) {
+        capturer.video.isScreen { ScreenSharingUtils.hideScreenShareNotification() }
+    }
 
     override fun onAttach(device: UsbDevice) = runOnUiThread {
         if (isFinishing) return@runOnUiThread
@@ -403,7 +404,7 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
 
     override fun onDetach(device: UsbDevice) = runOnUiThread {
         if (isFinishing) return@runOnUiThread
-        val capturerIndex = capturers.indexOfFirst { it.isUsb }.takeIf { it != -1 }
+        val capturerIndex = capturers.indexOfFirst { it.video.isUsb }.takeIf { it != -1 }
                 ?: return@runOnUiThread
         val capturer = capturers.removeAt(capturerIndex)
         capturer.destroy()
@@ -432,13 +433,11 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
     override fun onLocalPublisherRemoved(publisher: Publisher) {
         Log.d("RoomActivity", "publisher" + publisher.id + " onLocalPublisherRemoved")
         pubSubsAdapter.itemAdapter.removeByIdentifier(publisher.id.hashCode().toLong())
-        if (publisher.stream.isScreenshare) ScreenSharingUtils.hideScreenShareNotification()
     }
 
     override fun onLocalPublisherError(publisher: Publisher, reason: String) {
         Log.e("RoomActivity", "publisher" + publisher.id + " onLocalPublisherError: " + reason)
         pubSubsAdapter.itemAdapter.removeByIdentifier(publisher.id.hashCode().toLong())
-        if (publisher.stream.isScreenshare) ScreenSharingUtils.hideScreenShareNotification()
     }
 
     override fun onLocalPublisherStateChanged(publisher: Publisher, state: PublisherState) {
