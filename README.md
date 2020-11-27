@@ -1,5 +1,5 @@
 <p align="center">
-<img src="img/bandyer.jpg" alt="Bandyer" title="Bandyer" />
+<img src="img/bandyer.png" alt="Bandyer" title="Bandyer" />
 </p>
 
 
