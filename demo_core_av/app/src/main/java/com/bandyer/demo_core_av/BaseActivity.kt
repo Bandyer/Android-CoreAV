@@ -35,6 +35,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun showError(title: String?, reason: String?) {
+        if(isFinishing) return
         autoDismiss(AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(reason)

@@ -238,6 +238,7 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
                 add("Audio Call")
                 add("VideoOnly Call")
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    add("Audio&AppShare")
                     add("ScreenShare")
                     add("Audio&ScreenShare")
                 }
@@ -355,6 +356,11 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
                     video = screen()
                     ScreenSharingUtils.showScreenShareNotification(this@RoomActivity)
                 }
+                "Audio&AppShare" -> {
+                    video = application()
+                    audio = default()
+                    ScreenSharingUtils.showScreenShareNotification(this@RoomActivity)
+                }
                 "Audio&ScreenShare" -> {
                     video = screen()
                     audio = default()
@@ -389,10 +395,12 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
     override fun onCapturerError(capturer: Capturer<VideoController<*, *>, AudioController>, error: CapturerException) {
         Log.e("RoomActivity", "onCapturerError " + error.localizedMessage)
         capturer.video.isScreen { ScreenSharingUtils.hideScreenShareNotification() }
+        capturer.video.isApplication { ScreenSharingUtils.hideScreenShareNotification() }
     }
 
     override fun onCapturerDestroyed(capturer: Capturer<VideoController<*, *>, AudioController>) {
         capturer.video.isScreen { ScreenSharingUtils.hideScreenShareNotification() }
+        capturer.video.isApplication { ScreenSharingUtils.hideScreenShareNotification() }
     }
 
     override fun onAttach(device: UsbDevice) = runOnUiThread {
