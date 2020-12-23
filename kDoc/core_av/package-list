@@ -16,6 +16,9 @@ $dokka.location:com.bandyer.core_av.capturer.video.dispatcher/FrameDispatcher/<g
 $dokka.location:com.bandyer.core_av.capturer.video.dispatcher/FrameDispatcher/<get-state>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video.dispatcher/-frame-dispatcher/get-state.html
 $dokka.location:com.bandyer.core_av.capturer.video.dispatcher/FrameDispatcher/<get-surfaceTexture>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video.dispatcher/-frame-dispatcher/get-surface-texture.html
 $dokka.location:com.bandyer.core_av.capturer.video.dispatcher/FrameDispatcher/<set-frameQuality>/#com.bandyer.core_av.capturer.video.provider.FrameQuality/PointingToDeclaration/com.bandyer.core_av.capturer.video.dispatcher/-frame-dispatcher/set-frame-quality.html
+$dokka.location:com.bandyer.core_av.capturer.video.provider.application/ApplicationFrameProvider/<get-frameQuality>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video.provider.application/-application-frame-provider/get-frame-quality.html
+$dokka.location:com.bandyer.core_av.capturer.video.provider.application/ApplicationFrameProvider/<get-state>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video.provider.application/-application-frame-provider/get-state.html
+$dokka.location:com.bandyer.core_av.capturer.video.provider.application/ApplicationFrameProvider/<set-frameQuality>/#com.bandyer.core_av.capturer.video.provider.FrameQuality/PointingToDeclaration/com.bandyer.core_av.capturer.video.provider.application/-application-frame-provider/set-frame-quality.html
 $dokka.location:com.bandyer.core_av.capturer.video.provider.camera/CameraFrameProvider/<get-backCameraFeeders>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video.provider.camera/-camera-frame-provider/get-back-camera-feeders.html
 $dokka.location:com.bandyer.core_av.capturer.video.provider.camera/CameraFrameProvider/<get-currentCameraFeeder>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video.provider.camera/-camera-frame-provider/get-current-camera-feeder.html
 $dokka.location:com.bandyer.core_av.capturer.video.provider.camera/CameraFrameProvider/<get-frameQuality>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video.provider.camera/-camera-frame-provider/get-frame-quality.html
@@ -70,10 +73,18 @@ $dokka.location:com.bandyer.core_av.capturer.video/YuvFrame/<get-rotation>/#/Poi
 $dokka.location:com.bandyer.core_av.capturer.video/YuvFrame/<get-timestamp>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-yuv-frame/get-timestamp.html
 $dokka.location:com.bandyer.core_av.capturer.video/YuvFrame/<get-width>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-yuv-frame/get-width.html
 $dokka.location:com.bandyer.core_av.capturer//capturer/#androidx.appcompat.app.AppCompatActivity#kotlin.Function1[com.bandyer.core_av.capturer.CapturerFactory,kotlin.Unit]/PointingToDeclaration/com.bandyer.core_av.capturer/-capturer-kt/capturer.html
+$dokka.location:com.bandyer.core_av.capturer//isApplication/com.bandyer.core_av.capturer.video.VideoController[*,*]?#/PointingToDeclaration/com.bandyer.core_av.capturer/-application-capturer-kt/get-is-application.html
+$dokka.location:com.bandyer.core_av.capturer//isApplication/com.bandyer.core_av.capturer.video.VideoController[*,*]?#kotlin.Function1[com.bandyer.core_av.capturer.video.VideoController[com.bandyer.core_av.capturer.video.provider.application.ApplicationFrameProvider,com.bandyer.core_av.capturer.video.dispatcher.FrameDispatcher],kotlin.Any?]/PointingToDeclaration/com.bandyer.core_av.capturer/-application-capturer-kt/is-application.html
 $dokka.location:com.bandyer.core_av.capturer//isCamera/com.bandyer.core_av.capturer.video.VideoController[*,*]?#/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer-kt/get-is-camera.html
-$dokka.location:com.bandyer.core_av.capturer//isCamera/com.bandyer.core_av.capturer.video.VideoController[*,*]?#kotlin.Function1[com.bandyer.core_av.capturer.video.VideoController[com.bandyer.core_av.capturer.video.provider.camera.CameraFrameProvider,com.bandyer.core_av.capturer.video.dispatcher.FrameDispatcher],kotlin.Unit]/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer-kt/is-camera.html
+$dokka.location:com.bandyer.core_av.capturer//isCamera/com.bandyer.core_av.capturer.video.VideoController[*,*]?#kotlin.Function1[com.bandyer.core_av.capturer.video.VideoController[com.bandyer.core_av.capturer.video.provider.camera.CameraFrameProvider,com.bandyer.core_av.capturer.video.dispatcher.FrameDispatcher],kotlin.Any?]/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer-kt/is-camera.html
 $dokka.location:com.bandyer.core_av.capturer//isScreen/com.bandyer.core_av.capturer.video.VideoController[*,*]?#/PointingToDeclaration/com.bandyer.core_av.capturer/-screen-capturer-kt/get-is-screen.html
-$dokka.location:com.bandyer.core_av.capturer//isScreen/com.bandyer.core_av.capturer.video.VideoController[*,*]?#kotlin.Function1[com.bandyer.core_av.capturer.video.VideoController[com.bandyer.core_av.capturer.video.provider.screen.ScreenFrameProvider,com.bandyer.core_av.capturer.video.dispatcher.FrameDispatcher],kotlin.Unit]/PointingToDeclaration/com.bandyer.core_av.capturer/-screen-capturer-kt/is-screen.html
+$dokka.location:com.bandyer.core_av.capturer//isScreen/com.bandyer.core_av.capturer.video.VideoController[*,*]?#kotlin.Function1[com.bandyer.core_av.capturer.video.VideoController[com.bandyer.core_av.capturer.video.provider.screen.ScreenFrameProvider,com.bandyer.core_av.capturer.video.dispatcher.FrameDispatcher],kotlin.Any?]/PointingToDeclaration/com.bandyer.core_av.capturer/-screen-capturer-kt/is-screen.html
+$dokka.location:com.bandyer.core_av.capturer/ApplicationCapturer/<get-audio>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-application-capturer/get-audio.html
+$dokka.location:com.bandyer.core_av.capturer/ApplicationCapturer/<get-id>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-application-capturer/get-id.html
+$dokka.location:com.bandyer.core_av.capturer/ApplicationCapturer/<get-isRunning>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-application-capturer/get-is-running.html
+$dokka.location:com.bandyer.core_av.capturer/ApplicationCapturer/<get-state>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-application-capturer/get-state.html
+$dokka.location:com.bandyer.core_av.capturer/ApplicationCapturer/<get-stream>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-application-capturer/get-stream.html
+$dokka.location:com.bandyer.core_av.capturer/ApplicationCapturer/<get-video>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-application-capturer/get-video.html
 $dokka.location:com.bandyer.core_av.capturer/CameraCapturer/<get-audio>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer/get-audio.html
 $dokka.location:com.bandyer.core_av.capturer/CameraCapturer/<get-id>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer/get-id.html
 $dokka.location:com.bandyer.core_av.capturer/CameraCapturer/<get-isRunning>/#/PointingToDeclaration/com.bandyer.core_av.capturer/-camera-capturer/get-is-running.html
@@ -307,6 +318,7 @@ com.bandyer.core_av.capturer.audio.dispatcher
 com.bandyer.core_av.capturer.video
 com.bandyer.core_av.capturer.video.dispatcher
 com.bandyer.core_av.capturer.video.provider
+com.bandyer.core_av.capturer.video.provider.application
 com.bandyer.core_av.capturer.video.provider.camera
 com.bandyer.core_av.capturer.video.provider.screen
 com.bandyer.core_av.networking.models
