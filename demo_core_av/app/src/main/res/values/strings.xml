@@ -48,4 +48,9 @@
     <string name="receiver">Receiver</string>
     <string name="sender">Sender</string>
     <string name="screenshare_button">ScreenShare</string>
+
+    <string name="quality_width">Width</string>
+    <string name="quality_height">Height</string>
+    <string name="quality_fps">Fps</string>
+    <string name="quality_optimize">Get nearest quality supported</string>
 </resources>

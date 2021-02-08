@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2020 Bandyer S.r.l. All Rights Reserved.
+  ~ See LICENSE.txt for licensing information
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/space16">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/video_quality_picker_title"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_h1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/quality_width"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space8"
+        android:hint="@string/quality_width"
+        app:layout_constraintEnd_toStartOf="@id/quality_height"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/quality_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/quality_height"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/quality_height"
+        app:layout_constraintEnd_toStartOf="@id/quality_fps"
+        app:layout_constraintLeft_toRightOf="@id/quality_width"
+        app:layout_constraintRight_toLeftOf="@id/quality_fps"
+        app:layout_constraintStart_toEndOf="@id/quality_width"
+        app:layout_constraintTop_toTopOf="@+id/quality_width">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/quality_fps"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/quality_fps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/quality_height"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@id/quality_height"
+        app:layout_constraintTop_toTopOf="@+id/quality_width">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/enable_optimize_quality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space16"
+        android:checked="false"
+        android:text="@string/quality_optimize"
+        app:layout_constraintTop_toBottomOf="@id/quality_width" />
+</androidx.constraintlayout.widget.ConstraintLayout>

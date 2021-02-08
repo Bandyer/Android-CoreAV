@@ -91,6 +91,13 @@
             android:src="@drawable/ic_add_a_photo_white_24dp"
             app:backgroundTint="@color/colorPrimary" />
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/changeQualityButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_tune"
+            app:backgroundTint="@color/colorPrimary" />
+
     </LinearLayout>
 
     <TextView

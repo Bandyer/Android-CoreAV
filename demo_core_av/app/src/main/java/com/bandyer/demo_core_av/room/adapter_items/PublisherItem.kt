@@ -22,18 +22,32 @@ import com.bandyer.core_av.OnStreamListener
 import com.bandyer.core_av.Stream
 import com.bandyer.core_av.capturer.Capturer
 import com.bandyer.core_av.capturer.isCamera
+import com.bandyer.core_av.capturer.video.provider.FrameQuality
 import com.bandyer.core_av.publisher.*
 import com.bandyer.core_av.capturer.video.provider.camera.CameraFrameProvider
 import com.bandyer.core_av.publisher.*
+import com.bandyer.core_av.subscriber.VideoFpsQuality
+import com.bandyer.core_av.subscriber.VideoQuality
+import com.bandyer.core_av.subscriber.VideoResolutionQuality
 import com.bandyer.core_av.view.OnViewStatusObserver
 import com.bandyer.core_av.view.StreamView
+import com.bandyer.demo_core_av.BaseActivity
 import com.bandyer.demo_core_av.R
+import com.bandyer.demo_core_av.design.bottom_sheet.QualityPicker
+import com.bandyer.demo_core_av.design.bottom_sheet.group_picker.BottomGroupPicker
+import com.bandyer.demo_core_av.design.bottom_sheet.group_picker.BottomGroupPickerDelegate
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.fastadapter.listeners.ClickEventHook
 import com.viven.imagezoom.ImageZoomHelper
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_publisher.view.*
+import kotlinx.android.synthetic.main.item_publisher.view.captureFrameButton
+import kotlinx.android.synthetic.main.item_publisher.view.changeQualityButton
+import kotlinx.android.synthetic.main.item_publisher.view.preview
+import kotlinx.android.synthetic.main.item_publisher.view.stream_id
+import kotlinx.android.synthetic.main.item_publisher.view.videoButton
+import kotlinx.android.synthetic.main.item_subscriber.view.*
 
 /**
  * @author kristiyan
@@ -131,6 +145,9 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
                     if (isBroadcasting) stopBroadcast(broadcastListener!!) else startBroadcast(broadcastListener!!)
                 }
             }
+
+            containerView.changeQualityButton.visibility = if (capturer?.video == null) View.GONE else View.VISIBLE
+            containerView.changeQualityButton.setOnClickListener { v -> onChangeQuality(v.context as BaseActivity, item) }
         }
 
         private fun showImage(bitmap: Bitmap?) {
@@ -201,6 +218,16 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
             }
         }
 
+        private fun onChangeQuality(activity: BaseActivity, item: PublisherItem) {
+            val qualityPicker = QualityPicker(activity)
+            qualityPicker.onChanged { width, height, fps, optimized ->
+                val frameQuality = FrameQuality(width, height, fps)
+                item.capturer.video?.frameProvider?.frameQuality = frameQuality
+                item.capturer.video?.isCamera {
+                    if (optimized) frameProvider.getNearestCaptureQualitySupported(frameQuality)
+                }
+            }.show()
+        }
 
         init {
             ImageZoomHelper.setViewZoomable(containerView.preview)
