@@ -62,6 +62,8 @@ $dokka.location:com.bandyer.core_av.capturer.video/VideoController/<get-state>/#
 $dokka.location:com.bandyer.core_av.capturer.video/VideoController/<get-videoEnabled>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-video-controller/get-video-enabled.html
 $dokka.location:com.bandyer.core_av.capturer.video/VideoController/<set-videoEnabled>/#kotlin.Boolean/PointingToDeclaration/com.bandyer.core_av.capturer.video/-video-controller/set-video-enabled.html
 $dokka.location:com.bandyer.core_av.capturer.video/VideoFrame.Companion/<get-DEFAULT_COMPRESSION_RATE>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-video-frame/-companion/get-d-e-f-a-u-l-t_-c-o-m-p-r-e-s-s-i-o-n_-r-a-t-e.html
+$dokka.location:com.bandyer.core_av.capturer.video/VideoFrame.Format/<get-I420>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-video-frame/-format/get-i420.html
+$dokka.location:com.bandyer.core_av.capturer.video/VideoFrame.Format/<get-NV21>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-video-frame/-format/get-n-v21.html
 $dokka.location:com.bandyer.core_av.capturer.video/VideoFrame/<get-byteArray>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-video-frame/get-byte-array.html
 $dokka.location:com.bandyer.core_av.capturer.video/VideoFrame/<get-height>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-video-frame/get-height.html
 $dokka.location:com.bandyer.core_av.capturer.video/VideoFrame/<get-rotation>/#/PointingToDeclaration/com.bandyer.core_av.capturer.video/-video-frame/get-rotation.html
