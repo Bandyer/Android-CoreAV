@@ -3,7 +3,8 @@
 </p>
 
 
-[ ![Download](https://api.bintray.com/packages/bandyer/Android-CoreAV/Android-CoreAV/images/download.svg) ](https://bintray.com/bandyer/Android-CoreAV/Android-CoreAV/_latestVersion)[![Docs](https://img.shields.io/badge/docs-current-brightgreen.svg)](https://bandyer.github.io/Android-CoreAV/)
+[![Download](https://badgen.net/maven/v/metadata-url/https/maven.bandyer.com/releases/com/bandyer/core_av/maven-metadata.xml?label=maven.bandyer.com/releases) ](https://maven.bandyer.com/index.html#releases/com/bandyer/core_av/)
+[![Docs](https://img.shields.io/badge/docs-current-brightgreen.svg)](https://docs.bandyer.com/Bandyer-Android-CoreAV/kDoc/core_av/)
 [![Twitter](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=bandyersrl)
 
 
@@ -75,10 +76,20 @@ Java && AppCompat <= **v1.2.5**
 
 ## Installation
 
-Download the [latest AAR](https://bintray.com/bandyer/Android-CoreAV/Android-CoreAV) or grab via Gradle:
-
-```groovy
-implementation 'com.bandyer:core_av:2.3.5'
+### Step 1
+Add it in your root build.gradle at the end of repositories:
+```gradle
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://maven.bandyer.com/releases' }
+    }
+}
+```
+### Step 2 
+Add this line into **app/build.gradle** file
+```gradle
+implementation 'com.bandyer:core_av:$latestVersion'
 ```
 
 ## Quickstart
