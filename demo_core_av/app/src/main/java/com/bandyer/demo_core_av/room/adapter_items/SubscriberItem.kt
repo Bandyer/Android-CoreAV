@@ -93,6 +93,7 @@ class SubscriberItem(val subscriber: Subscriber) : AbstractItem<SubscriberItem, 
             subscriber = item.subscriber
             item.subscriber.setView(containerView.preview, object : OnStreamListener {
                 override fun onReadyToPlay(view: StreamView, stream: Stream) {
+                    if(!view.isShown) return
                     updateAudioVideoButton(stream.hasVideo,
                             stream.hasAudio,
                             stream.isAudioMuted,

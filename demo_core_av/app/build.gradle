@@ -90,8 +90,8 @@ dependencies {
     /*** Bandyer Libs ***/
     implementation 'com.bandyer:bandyer-android-audiosession:1.0.6'
 
-    implementation "com.bandyer:core_av:2.3.6"
-    implementation ("com.bandyer:extension_usb_camera:1.1.4"){
+    implementation "com.bandyer:core_av:2.3.7"
+    implementation ("com.bandyer:extension_usb_camera:1.1.5"){
         exclude group: "com.bandyer", module: "core_av"
     }
 }
