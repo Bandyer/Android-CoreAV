@@ -22,6 +22,8 @@ import com.bandyer.core_av.OnStreamListener
 import com.bandyer.core_av.Stream
 import com.bandyer.core_av.capturer.Capturer
 import com.bandyer.core_av.capturer.isCamera
+import com.bandyer.core_av.capturer.video.CaptureFrameListener
+import com.bandyer.core_av.capturer.video.VideoFrame
 import com.bandyer.core_av.capturer.video.provider.FrameQuality
 import com.bandyer.core_av.publisher.*
 import com.bandyer.core_av.capturer.video.provider.camera.CameraFrameProvider
@@ -93,7 +95,7 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
             }
 
             override fun onFrameCaptured(bitmap: Bitmap?) {
-                showImage(bitmap)
+                Log.d("PubView", "onFrameCaptured")
             }
         }
 
@@ -104,10 +106,12 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
             containerView.preview.addViewStatusObserver(viewStatusObserver)
             item.publisher.setView(containerView.preview, object : OnStreamListener {
                 override fun onReadyToPlay(view: StreamView, stream: Stream) {
-                    updateAudioVideoButton(stream.hasVideo,
-                            stream.hasAudio,
-                            stream.isAudioMuted,
-                            stream.isVideoMuted)
+                    updateAudioVideoButton(
+                        stream.hasVideo,
+                        stream.hasAudio,
+                        stream.isAudioMuted,
+                        stream.isVideoMuted
+                    )
                     view.play(stream)
                 }
             })
@@ -137,7 +141,17 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
                     if (isRecording) stopRecording(recordListener!!) else startRecording(recordListener!!)
                 }
             }
-            containerView.captureFrameButton.setOnClickListener { containerView.preview.captureFrame() }
+            containerView.captureFrameButton.setOnClickListener {
+                publisher!!.capturer?.video?.frameProvider?.captureFrame(object : CaptureFrameListener {
+                    override fun onError(reason: String) {
+                        Log.e("PublisherItem", reason)
+                    }
+
+                    override fun onSuccess(image: VideoFrame) {
+                        image.writeToBitmap({ showImage(it) }, { Log.e("PublisherItem", it) })
+                    }
+                })
+            }
             containerView.broadcastButton.setOnClickListener {
                 broadcastListener ?: return@setOnClickListener
                 publisher ?: return@setOnClickListener
