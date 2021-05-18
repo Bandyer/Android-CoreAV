@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":core_av:dokkaHtml/debug": [], ":core_av:dokkaHtml/main": [], ":core_av:dokkaHtml/release": []}'
+sourceset_dependencies = '{":bandyer-android-coreav:dokkaHtml/debug": [], ":bandyer-android-coreav:dokkaHtml/main": [], ":bandyer-android-coreav:dokkaHtml/release": []}'
