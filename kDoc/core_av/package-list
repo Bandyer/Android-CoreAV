@@ -296,7 +296,6 @@ $dokka.location:com.bandyer.core_av/Stream/<get-hasData>/#/PointingToDeclaration
 $dokka.location:com.bandyer.core_av/Stream/<get-hasVideo>/#/PointingToDeclaration/com.bandyer.core_av/-stream/get-has-video.html
 $dokka.location:com.bandyer.core_av/Stream/<get-isAudioMuted>/#/PointingToDeclaration/com.bandyer.core_av/-stream/get-is-audio-muted.html
 $dokka.location:com.bandyer.core_av/Stream/<get-isBroadcast>/#/PointingToDeclaration/com.bandyer.core_av/-stream/get-is-broadcast.html
-$dokka.location:com.bandyer.core_av/Stream/<get-isRemote>/#/PointingToDeclaration/com.bandyer.core_av/-stream/get-is-remote.html
 $dokka.location:com.bandyer.core_av/Stream/<get-isScreenshare>/#/PointingToDeclaration/com.bandyer.core_av/-stream/get-is-screenshare.html
 $dokka.location:com.bandyer.core_av/Stream/<get-isVideoMuted>/#/PointingToDeclaration/com.bandyer.core_av/-stream/get-is-video-muted.html
 $dokka.location:com.bandyer.core_av/Stream/<get-mediaStream>/#/PointingToDeclaration/com.bandyer.core_av/-stream/get-media-stream.html
