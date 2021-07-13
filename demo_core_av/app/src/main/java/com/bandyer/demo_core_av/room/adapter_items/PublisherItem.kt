@@ -121,7 +121,6 @@ class PublisherItem(val publisher: Publisher, val capturer: Capturer<*, *>) : Ab
             containerView.micButton.setOnClickListener {
                 audioMuted = !audioMuted
                 containerView.micButton.setImageResource(if (audioMuted) R.drawable.ic_mic_off else R.drawable.ic_mic)
-                containerView.preview.disableAudioPlaying(audioMuted)
                 publisher!!.disableAudio(audioMuted)
             }
 

@@ -218,7 +218,8 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
                 room?.unpublish(item.publisher)
             } else if (item is SubscriberItem) {
                 room?.unsubscribe(item.subscriber)
-                onRemotePublisherJoined(item.subscriber.stream)
+                val streamItem = StreamItem(item.subscriber.stream)
+                streamAdapter.add(0, streamItem)
             }
             pubSubsAdapter.remove(position)
             false
@@ -468,6 +469,8 @@ class RoomActivity : BaseActivity(), RoomObserver, SubscriberObserver, Publisher
     override fun onLocalSubscriberError(subscriber: Subscriber, reason: String) {
         Log.e("RoomActivity", "subscriber" + subscriber.id + " onLocalSubscriberError " + reason)
         pubSubsAdapter.itemAdapter.removeByIdentifier(subscriber.id.hashCode().toLong())
+        val streamItem = StreamItem(subscriber.stream)
+        streamAdapter.add(0, streamItem)
     }
 
     override fun onLocalSubscriberStateChanged(subscriber: Subscriber, state: SubscriberState) {

@@ -127,17 +127,16 @@ class SubscriberItem(val subscriber: Subscriber) : AbstractItem<SubscriberItem, 
             }
 
             containerView.videoButton.setOnClickListener {
-                videoMuted = !videoMuted
+                subscriber!!.disableVideo(!videoMuted)
+                videoMuted =  subscriber!!.isVideoDisabled
                 containerView.videoButton.setImageResource(if (videoMuted) R.drawable.ic_videocam_off else R.drawable.ic_videocam)
                 containerView.preview!!.disableVideoRendering(videoMuted)
-                subscriber!!.disableVideo(videoMuted)
             }
 
             containerView.audioButton.setOnClickListener {
-                audioMuted = !audioMuted
+                subscriber!!.disableAudio(!audioMuted)
+                audioMuted = subscriber!!.isAudioDisabled
                 containerView.audioButton.setImageResource(if (audioMuted) R.drawable.ic_volume_off else R.drawable.ic_volume_up)
-                containerView.preview!!.disableAudioPlaying(audioMuted)
-                subscriber!!.disableAudio(audioMuted)
             }
         }
 
